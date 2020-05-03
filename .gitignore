@@ -1,0 +1,16 @@
+.DS_Store
+Thumbs.db
+db.json
+*.log
+~*
+node_modules
+foundswatch.sublime-*
+package-lock.json
+website
+assets
+imgsrc
+themesrc
+scss
+.editorconfig
+gulpfile.js
+package.json
