@@ -2,6 +2,23 @@
 
 include_once '../inc/functions.php';
 
+if (!defined('FOUNDSWATCH_VERSION')) {
+	$ver = file_get_contents('../version.json');
+	if (false !== $ver) {
+		$ver = json_decode($ver, true);
+		if (is_array($ver) && array_key_exists('version', $ver)) {
+			$ver = $ver['version'];
+		} else {
+			$ver = false;
+		}
+	}
+	if (false !== $ver) {
+		define('FOUNDSWATCH_VERSION', $ver);
+	} else {
+		define('FOUNDSWATCH_VERSION', 'UNKNOWN');
+	}
+}
+
 function injectPrismHead() {
 	?>
 	<style>
@@ -13,6 +30,12 @@ function injectPrismHead() {
 		.code-block {
 			margin-bottom: 0;
 		}
+		.token.comment {
+			font-style: italic;
+		}
+		.special-url-format u { text-decoration: none; font-style: italic; font-size: 85%; }
+		.special-url-format i { opacity: 0.5; }
+		.special-url-format b { font-size: 100%; }
 	</style>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-tomorrow.min.css" rel="stylesheet" media="(prefers-color-scheme: dark)" />
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism.min.css" rel="stylesheet" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" />
@@ -23,6 +46,15 @@ function injectPrismFooter() {
 	?>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/components/prism-core.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/autoloader/prism-autoloader.min.js"></script>
+	<script>
+		function copyToClipboard(element) {
+			var $temp = $("<input>");
+			$("body").append($temp);
+			$temp.val($(element).text()).select();
+			document.execCommand("copy");
+			$temp.remove();
+		}
+	</script>
 	<?php
 }
 
@@ -64,20 +96,51 @@ headHere('Help', 'injectPrismHead');
 
 				</p>
 			</div>
-			<div class="cell large-6">
+			<div class="cell small-12">
 				<h3>CDN</h3>
-				<p class="text-alert">[UNDER DEVELOPMENT]</p>
-				<dl>
-					<dt class="h4">cdnjs</dt>
-					<dd>The intent is to host this on <a href="https://cdnjs.cloudflare.com" target="_blank">cdnjs.cloudflare.com</a>, but we'll need <b>200</b> stars on GitHub.
-						So go ahead and support this project. :) </dd>
-					<dt class="h4">jsDelivr</dt>
-					<dd>Another option is to link to our <code>dist</code> folder on GitHub via <a href="https://www.jsdelivr.com" target="_blank">www.jsdelivr.com</a>,
-						but this will only become available once all the themes are ported and we tag a releas on GitHub.</dd>
-				</dl>
-				<p><small><b>NB:</b> Please do not hotlink to the files on this site as it will slow yours.</small></p>
+				<p>You can also hotlink the themes via CDN via <a href="https://www.jsdelivr.com" target="_blank">jsdelivr.com</a></p>
+				<p>You can access the theme CSS file from the GitHub release:
+
+<pre><code class="code-block language-clike">// load Foundswatch v<?= FOUNDSWATCH_VERSION ?> Theme
+https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@<?= FOUNDSWATCH_VERSION ?>/dist/{themename}/foundation.min.css
+
+// use a version range instead of a specific version
+https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@<?= preg_match('/(\d+\.)(\d)/', FOUNDSWATCH_VERSION, $out) ? $out[0] : '1.0' ?>/dist/{themename}/foundation.min.css
+https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@<?= preg_match('/(\d)/', FOUNDSWATCH_VERSION, $out) ? $out[0] : '1' ?>/dist/{themename}/foundation.min.css
+
+// omit the version completely to get the latest one
+// you should NOT use this in production
+https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/dist/{themename}/foundation.min.css
+
+// remove ".min" to get the uncompressed version
+https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/dist/{themename}/foundation.css
+
+// add / at the end to get a directory listing
+https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
+</code></pre>
+				</p>
+
+				<p>Current release is v<?= FOUNDSWATCH_VERSION ?> and contains:<br>
+				<table><tbody>
+
+				<?php
+				$kthemelist = array_keys( $themelist );
+				sort( $kthemelist, SORT_STRING | SORT_FLAG_CASE );
+
+				foreach ($kthemelist as $name) {
+					$name = strtolower($name);
+					if ('default' == $name) continue;
+				?>
+				<tr>
+					<td width="90%"><tt class="special-url-format" id="copy-<?= $name ?>-url"><u>https://cdn.jsdelivr.net</u><i>/gh/vinorodrigues/foundswatch@<?= FOUNDSWATCH_VERSION ?>/dist/</i><b><?= $name ?></b><i>/foundation.min.css</i></tt></td>
+					<td width="10%" style="text-align: center;"><button class="tiny hollow button" style="margin: 0;" onClick="copyToClipboard('#copy-<?= $name ?>-url')">Copy URL</button></td>
+				</tr>
+				<?php
+				}
+				?>
+				<tbody></table></p>
 			</div>
-			<div class="cell large-6">
+			<div class="cell small-12">
 				<h3>Customisation</h3>
 				<p>To modify a theme or create your own, follow the steps below in your terminal. You'll need to have
 					<a target="_blank" href="https://help.github.com/articles/set-up-git">Git</a>,
@@ -91,7 +154,7 @@ headHere('Help', 'injectPrismHead');
 						<li>The compliled code will be in the <code>/website/themes</code> folder.</li>
 					</ol>
 			</div>
-			<div class="cell small-12 clearfix">
+			<div class="cell small-12">
 				<h3>Dark Mode</h3>
 				<p>Unfortunately, Foundation 6 is not designed to support “dark
 					mode switching”, i.e. does not support the new

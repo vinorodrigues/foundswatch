@@ -5,6 +5,7 @@
 
 const fsys = require( 'fs' );
 const path = require( 'path' );
+const sver = require( 'semver' );
 const merg = require( 'merge-stream' );
 const gulp = require( 'gulp' );
 const sass = require( 'gulp-sass' );
@@ -109,6 +110,22 @@ function sassTask(name, srcPath, destPath, min = false, map = true ) {
 	});
 }
 
+function bumpTask(name, what = 'patch') {
+	gulp.task( name, function(donr) {
+		var newVer = sver.inc( getVersion() , what );
+
+		var t1 = gulp.src( './package.json' )
+			.pipe( bump( { version: newVer } ) )
+			.pipe( gulp.dest( './' ) );
+
+		var t2 = gulp.src( './website/version.json' )
+			.pipe( bump( { version: newVer } ) )
+			.pipe( gulp.dest( './website/' ) );
+
+		return merg( [t1, t2] );
+	});
+}
+
 /* Work starts here ======================================================== */
 
 var theme_list = getFolders( './themesrc' );
@@ -120,23 +137,11 @@ var version = getVersion();
 
 /* Tasks =================================================================== */
 
-gulp.task( 'bump:patch', function(done) {
-	return gulp.src('./package.json')
-		.pipe(bump())
-		.pipe(gulp.dest('./'));
-});
+bumpTask( 'bump:patch' );
 
-gulp.task( 'bump:minor', function(done) {
-	return gulp.src('./package.json')
-		.pipe(bump({type:'minor'}))
-		.pipe(gulp.dest('./'));
-});
+bumpTask( 'bump:minor', 'minor' );
 
-gulp.task( 'bump:major', function(done) {
-	return gulp.src('./package.json')
-		.pipe(bump({type:'major'}))
-		.pipe(gulp.dest('./'));
-});
+bumpTask( 'bump:major', 'major' );
 
 gulp.task( 'bump', gulp.series( 'bump:patch' ) );
 

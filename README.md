@@ -12,6 +12,10 @@ There are a few different ways you can integrate Foundswatch into your project.
 
 Download the `foundation.min.css` file associated with a theme and replace Foundation's default stylesheet. You must still include Foundation's JavaScript file to have functional dropdowns, modals, etc.
 
+### Via CDN
+
+Similar to above, but you can hotlink to the appropriate `foundation.min.css` hosted on [jsdelivr.com](https://www.jsdelivr.com/package/gh/vinorodrigues/foundswatch). [![](https://data.jsdelivr.com/v1/package/gh/vinorodrigues/foundswatch/badge?style=rounded)](https://www.jsdelivr.com/package/gh/vinorodrigues/foundswatch)
+
 ### Via Sass Imports
 
 If you're using Sass (SCSS) in your project, you can import the `_settings.scss` and `_foundswatch.scss` files for a given theme. This method allows you to override theme variables.
