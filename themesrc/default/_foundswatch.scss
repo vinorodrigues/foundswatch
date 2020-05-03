@@ -1,0 +1,28 @@
+// ----------------------------------------------------------------------------
+// Foundswatch v1.0.0 - Default
+// @see https://foundswatch.com
+// (c) 2020 Vino Rodrigues
+// Licensed under MIT
+// Based on ZURB Foundation for Sites, https://get.foundation
+// ----------------------------------------------------------------------------
+
+// 0. borrowed from bootstrap
+// --------------------------
+
+:root {
+	@each $color, $value in $foundation-palette {
+		--#{$color}: #{$value};
+	}
+	--light-gray: #{$light-gray};
+	--medium-gray: #{$medium-gray};
+	--dark-gray: #{$dark-gray};
+	--black: #{$black};
+	--white: #{$white};
+	@each $bp, $value in $breakpoints {
+		--breakpoint-#{$bp}: #{$value};
+	}
+	--top-bar-bg: #{$topbar-background};
+	--title-bar-bg: #{$titlebar-background};
+	--font-family-sans-serif: #{inspect($body-font-family)};
+	--font-family-monospace: #{inspect($font-family-monospace)};
+}

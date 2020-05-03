@@ -1,0 +1,84 @@
+// ----------------------------------------------------------------------------
+// Foundswatch v1.0.0 - Cosmo
+// @see https://foundswatch.com
+// (c) 2020 Vino Rodrigues
+// Licensed under MIT
+// Based on ZURB Foundation for Sites, https://get.foundation
+// Based on Bootswatch - Cosmo, (c) Thomas Park, https://bootswatch.com/cosmo
+// ----------------------------------------------------------------------------
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+// 0. borrowed from bootstrap
+// --------------------------
+
+:root {
+	@each $color, $value in $foundation-palette {
+		--#{$color}: #{$value};
+	}
+	--light-gray: #{$light-gray};
+	--medium-gray: #{$medium-gray};
+	--dark-gray: #{$dark-gray};
+	--black: #{$black};
+	--white: #{$white};
+	@each $bp, $value in $breakpoints {
+		--breakpoint-#{$bp}: #{$value};
+	}
+	--top-bar-bg: #{$topbar-background};
+	--title-bar-bg: #{$titlebar-background};
+	--font-family-sans-serif: #{inspect($body-font-family)};
+	--font-family-monospace: #{inspect($font-family-monospace)};
+}
+
+// 9. Badge
+// --------
+
+.badge {
+	font-weight: 700;
+}
+
+// 21. Label
+// ---------
+
+.label {
+	font-weight: 700;
+}
+
+// 55. Top bar
+// -----------
+
+$topbar-text-color: $white;
+$topbar-link-color: rgba($white, 0.9);
+$topbar-link-active-color: $white;
+
+.top-bar {
+	.dropdown.menu {
+		> li > a {
+			color: $topbar-link-color;
+			&:hover, &:active {
+				color: $topbar-link-active-color;
+			}
+		}
+		> li.is-dropdown-submenu-parent > a::after {
+			@include css-triangle($dropdownmenu-arrow-size, $topbar-link-color, down);
+		}
+		> li.menu-text {
+			&,
+			& > a {
+				color: $topbar-text-color;
+			}
+		}
+		> li.is-active > a {
+			color: $topbar-link-active-color;
+		}
+		.is-dropdown-submenu {
+			> li > a {
+				color: $topbar-link-color;
+				&:hover, &:active {
+					color: $topbar-link-active-color;
+				}
+			}
+		}
+	}
+}

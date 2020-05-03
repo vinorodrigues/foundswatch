@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /css/
+Disallow: /img/
+Disallow: /inc/
+Disallow: /js/
+Sitemap: https://foundswatch.com/sitemap.php

@@ -1,0 +1,170 @@
+
+@import 'global';
+@import 'util/util';
+@import '../themesrc/default/settings';
+
+@include add-foundation-colors;
+
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@700&display=swap');
+
+$the-primary-color: #064f68;
+
+$hero-padding: 3rem;
+$hero-color: #EBF1F1;
+$hero-bg: $the-primary-color;
+
+@font-face {
+	font-family: 'Redacted';
+	src: url('../fonts/redacted-script-regular.eot');
+	src: url('../fonts/redacted-script-regular.eot?#iefix') format('embedded-opentype'),
+		url('../fonts/redacted-script-regular.woff2') format('woff2'),
+		url('../fonts/redacted-script-regular.woff') format('woff'),
+		url('../fonts/redacted-script-regular.ttf') format('truetype'),
+		url('../fonts/redacted-script-regular.svg#redacted_scriptregular') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@each $name, $color in $foundation-palette {
+	.text-#{$name} {
+		color: $color;
+	}
+}
+
+a[target=_blank] {
+	background-image: url('../img/lnk-ext.svg');
+	background-repeat: no-repeat;
+	background-position-x: right;
+	background-position-y: center;
+	padding-right: rem-calc(16);
+	background-size: rem-calc(12);
+}
+
+dd {
+	margin-bottom: $paragraph-margin-bottom;
+}
+
+.top-bar-wrapper {
+	width: 100%;
+	background-color: $topbar-background;
+
+	@include breakpoint(medium up) {
+		background-color: var(--top-bar-bg);
+	}
+
+	@include breakpoint(small only) {
+		background-color: var(--title-bar-bg);
+	}
+
+	&.is-stuck {
+		box-shadow: 0 8px 6px -6px rgba(#777, 50%);
+	}
+}
+
+.top-bar {
+	.site-logo {
+		padding-right: 0;
+	}
+
+	.site-logo, .site-name {
+		a {
+			padding: 0 !important;
+			color: inherit;
+		}
+	}
+}
+
+.hero {
+	padding: $hero-padding ($hero-padding / 2);
+	background-color: $hero-bg;
+	margin: 0;
+
+	h1 {
+		font-weight: bold;
+		font-family: "Open Sans", "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+		color: $hero-color;
+		text-shadow: 0.1em 0.1em transparentize( darken($the-primary-color, 33%), 0.75);
+		font-size: 1.5em;
+
+		@include breakpoint(medium) {
+			font-size: 2.25em;
+		}
+		@include breakpoint(large) {
+			font-size: 3.5em;
+		}
+	}
+}
+
+.hero-1 {
+	background: linear-gradient(180deg, lighten($the-primary-color, 5%) 0%, darken($the-primary-color, 5%) 100%);
+}
+
+.tout {
+	text-align: center;
+	padding-top: $global-padding * 3;
+	padding-bottom: $global-padding * 3;
+	margin-bottom: $global-margin;
+	background-color: $light-gray;
+	background-size: cover;
+	background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 25%, rgba(0,0,0,0.33) 100%);
+
+	.icon {
+		padding-bottom: $global-padding;
+		display: inline-block;
+		margin: 0 $global-margin;
+
+		i {
+			color: rgb(255,255,255);
+			background: $the-primary-color;
+			background: linear-gradient(180deg, lighten($the-primary-color, 5%) 0%, darken($the-primary-color, 5%) 100%);
+			// box-shadow: 4px 4px 8px 0px rgba(127,127,127,0.5);
+
+			padding: 0.8rem;
+			font-size: 2rem;
+			border-radius: 50%;
+			text-align: center;
+			display: block;
+			vertical-align: middle;
+			width: 4.75rem;
+			height: 4.75rem;
+			font-style: normal;
+			font-weight: bold;
+		}
+	}
+}
+
+.content {
+	padding-top: $global-padding;
+	padding-bottom: $global-padding;
+}
+
+.preview-section {
+	margin-top: $global-margin * 4;
+
+	.p-t-2 { padding-top: $global-padding * 2; }
+	.p-b-2 { padding-bottom: $global-padding * 2; }
+}
+
+.footer-container {
+	width: 100%;
+	padding-top: $global-padding;
+	// background: transparent url("../img/stripew.png") top left repeat;
+}
+
+.fluffer {
+	h4, p, a {
+		font-family: Redacted;
+	}
+}
+
+@media (prefers-color-scheme: dark) {
+
+	.top-bar-wrapper.is-stuck {
+		box-shadow: 0 8px 6px -6px rgba(#333, 50%);
+	}
+
+	.tout {
+		background-color: #282c34;
+	}
+
+}

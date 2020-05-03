@@ -1,0 +1,29 @@
+# ---
+# Rename this file: .htaccess
+# ---
+
+ErrorDocument 400 /404.php?e=400
+ErrorDocument 401 /404.php?e=401
+ErrorDocument 403 /404.php?e=403
+ErrorDocument 404 /404.php
+ErrorDocument 500 /404.php?e=500
+
+<IfModule mod_rewrite.c>
+	Options +FollowSymLinks
+	RewriteEngine On
+
+	# SSL Only
+	RewriteCond %{HTTPS} off
+	RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+	# Redirect sitemap.xml to sitemap.php
+	RewriteRule ^sitemap\.xml$ /sitemap.php [R=302,L]
+
+	# Theme Permalinks
+	# RewriteBase /
+	RewriteRule ^index\.php$ - [L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^/?([-A-Za-z0-9]+)/?$ /permalink.php?q=$1 [QSA,L]
+
+</IfModule>

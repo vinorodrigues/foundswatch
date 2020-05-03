@@ -1,0 +1,13 @@
+/**
+ * Foundswatch v1.0.0 - United
+ * @see https://foundswatch.com
+ * (c) 2020 Vino Rodrigues
+ * Licensed under MIT
+ * Based on ZURB Foundation for Sites, https://get.foundation
+ * Based on Bootswatch - United, (c) Thomas Park, https://bootswatch.com/united
+ */
+
+@import 'settings';
+@import '../scss/foundation';
+@include foundation-everything;
+@import '_foundswatch';

@@ -1,0 +1,13 @@
+/**
+ * Foundswatch v1.0.0 - Cosmo
+ * @see https://foundswatch.com
+ * (c) 2020 Vino Rodrigues
+ * Licensed under MIT
+ * Based on ZURB Foundation for Sites, https://get.foundation
+ * Based on Bootswatch - Cosmo, (c) Thomas Park, https://bootswatch.com/cosmo
+ */
+
+@import 'settings';
+@import '../scss/foundation';
+@include foundation-everything;
+@import '_foundswatch';

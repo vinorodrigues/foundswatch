@@ -1,0 +1,354 @@
+// ----------------------------------------------------------------------------
+// Foundswatch v1.0.0 - Cyborg
+// @see https://foundswatch.com
+// (c) 2020 Vino Rodrigues
+// Licensed under MIT
+// Based on ZURB Foundation for Sites, https://get.foundation
+// Based on Bootswatch - Cyborg, (c) Thomas Park, https://bootswatch.com/cyborg
+// ----------------------------------------------------------------------------
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,700;1,400;1,700&family=Roboto+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+// 0. borrowed from bootstrap
+// --------------------------
+
+:root {
+	@each $color, $value in $foundation-palette {
+		--#{$color}: #{$value};
+	}
+	--light-gray: #{$light-gray};
+	--medium-gray: #{$medium-gray};
+	--dark-gray: #{$dark-gray};
+	--black: #{$black};
+	--white: #{$white};
+	@each $bp, $value in $breakpoints {
+		--breakpoint-#{$bp}: #{$value};
+	}
+	--top-bar-bg: #{$topbar-background};
+	--title-bar-bg: #{$titlebar-background};
+	--font-family-sans-serif: #{inspect($body-font-family)};
+	--font-family-monospace: #{inspect($font-family-monospace)};
+}
+
+// 8. Accordian Menu
+// -----------------
+
+.accordion-menu {
+	.is-accordion-submenu {
+		a {
+			color: $__bs__white;
+		}
+
+		a:hover,
+		a:focus {
+			color: $primary-color;
+		}
+	}
+}
+
+// 9. Badge
+// --------
+
+.badge {
+	font-weight: bold;
+}
+
+// 10. Breadcrumbs
+// ---------------
+
+.breadcrumbs {
+	background-color: $__bs__gray-700;
+	padding: 0.75rem 1rem;
+	border-radius: $global-radius;
+
+	li {
+		text-transform: none;
+		font-size: 0.875rem;
+	}
+}
+
+// 11. Buttons
+// -----------
+
+$btn-secondary-color-alt: scale-color(get-color(secondary), $lightness: 20%);
+
+.button.secondary {
+	&.hollow {
+		color: $btn-secondary-color-alt;
+		border-color: $btn-secondary-color-alt;
+	}
+}
+
+.button.hollow {
+	&:active,
+	&:hover {
+		color: $__bs__white;
+		border-color: $button-background;
+		background-color: $button-background;
+	}
+
+	@each $bname, $bcolor in $foundation-palette {
+		&.#{$bname}:active,
+		&.#{$bname}:hover {
+			color: $__bs__white;
+			border-color: $bcolor;
+			background-color: $bcolor;
+		}
+	}
+}
+
+.button.clear {
+	color: $anchor-color;
+
+	&:active,
+	&:hover {
+		color: $anchor-color-hover;
+	}
+
+	@each $bname, $bcolor in $foundation-palette {
+		&.#{$bname}:active,
+		&.#{$bname}:hover {
+			color: scale-color($bcolor, $lightness: 20%);
+		}
+	}
+}
+
+.button.dropdown {
+	&::after {
+		border-color: $button-color transparent transparent;
+	}
+
+	@each $bname, $__dmp in $foundation-palette {
+		&.#{$bname}::after {
+			border-color: $__bs__white transparent transparent;
+		}
+	}
+}
+
+// 13. Callout
+// -----------
+
+.callout {
+	a {
+		color: $__bs__white;
+		text-decoration: underline;
+	}
+}
+
+// 16. Drilldown menu
+// ------------------
+
+.drilldown {
+	.is-drilldown-submenu {
+		a {
+			color: $__bs__white;
+			border-radius: $global-radius;
+		}
+
+		a:hover,
+		a:focus {
+			background: $__bs__gray-700;
+		}
+	}
+}
+
+// 18. Dropdown menu
+// -----------------
+
+.dropdown.menu {
+	> li {
+		> a {
+			color: $__bs__white;
+			border-radius: $global-radius;
+		}
+
+		> a:hover,
+		> a:focus {
+			background: $__bs__gray-700;
+		}
+	}
+
+	> li.is-dropdown-submenu-parent > a {
+		border-bottom-right-radius: 0;
+		border-bottom-left-radius: 0;
+		padding-right: 2rem;
+
+		&::after {
+			margin-right: 0.5rem;
+		}
+	}
+
+	> li.is-active > a {
+		color: $__bs__white;
+		background: $dropdown-menu-item-background-active;
+	}
+}
+
+.is-dropdown-submenu {
+	> li {
+		> a {
+			color: $__bs__white;
+		}
+
+		> a:hover,
+		> a:focus {
+			background: get-color(primary);
+		}
+	}
+}
+
+// 23. Menu
+// --------
+
+.menu:not(.dropdown):not(.submenu) {
+	> li {
+		> a {
+			color: $__bs__white;
+			border-radius: $global-radius;
+		}
+
+		> a:hover,
+		> a:focus {
+			background: $__bs__gray-700;
+		}
+	}
+
+	> li.is-active {
+		> a:hover,
+		> a:focus {
+			background-color: $primary-color;
+		}
+	}
+}
+
+// 27. Pagination
+// --------------
+
+.pagination {
+	li {
+		background-color: $__bs__gray-700;
+
+		&.ellipsis {
+			background-color: inherit;
+		}
+	}
+
+	.disabled:hover {
+		background-color: $__bs__gray-700;
+	}
+}
+
+// 28. Progress Bar
+// ----------------
+
+.progress-meter-text {
+	color: $__bs__white;
+}
+
+// 49. Switch
+// ----------
+
+.switch-paddle {
+	border-radius: $switch-height / 2;
+
+	input:checked ~ & {
+		&::after {
+			background-color: $__bs__gray-200;
+		}
+	}
+
+	.switch-active {
+		color: $__bs__white;
+	}
+
+	.switch.tiny & { border-radius: $switch-height-tiny / 2;	}
+	.switch.small & { border-radius: $switch-height-small / 2; }
+	.switch.large & { border-radius: $switch-height-large / 2; }
+}
+
+// 51. Tabs
+// --------
+
+.tabs {
+	border-bottom-color: $__bs__gray-700;
+
+	.tabs-title {
+		> a {
+			border-top-right-radius: $global-radius;
+			border-top-left-radius: $global-radius;
+		}
+	}
+
+}
+
+// 52. Thumbnail
+// -------------
+
+.thumbnail {
+	border: 1px solid $__bs__gray-700;
+	padding: 4px;
+	box-shadow: none;
+}
+
+// 55. Top bar
+// -----------
+
+$topbar-text-color: $__bs__white;
+$topbar-link-color: rgba($__bs__white, 0.5);
+$topbar-link-active-color: rgba($__bs__white, 0.75);
+
+.top-bar {
+	.dropdown.menu {
+		> li {
+			> a {
+				color: $topbar-link-color;
+			}
+
+			> a:hover,
+			> a:focus,
+			> a:active {
+				color: $topbar-link-active-color;
+				background: transparent;
+			}
+		}
+		> li.is-dropdown-submenu-parent > a::after {
+			@include css-triangle($dropdownmenu-arrow-size, $topbar-link-color, down);
+		}
+		> li.menu-text {
+			&,
+			& > a {
+				color: $topbar-text-color;
+			}
+		}
+		> li.is-active > a {
+			color: $topbar-link-active-color;
+			background-color: $topbar-background;
+		}
+		.is-dropdown-submenu {
+			> li > a {
+				color: $topbar-link-color;
+				&:hover,
+				&:focus,
+				&:active {
+					color: $topbar-link-active-color;
+				}
+			}
+		}
+	}
+
+	input {
+		background-color: $__bs__white;
+		color: $__bs__gray-600;
+		opacity: 0.75;
+
+		&:active {
+			background-color: $__bs__white;
+			color: $__bs__gray-600;
+			opacity: 1;
+		}
+	}
+
+	.button {
+		border-color: rgba(#000, 0.25);
+	}
+}

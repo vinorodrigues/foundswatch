@@ -1,0 +1,123 @@
+// ----------------------------------------------------------------------------
+// Foundswatch v1.0.0 - Cerulean
+// @see https://foundswatch.com
+// (c) 2020 Vino Rodrigues
+// Licensed under MIT
+// Based on ZURB Foundation for Sites, https://get.foundation
+// Based on Bootswatch - Cerulean, (c) Thomas Park, https://bootswatch.com/cerulean
+// ----------------------------------------------------------------------------
+
+// 0. borrowed from bootstrap
+// --------------------------
+
+:root {
+	@each $color, $value in $foundation-palette {
+		--#{$color}: #{$value};
+	}
+	--light-gray: #{$light-gray};
+	--medium-gray: #{$medium-gray};
+	--dark-gray: #{$dark-gray};
+	--black: #{$black};
+	--white: #{$white};
+	@each $bp, $value in $breakpoints {
+		--breakpoint-#{$bp}: #{$value};
+	}
+	--top-bar-bg: #{$topbar-background};
+	--title-bar-bg: #{$titlebar-background};
+	--font-family-sans-serif: #{inspect($body-font-family)};
+	--font-family-monospace: #{inspect($font-family-monospace)};
+}
+
+// 11. Buttons
+// -----------
+
+// Borrowed from Bootstrap, (c) The Bootstrap Authors
+@mixin gradient-y-three-colors($start-color: $blue, $mid-color: $purple, $color-stop: 50%, $end-color: $red) {
+	background-image: linear-gradient($start-color, $mid-color $color-stop, $end-color);
+	background-repeat: no-repeat;
+}
+
+// Borrowed from Bootswatch, (c) Thomas Park
+@mixin btn-shadow($color){
+	@include gradient-y-three-colors(lighten($color, 8%), $color, 60%, darken($color, 4%));
+}
+
+$text-shadow: 0 1px 0 rgba(0, 0, 0, 0.05) !default;
+
+button,
+.button {
+	text-shadow: $text-shadow;
+}
+
+button:not(.hollow):not(.clear):not(.close-button),
+.button:not(.hollow):not(.clear):not(.close-button) {
+	@include btn-shadow( get-color(primary) )
+
+	&:hover, &:focus {
+		@include btn-shadow( scale-color(get-color(primary), $lightness: -15%) );
+	}
+
+	@each $b_type, $b_color in $foundation-palette {
+		&.#{$b_type} {
+			@include btn-shadow( $b_color );
+		}
+
+		&.#{$b_type}:hover, &.#{$b_type}:focus {
+			@include btn-shadow( scale-color($b_color, $lightness: -15%) );
+		}
+	}
+}
+
+// 28. Progress Bar
+// ----------------
+
+.progress.secondary {
+	& .progress-meter-text {
+		color: $__bs__gray-700;
+	}
+}
+
+// 55. Top Bar
+// -----------
+
+$topbar-text-color: $white;
+$topbar-link-color: darken( $white, 10% );
+$topbar-link-active-color: lighten( $white, 10% );
+
+.top-bar {
+	@include btn-shadow( $topbar-background );
+	ul {
+		background: transparent;
+	}
+	.dropdown.menu {
+		> li > a {
+			color: $topbar-link-color;
+			&:hover, &:active {
+				color: $topbar-link-active-color;
+			}
+		}
+		> li.is-dropdown-submenu-parent > a::after {
+			@include css-triangle($dropdownmenu-arrow-size, $topbar-link-color, down);
+			#{$global-right}: 5px;
+			#{$global-left}: auto;
+			margin-top: -1 * ($dropdownmenu-arrow-size / 2);
+		}
+		> li.menu-text {
+			&,
+			& > a {
+				color: $topbar-text-color;
+			}
+		}
+		> li.is-active > a {
+			color: $topbar-link-active-color;
+		}
+		.is-dropdown-submenu {
+			> li > a {
+				color: $topbar-link-color;
+				&:hover, &:active {
+					color: $topbar-link-active-color;
+				}
+			}
+		}
+	}
+}
