@@ -15,7 +15,7 @@ if (!defined('FOUNDSWATCH_VERSION')) {
 	if (false !== $ver) {
 		define('FOUNDSWATCH_VERSION', $ver);
 	} else {
-		define('FOUNDSWATCH_VERSION', 'UNKNOWN');
+		define('FOUNDSWATCH_VERSION', '1.0.0');
 	}
 }
 
@@ -52,8 +52,16 @@ function injectPrismFooter() {
 			$("body").append($temp);
 			$temp.val($(element).text()).select();
 			document.execCommand("copy");
+			// console.log("\""+$(element).text()+"\" copied to clipboard.");
 			$temp.remove();
 		}
+
+		$(document).ready(function() {
+			// only works if jQuery loaded
+			$('.special-url-button').each(function() {
+				$(this).css( {"display": "inline-block"} );
+			});
+		});
 	</script>
 	<?php
 }
@@ -133,7 +141,7 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 				?>
 				<tr>
 					<td width="90%"><tt class="special-url-format" id="copy-<?= $name ?>-url"><u>https://cdn.jsdelivr.net</u><i>/gh/vinorodrigues/foundswatch@<?= FOUNDSWATCH_VERSION ?>/dist/</i><b><?= $name ?></b><i>/foundation.min.css</i></tt></td>
-					<td width="10%" style="text-align: center;"><button class="tiny hollow button" style="margin: 0;" onClick="copyToClipboard('#copy-<?= $name ?>-url')">Copy URL</button></td>
+					<td width="10%" style="text-align: center;"><button class="tiny button special-url-button" style="margin: 0; display: none;" onClick="copyToClipboard('#copy-<?= $name ?>-url')">Copy URL</button></td>
 				</tr>
 				<?php
 				}
@@ -167,9 +175,9 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 					</ul></p>
 				<p>
 <pre><code class="code-block language-css">/* Alternative color mode (loaded first) */
-&lt;link rel="stylesheet" href="foundatiuon<i>-dark</i>.css" media="(prefers-color-scheme: dark)"&gt;
+&lt;link rel="stylesheet" href="<i>dark/</i>foundation.min.css" media="<b>(prefers-color-scheme: dark)</b>"&gt;
 /* Default and/or 'no preference' color mode (loaded last) */
-&lt;link rel="stylesheet" href="foundation<i>-light</i>.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)"&gt;
+&lt;link rel="stylesheet" href="<i>default/</i>foundation.min.css" media="<b>(prefers-color-scheme: no-preference), (prefers-color-scheme: light)</b>"&gt;
 </code></pre>
 				</p>
 			</div>

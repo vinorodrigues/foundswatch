@@ -66,8 +66,13 @@ function headHere(string $title, $injection_callback = '') {
 	<link rel="alternate icon" href="<?= ABSPATH ?>favicon.ico" />
 	<link rel="icon" type="image/gif" href="<?= ABSPATH ?>favicon.gif" />
 <?php if (false === $usetheme): ?>
-	<link rel="stylesheet" href="<?= ABSPATH ?>themes/dark/foundation<?= DOTMIN ?>.css<?= _v() ?>" media="(prefers-color-scheme: dark)" />
-	<link rel="stylesheet" href="<?= ABSPATH ?>themes/default/foundation<?= DOTMIN ?>.css<?= _v() ?>" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" />
+	<?php if (empty(DOTMIN)) : ?>
+	<link rel="stylesheet" href="<?= ABSPATH ?>themes/dark/foundation<?= DOTMIN ?>.css<?= _v() ?>" media="(prefers-color-scheme: dark)" id="css-dark" />
+	<link rel="stylesheet" href="<?= ABSPATH ?>themes/default/foundation<?= DOTMIN ?>.css<?= _v() ?>" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" id="css-light" />
+	<?php else: ?>
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/dist/dark/foundation.min.css" media="(prefers-color-scheme: dark)" id="css-dark" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/<?= FOUNDATION_VERSION ?>/css/foundation.min.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" id="css-light" />
+	<?php endif; ?>
 <?php else: ?>
 	<link rel="stylesheet" href="<?= ABSPATH ?>themes/<?= $usetheme ?>/foundation<?= DOTMIN ?>.css<?= _v() ?>" />
 <?php endif; ?>
@@ -94,6 +99,7 @@ function headerHere($add_on_menu_callback = '') {
 						<ul class="dropdown menu" data-dropdown-menu>
 							<li class="menu-text hide-for-small-only site-logo"><a href="<?= ABSPATH ?>."><picture><source srcset="<?= ABSPATH ?>img/logo.dark.svg" media="(prefers-color-scheme: dark)" /><img src="<?= ABSPATH ?>img/logo.svg" style="height: 1.2rem"></picture></a></li>
 							<li class="menu-text hide-for-small-only site-name"><a href="<?= ABSPATH ?>.">Foundswatch</a></li>
+							<li class="hide-for-medium"><a href="<?= ABSPATH ?>.">Home</a></li>
 							<li class="has-submenu">
 								<!-- <a href="<?= ABSPATH ?>themes/">Themes</a> -->
 								<a>Themes</a>
@@ -108,8 +114,8 @@ function headerHere($add_on_menu_callback = '') {
 									?>
 								</ul>
 							</li>
-							<li><a href="<?= ABSPATH ?>help/">Help</a></li>
 							<?php if (!empty($add_on_menu_callback)) call_user_func($add_on_menu_callback); ?>
+							<li><a href="<?= ABSPATH ?>help/">Help</a></li>
 						</ul>
 					</div>
 				</div>
@@ -137,7 +143,8 @@ function footerHere($injection_callback = '', $anythingelse_callback = '') {
 			</div>
 			<div class="cell small-10 clearfix">
 				Made with <small>&#10084;&#65039;</small> by <a href="https://github.com/vinorodrigues">Vino Rodrigues</a>.<br>
-				Code released under the <a target="_blank" href="https://github.com/vinorodrigues/foundswatch/blob/master/LICENSE.md">MIT License</a>.<br>
+				Code released under the <a target="_blank" href="https://github.com/vinorodrigues/foundswatch/blob/master/LICENSE.md">MIT License</a>.
+					Inspired by <a target="_blank" href="https://bootswatch.com">Bootswatch</a>, made by <a target="_blank" href="https://thomaspark.co/">Thomas Park</a>.<br>
 				Based on <a target="_blank" href="https://get.foundation" rel="nofollow">ZURB Foundation</a>.
 					Icons from <a target="_blank" href="https://zurb.com/playground/foundation-icon-fonts-3" rel="nofollow">ZURB Foundation Icon Fonts</a>.
 					Web fonts from <a target="_blank" href="https://fonts.google.com/" rel="nofollow">Google</a>.
