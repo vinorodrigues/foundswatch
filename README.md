@@ -1,3 +1,5 @@
+[![Vino Rodrigues](https://img.shields.io/badge/vino-rodrigues-%23006699)](https://vinorodrigues.com) ![License](https://img.shields.io/github/license/vinorodrigues/Foundswatch) ![GitHub issues](https://img.shields.io/github/issues/vinorodrigues/Foundswatch)
+
 # Foundswatch
 
 ![](https://foundswatch.com/img/logo.png)
