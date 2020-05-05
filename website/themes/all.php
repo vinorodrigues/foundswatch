@@ -2,8 +2,8 @@
 
 if (!defined('INIT')) include_once '../inc/functions.php';
 
-global $theme;
-if (!isset($theme) && (false === $theme)) $theme = 'default';
+// global $theme;
+// if (!isset($theme) && (false === $theme)) $theme = 'default';
 
 function injectStyles() {
 	?>

@@ -108,7 +108,7 @@ function headerHere($add_on_menu_callback = '') {
 									global $themelist;
 									foreach ($themelist as $name => $desc) {
 										$thm = strtolower($name);
-										// if ('default' == $thm) continue;
+										if ('default' == $thm) continue;
 										echo '<li><a href="' . ABSPATH . 'themes/' . $thm . '/">' . $name . '</a></li>';
 									}
 									?>

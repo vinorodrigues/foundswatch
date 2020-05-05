@@ -16,7 +16,7 @@ if (false !== $preview) {
 	include 'preview.php';
 } else {
 	if (false === $theme) {
-		$theme = 'default';
+		// $theme = 'default';
 		include 'all.php';
 	} else {
 		include 'thumbnail.php';
