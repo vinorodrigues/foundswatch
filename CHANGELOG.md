@@ -21,7 +21,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 ### Changed
 - Help page
 
-## [0.1.0] - 2020-05-03 [Link](https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@0.1.0/)
+## [[0.1.0]](https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@0.1.0/) - 2020-05-03
 ### Added
 - Initial release (beta)
 - Contains the following Themes:
