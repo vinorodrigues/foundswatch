@@ -49,11 +49,13 @@ dd {
 	background-color: $topbar-background;
 
 	@include breakpoint(medium up) {
-		background-color: var(--top-bar-bg);
+		background: $topbar-background;
+		background: var(--top-bar-bg);
 	}
 
 	@include breakpoint(small only) {
-		background-color: var(--title-bar-bg);
+		background: $titlebar-background;
+		background: var(--title-bar-bg);
 	}
 
 	&.is-stuck {

@@ -31,7 +31,7 @@ headHere('Themes', 'injectStyles');
 			</div>
 			<?php
 				foreach ($themelist as $name => $desc) {
-					// if ('default' == $name) continue;  // skip default
+					// if ('default' == strtolower($name)) continue;  // skip default
 			?>
 			<div class="cell small-12 medium-6">
 				<iframe src="?theme=<?= $name ?>" width="500" height="250" frameborder="0" scrolling="no" class="float-center"></iframe>

@@ -20,7 +20,7 @@ function dateFile($filename) {
 header('Content-type: text/xml');
 // header('Content-type: text/plain');  // for debug
 
-if (true || !defined('DEBUG') || !DEBUG) {
+if (!defined('DEBUG') || !DEBUG) {
 	$wait = 2592000;  // 30 days, or 60 * 60 * 24 * 30, seconds
 	header('Cache-Control: max-age=' . $wait . ', public');
 	header('Expires: ' . gmdate('D, d M Y H:i:s \G\M\T', time() + $wait));
