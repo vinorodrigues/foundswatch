@@ -40,7 +40,7 @@ if (empty($x)) {
 	if (false !== $fn) {
 		$data['filename'] = $fn;
 		if (!defined('DEBUG') || !DEBUG)
-			header('Content-Disposition: attachment; filename="'.$fn.'"');
+			header('Content-Disposition: inline; filename="'.$fn.'"');
 	}
 	if (!defined('DEBUG') || !DEBUG) {
 		$x = 86400;  // 1 day, or 60 * 60 * 24, seconds

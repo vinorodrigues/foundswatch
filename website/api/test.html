@@ -11,31 +11,31 @@
 
 <div class="grid-container">
 
-  <div class="grid-x grid-margin-x">
+	<div class="grid-x grid-margin-x">
 
-    <div class="cell small-12">
-      <h1>Foundation 6</h1>
-    </div>
+		<div class="cell small-12">
+			<h1>Foundation 6</h1>
+		</div>
 
-    <div class="cell medium-6">
-      <h4>Change it up!</h4>
-      <select id="lst"><option /></select>
-    </div>
+		<div class="cell medium-6">
+			<h4>Change it up!</h4>
+			<select id="lst"><option /></select>
+		</div>
 
-    <div class="cell medium-6">
-      <div class="warning callout">
-        <h4>Warning!</h4>
-        <p>This is a demo of the Foundswatch API.</p>
-        <a href="https://foundswatch.com" target="_blank" class="primary button">Go there</a>
-      </div>
+		<div class="cell medium-6">
+			<div class="warning callout">
+				<h4>Warning!</h4>
+				<p>This is a demo of the Foundswatch API.</p>
+				<a href="https://foundswatch.com" target="_blank" class="primary button">Go there</a>
+			</div>
 
-    </div>
+		</div>
 
-  </div>
+	</div>
 
-  <div class="cell small-12">
-    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec nisl cursus, fermentum turpis et, lobortis eros. Proin sem neque, condimentum sed sodales eget, vestibulum a ex. Curabitur sagittis lacinia turpis venenatis consequat. Aliquam placerat, nulla sit amet varius eleifend, elit metus gravida nisi, dapibus varius eros orci id nibh.</p>
-  </div>
+	<div class="cell small-12">
+		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque nec nisl cursus, fermentum turpis et, lobortis eros. Proin sem neque, condimentum sed sodales eget, vestibulum a ex. Curabitur sagittis lacinia turpis venenatis consequat. Aliquam placerat, nulla sit amet varius eleifend, elit metus gravida nisi, dapibus varius eros orci id nibh.</p>
+	</div>
 
 </div>
 
@@ -47,38 +47,40 @@
 /* -- jsFiddle JavaScript Block : Start ------------------------------------ */
 
 $(document).ready(function() {
-  $(document).foundation();
+	$(document).foundation();
 
-  // load default Foundation (so that we have an id to work with)
-  $('head').append('<link id="f6css" rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/css/foundation.css">');
+	// load default Foundation (so that we have an id to work with)
+	$('head').append('<link id="f6css" rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/css/foundation.css">');
 
-  // populate select and tether select change function
-  $.getJSON("https://foundswatch.com/api/0.json", function(data) {
-    var themes = data.themes;
-    var select = $("#lst");
-    select.show();
-    $(".callout").toggleClass("warning success");
-    $(".callout h4").text("Success!");
+	// populate select and tether select change function
+	$.getJSON("https://foundswatch.com/api/0.json", function(data) {
+		var themes = data.themes;
+		var select = $("#lst");
+		select.show();
+		$(".callout").toggleClass("warning success");
+		$(".callout h4").text("Success!");
 
-    themes.forEach(function(value, index) {
-      select.append($("<option />")
-        .val(index)
-        .text(value.name));
-    });
+		themes.forEach(function(value, index) {
+			select.append($("<option />")
+				.val(index)
+				.text(value.name));
+		});
 
-    select.change(function() {
-      var theme = themes[$(this).val()];
-      $("#f6css").attr("href", theme.css);
-      $("h1").text(theme.name);
-    }).change();
+		select.change(function() {
+			var theme = themes[$(this).val()];
+			if (typeof theme !== 'undefined') {
+				$("#f6css").attr("href", theme.cssMin);
+				$("h1").text(theme.name);
+			} else console.log("Theme "+$(this).val()+" not found");
+		}).change();
 
-  }, "json").fail(function(jqxhr, textStatus, error) {
-    var err = textStatus + ", " + error;
-    console.log("Request Failed: " + err);
-    $(".callout").toggleClass("warning alert");
-    $(".callout h4").text("Bugger!");
-    $(".callout p").text("Someting went wrong!<br>"+err);
-  });
+	}, "json").fail(function(jqxhr, textStatus, error) {
+		var err = textStatus + ", " + error;
+		console.log("Request Failed: " + err);
+		$(".callout").toggleClass("warning alert");
+		$(".callout h4").text("Bugger!");
+		$(".callout p").text("Someting went wrong!<br>"+err);
+	});
 });
 
 /* -- jsFiddle JavaScript Block : End -------------------------------------- */
