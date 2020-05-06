@@ -1,0 +1,16 @@
+# ---
+# Rename this file: .htaccess
+# ---
+
+<IfModule mod_rewrite.c>
+	Options +FollowSymLinks
+	RewriteEngine On
+
+	# API Permalinks
+	# RewriteBase /
+	RewriteRule ^index\.php$ - [L]
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule ^/?([-A-Za-z0-9]+.[Jj][Ss][Oo][Nn]$)/?$ /api/index.php?f=$1 [QSA,L]
+
+</IfModule>

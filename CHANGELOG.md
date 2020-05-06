@@ -17,3 +17,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 	- flatly
 	- materia
 	- united
+
+## [0.1.1] - 2020-05-06
+### Added
+- API
+
+### Changed
+- Help page

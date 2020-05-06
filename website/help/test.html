@@ -1,0 +1,97 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="x-ua-compatible" content="ie=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
+<body>
+
+<!-- jsFiddle HTML Block : Start ------------------------------------------ -->
+
+<div class="grid-container">
+
+	<div class="grid-x grid-margin-x">
+
+		<div class="cell medium-6">
+			<h1>Dark Mode Test</h1>
+			<p>Remember that "<i>Dark Mode</i>" is a combination of two choosing parties, the user ('s browser) that can choose between: don't care / don't support, light preferred and dark preferred; and the website / brand that has a choice to deliver either light or dark. So, the Decision Table is:
+				<table>
+					<thead><tr><th>Website Brand</th><th>User Browser</th><th>Output</th></tr></thead>
+					<tbody>
+						<tr><td>Light</td><td>Light</td><td>Light</td></tr>
+						<tr><td>Light</td><td>Dark</td><td><b>Dark</b></td></tr>
+						<tr><td>Light</td><td>Don't Care</td><td>Light</td></tr>
+						<tr><td>Dark</td><td>Light</td><td><b>Light</b></td></tr>
+						<tr><td>Dark</td><td>Dark</td><td>Dark</td></tr>
+						<tr><td>Dark</td><td>Don't Care</td><td>Dark</td></tr>
+					</tbody>
+				</table>
+				<i>i.e.</i> <abbr title="Rule of Thumb">&#x1F44D;</abbr> <small>User always wins except when they don't care, or their browser doesn't support it.</small>
+			</p>
+		</div>
+
+		<div class="cell medium-6">
+			<br style="margin-top:6rem">
+			<div class="large callout">
+				<h4>Test It Out</h4>
+				<p><button id="toggleButton" class="large primary button">Toggle</button>
+				( -- In <b id="mode-msg">browser default</b> mode, you are.)</p>
+			</div>
+		</div>
+
+	</div>
+</div>
+
+<!-- jsFiddle HTML Block : End -------------------------------------------- -->
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/5.2.7/what-input.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/js/foundation.js"></script>
+<script>
+/* -- jsFiddle JavaScript Block : Start ------------------------------------ */
+
+$(document).ready(function() {
+	$(document).foundation();
+
+	// if jQuery loaded, so give the button control
+	$("#toggleButton").attr( { "onclick": "toggleF6css();" } );
+
+	// based on the Rule of Thumb, load the brand alternative first, and then the brand preference
+	// - then let the browser decide - (and if it doesn't then the latter wins)
+	// This bit is usally in your <head> ... just doing it like this here so that we can make it work in jsFiddle
+	$('head').append('<link id="f6css-dark" rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@0.1.0/dist/dark/foundation.min.css" media="(prefers-color-scheme: dark)" />');
+	$('head').append('<link id="f6css-light" rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.6.3/css/foundation.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" />');
+	$('head').append('<link id="f6css" /><!-- this one is empty for defaul browser mode -->');
+});
+
+// the big toggle switch and all it's trickery - it assumes jQuery is loaded.
+function toggleF6css() {
+	// get current mode
+	$mode = $("#f6css").attr("data-mode");  // don't use data("mode"), it doesn't refresh
+	if (typeof $mode === 'undefined') {
+		// not defined yet - set brand pref. & ask the browser if alt. is active
+		$mode = 'light';
+		if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) $mode = 'dark';
+	}
+
+	// by here we have the current mode, so swap it
+	$mode = ($mode == 'dark') ? 'light' : 'dark';
+	// and grab the new mode css href
+	$href = $("#f6css-"+$mode).attr("href");
+
+	// set the third css (last wins) to the forced preference.
+	$("#f6css").attr( {
+		"rel" : "stylesheet",
+		"type": "text/css",
+		"href": $href,
+		"data-mode": $mode,
+		} );
+
+	// optional bit, just for this demo
+	$("#mode-msg").html( $mode );
+}
+
+/* -- jsFiddle JavaScript Block : End -------------------------------------- */
+</script>
+</body>
+</html>

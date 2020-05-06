@@ -118,9 +118,9 @@ function bumpTask(name, what = 'patch') {
 			.pipe( bump( { version: newVer } ) )
 			.pipe( gulp.dest( './' ) );
 
-		var t2 = gulp.src( './website/version.json' )
+		var t2 = gulp.src( './website/api/version.json' )
 			.pipe( bump( { version: newVer } ) )
-			.pipe( gulp.dest( './website/' ) );
+			.pipe( gulp.dest( './website/api/' ) );
 
 		return merg( [t1, t2] );
 	});

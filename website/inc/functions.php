@@ -19,6 +19,26 @@ function _v() {
 	}
 }
 
+function getVersion() {
+	if (!defined('FOUNDSWATCH_VERSION')) {
+		$ver = @file_get_contents('../api/version.json');
+		if (false !== $ver) {
+			$ver = @json_decode($ver, true);
+			if (is_array($ver) && array_key_exists('version', $ver)) {
+				$ver = $ver['version'];
+			} else {
+				$ver = false;
+			}
+		}
+		if (false !== $ver) {
+			define('FOUNDSWATCH_VERSION', $ver);
+		} else {
+			define('FOUNDSWATCH_VERSION', '1.0.0');
+		}
+	}
+	return FOUNDSWATCH_VERSION;
+}
+
 function getRequest(string $name, $must_have_value = false) {
 	$ret = array_key_exists($name, $_REQUEST) ? trim( $_REQUEST[$name] ) : false;
 	if ((false !== $ret) && empty($ret) ) return $must_have_value ? false : true;
@@ -40,6 +60,8 @@ function findTheme($name) {
 	return $desc !== false ? array($name, $desc) : false;
 }
 
+// borrowed from Wordpress
+
 function untrailingslashit( $string ) {
 	return rtrim( $string, '/\\' );
 }
@@ -47,6 +69,27 @@ function untrailingslashit( $string ) {
 function trailingslashit( $string ) {
 	return untrailingslashit( $string ) . '/';
 }
+
+// borrowed from https://stackoverflow.com/a/8891890/1575941
+
+function url_origin( $s = null, $use_forwarded_host = false ) {
+	if (empty($s)) $s = $_SERVER;
+	$ssl      = ( ! empty( $s['HTTPS'] ) && $s['HTTPS'] == 'on' );
+	$sp       = strtolower( $s['SERVER_PROTOCOL'] );
+	$protocol = substr( $sp, 0, strpos( $sp, '/' ) ) . ( ( $ssl ) ? 's' : '' );
+	$port     = $s['SERVER_PORT'];
+	$port     = ( ( ! $ssl && $port=='80' ) || ( $ssl && $port=='443' ) ) ? '' : ':'.$port;
+	$host     = ( $use_forwarded_host && isset( $s['HTTP_X_FORWARDED_HOST'] ) ) ? $s['HTTP_X_FORWARDED_HOST'] : ( isset( $s['HTTP_HOST'] ) ? $s['HTTP_HOST'] : null );
+	$host     = isset( $host ) ? $host : $s['SERVER_NAME'] . $port;
+	return $protocol . '://' . $host;
+}
+
+function full_url( $s = null, $use_forwarded_host = true ) {
+	if (empty($s)) $s = $_SERVER;
+    return url_origin( $s, $use_forwarded_host ) . $s['REQUEST_URI'];
+}
+
+// website pages common
 
 function headHere(string $title, $injection_callback = '') {
 	global $theme;
@@ -160,14 +203,15 @@ function footerHere($injection_callback = '', $anythingelse_callback = '') {
 	</div>
 <?php /*
 	<script src="<?= ABSPATH ?>js/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/<?= JQUERY_VERSION ?>/jquery<?= DOTMIN ?>.js"></script>
 	<script src="<?= ABSPATH ?>js/what-input.min.js"></script>
 	<script src="<?= ABSPATH ?>js/foundation.min.js"></script>
 */ ?>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/<?= JQUERY_VERSION ?>/jquery<?= DOTMIN ?>.js"></script>
+	<script src="https://code.jquery.com/jquery-<?= JQUERY_VERSION ?><?= DOTMIN ?>.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/what-input/<?= WHAT_INPUT_VERSION ?>/what-input<?= DOTMIN ?>.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/<?= FOUNDATION_VERSION ?>/js/foundation<?= DOTMIN ?>.js"></script>
 <?php if (!empty($injection_callback)) call_user_func($injection_callback); ?>
-
 	<script>
 		$(document).ready(function() {
 			$(document).foundation();

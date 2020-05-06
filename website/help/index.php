@@ -2,43 +2,27 @@
 
 include_once '../inc/functions.php';
 
-if (!defined('FOUNDSWATCH_VERSION')) {
-	$ver = file_get_contents('../version.json');
-	if (false !== $ver) {
-		$ver = json_decode($ver, true);
-		if (is_array($ver) && array_key_exists('version', $ver)) {
-			$ver = $ver['version'];
-		} else {
-			$ver = false;
-		}
-	}
-	if (false !== $ver) {
-		define('FOUNDSWATCH_VERSION', $ver);
-	} else {
-		define('FOUNDSWATCH_VERSION', '1.0.0');
-	}
-}
+$v = getVersion();
+$v0 = preg_match('/(\d)/', $v, $out) ? $out[0] : '1';
+$v00 = preg_match('/(\d+\.)(\d)/', $v, $out) ? $out[0] : '1.0';
 
 function injectPrismHead() {
 	?>
 	<style>
+		h3 { margin-top: 3rem; }
 		pre[class*=language-] {
 			margin: 0 !important;
 			padding: 0 !important;
 			overflow: hidden !important;
 		}
-		.code-block {
-			margin-bottom: 0;
-		}
-		.token.comment {
-			font-style: italic;
-		}
+		.code-block { margin-bottom: 0; }
+		.token.comment { font-style: italic; }
 		.special-url-format u { text-decoration: none; font-style: italic; font-size: 85%; }
 		.special-url-format i { opacity: 0.5; }
 		.special-url-format b { font-size: 100%; }
 	</style>
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-tomorrow.min.css" rel="stylesheet" media="(prefers-color-scheme: dark)" />
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism.min.css" rel="stylesheet" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" />
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-coy.min.css" rel="stylesheet" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" />
 	<?php
 }
 
@@ -81,7 +65,7 @@ headHere('Help', 'injectPrismHead');
 		<div class="grid-x grid-margin-x">
 			<div class="cell small-12"><h1>Quick Start</h1></div>
 			<div class="cell large-6 clearfix">
-				<h3>Pre-Compiled CSS</h3>
+				<a name="css"></a><h3>Pre-Compiled CSS</h3>
 				<p>Using the themes is as easy as downloading a CSS file and replacing the one that comes with Foundation.</p>
 				<p>There are 2 versions of each theme:
 					<ul>
@@ -89,10 +73,10 @@ headHere('Help', 'injectPrismHead');
 						<li><code>foundation.min.css</code> The compressed variant - used for production websites.</li>
 					</ul>
 				</p>
-				<p><small><b>NB:</b> Please do not hotlink to the files on this site as it will slow yours.</small></p>
+				<p><small><b>NB:</b> Please do not hotlink to the files on this site as it will slow yours. See <a href="#cdn">CDN</a> below.</small></p>
 			</div>
 			<div class="cell large-6">
-				<h3>Sass</h3>
+				<a name="sass"></a><h3>Sass</h3>
 				<p>Follow the instructions listed at <a href="https://get.foundation/sites/docs/sass.html" target="_blank">get.foundation/sites/docs/sass.html</a></p>
 				<p>Then drop in the theme SASS files:
 
@@ -105,16 +89,16 @@ headHere('Help', 'injectPrismHead');
 				</p>
 			</div>
 			<div class="cell small-12">
-				<h3>CDN</h3>
+				<a name="cdn"></a><h3>CDN</h3>
 				<p>You can also hotlink the themes via CDN via <a href="https://www.jsdelivr.com" target="_blank">jsdelivr.com</a></p>
 				<p>You can access the theme CSS file from the GitHub release:
 
-<pre><code class="code-block language-clike">// load Foundswatch v<?= FOUNDSWATCH_VERSION ?> Theme
-https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@<?= FOUNDSWATCH_VERSION ?>/dist/{themename}/foundation.min.css
+<pre><code class="code-block language-clike">// load Foundswatch v<?= $v ?> Theme
+https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@<?= $v ?>/dist/{themename}/foundation.min.css
 
 // use a version range instead of a specific version
-https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@<?= preg_match('/(\d+\.)(\d)/', FOUNDSWATCH_VERSION, $out) ? $out[0] : '1.0' ?>/dist/{themename}/foundation.min.css
-https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@<?= preg_match('/(\d)/', FOUNDSWATCH_VERSION, $out) ? $out[0] : '1' ?>/dist/{themename}/foundation.min.css
+https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@<?= $v00 ?>/dist/{themename}/foundation.min.css
+https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@<?= $v0 ?>/dist/{themename}/foundation.min.css
 
 // omit the version completely to get the latest one
 // you should NOT use this in production
@@ -128,7 +112,7 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 </code></pre>
 				</p>
 
-				<p>Current release is v<?= FOUNDSWATCH_VERSION ?> and contains:<br>
+				<p>Current release is v<?= $v ?> and contains:<br>
 				<table><tbody>
 
 				<?php
@@ -140,7 +124,7 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 					if ('default' == $name) continue;
 				?>
 				<tr>
-					<td width="90%"><tt class="special-url-format" id="copy-<?= $name ?>-url"><u>https://cdn.jsdelivr.net</u><i>/gh/vinorodrigues/foundswatch@<?= FOUNDSWATCH_VERSION ?>/dist/</i><b><?= $name ?></b><i>/foundation.min.css</i></tt></td>
+					<td width="90%"><tt class="special-url-format" id="copy-<?= $name ?>-url"><u>https://cdn.jsdelivr.net</u><i>/gh/vinorodrigues/foundswatch@<?= $v ?>/dist/</i><b><?= $name ?></b><i>/foundation.min.css</i></tt></td>
 					<td width="10%" style="text-align: center;"><button class="tiny button special-url-button" style="margin: 0; display: none;" onClick="copyToClipboard('#copy-<?= $name ?>-url')">Copy URL</button></td>
 				</tr>
 				<?php
@@ -149,7 +133,7 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 				<tbody></table></p>
 			</div>
 			<div class="cell small-12">
-				<h3>Customisation</h3>
+				<a name="customisation"></a><h3>Customisation</h3>
 				<p>To modify a theme or create your own, follow the steps below in your terminal. You'll need to have
 					<a target="_blank" href="https://help.github.com/articles/set-up-git">Git</a>,
 					<a target="_blank" href="https://nodejs.org/">Node</a> and
@@ -163,7 +147,31 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 					</ol>
 			</div>
 			<div class="cell small-12">
-				<h3>Dark Mode</h3>
+				<a name="api"></a><h3>API</h3>
+				<p>You can use the API to integrate the themes with your platform. Get:<br>
+					<code><a href="https://foundswatch.com/api/<?= $v0 ?>.json">
+						https://foundswatch.com/api/<?= $v0 ?>.json
+					</a></code></p>
+				<p>This returns an object with a <code>version</code> and a <code>themes</code> array property:
+<pre><code class="code-block language-json">{
+	"version":"<?= $v ?>",
+	"themes":[ {
+			"name":"&hellip;",
+			"description":"&hellip;",
+			"screenshot":"&hellip;",
+			"preview":"&hellip;",
+			"css":"&hellip;",
+			"cssMin":"&hellip;",
+			"scssSettings":"&hellip;",
+			"scss":"&hellip;"
+		}  // , (more themes)
+	]
+}
+</code></pre></p>
+				<p>Here's a <a href="https://jsfiddle.net/vinorodrigues/xqfcmz2b/" target="_blank">demo</a> of the API in action on jsFiddle.</p>
+			</div>
+			<div class="cell small-12">
+				<a name="dark-mode"></a><h3>Dark Mode</h3>
 				<p>Unfortunately, Foundation 6 is not designed to support “dark
 					mode switching”, i.e. does not support the new
 					“<code>prefers-color-scheme</code>” media query.</p>
@@ -178,8 +186,8 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 &lt;link rel="stylesheet" href="<i>dark/</i>foundation.min.css" media="<b>(prefers-color-scheme: dark)</b>"&gt;
 /* Default and/or 'no preference' color mode (loaded last) */
 &lt;link rel="stylesheet" href="<i>default/</i>foundation.min.css" media="<b>(prefers-color-scheme: no-preference), (prefers-color-scheme: light)</b>"&gt;
-</code></pre>
-				</p>
+</code></pre></p>
+			<p>Take a look at <a href="https://jsfiddle.net/vinorodrigues/qyx5o6tv/" target="_blank">this</a> jsFiddle for an example (with toggle button).</p>
 			</div>
 		</div>
 	</main>
