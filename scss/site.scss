@@ -46,15 +46,13 @@ dd {
 
 .top-bar-wrapper {
 	width: 100%;
-	background-color: $topbar-background;
+	background: $topbar-background;
 
 	@include breakpoint(medium up) {
-		background: $topbar-background;
 		background: var(--top-bar-bg);
 	}
 
 	@include breakpoint(small only) {
-		background: $titlebar-background;
 		background: var(--title-bar-bg);
 	}
 

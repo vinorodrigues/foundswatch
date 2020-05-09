@@ -10,6 +10,8 @@
 // 0. borrowed from bootstrap
 // --------------------------
 
+$new-topbar-background: $topbar-background linear-gradient(lighten($topbar-background, 8%), $topbar-background, 60%, darken($topbar-background, 4%)) no-repeat no-repeat;
+
 :root {
 	@each $color, $value in $foundation-palette {
 		--#{$color}: #{$value};
@@ -22,10 +24,19 @@
 	@each $bp, $value in $breakpoints {
 		--breakpoint-#{$bp}: #{$value};
 	}
-	--top-bar-bg: #{$topbar-background};
+	--top-bar-bg: #{$new-topbar-background};
 	--title-bar-bg: #{$titlebar-background};
 	--font-family-sans-serif: #{inspect($body-font-family)};
 	--font-family-monospace: #{inspect($font-family-monospace)};
+}
+
+@each $color, $value in $foundation-palette {
+	.text-#{$color} {
+		color: #{$value};
+	}
+}
+.text-muted {
+	color: scale-color($body-font-color, $lightness: 50%);
 }
 
 // 11. Buttons

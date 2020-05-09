@@ -7,6 +7,51 @@
 // Based on Bootstrap 4
 // ----------------------------------------------------------------------------
 
+$form-feedback-icon-invalid-color: get-color(alert);
+$form-feedback-icon-invalid: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='#{$form-feedback-icon-invalid-color}' viewBox='0 0 12 12'><circle cx='6' cy='6' r='4.5'/><path stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/><circle cx='6' cy='8.2' r='.6' fill='#{$form-feedback-icon-invalid-color}' stroke='none'/></svg>") !default;
+
+// Replace `$search` with `$replace` in `$string`
+// Used on our SVG icon backgrounds for custom forms.
+//
+// @author Hugo Giraudel
+// @param {String} $string - Initial string
+// @param {String} $search - Substring to replace
+// @param {String} $replace ('') - New value
+// @return {String} - Updated string
+@function str-replace($string, $search, $replace: "") {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+$escaped-characters: (
+  ("<","%3c"),
+  (">","%3e"),
+  ("#","%23"),
+  ("(","%28"),
+  (")","%29"),
+) !default;
+
+// See https://codepen.io/kevinweber/pen/dXWoRw
+@function escape-svg($string) {
+  @if str-index($string, "data:image/svg+xml") {
+    @each $char, $encoded in $escaped-characters {
+      // Do not escape the url brackets
+      @if str-index($string, "url(") == 1 {
+        $string: url("#{str-replace(str-slice($string, 6, -3), $char, $encoded)}");
+      } @else {
+        $string: str-replace($string, $char, $encoded);
+      }
+    }
+  }
+
+  @return $string;
+}
+
 // :root vars like bootstrap
 :root {
 	// Custom variable values only support SassScript inside `#{}`.
@@ -31,6 +76,32 @@
 	// See https://github.com/sass/sass/issues/2383#issuecomment-336349172
 	--font-family-sans-serif: #{inspect($body-font-family)};
 	--font-family-monospace: #{inspect($font-family-monospace)};
+}
+
+@each $color, $value in $foundation-palette {
+	.text-#{$color} {
+		color: #{$value};
+	}
+}
+.text-muted {
+	color: scale-color($body-font-color, $lightness: 50%);
+}
+
+// 6. Abide
+// --------
+
+.is-invalid-input {
+	border-color: get-color(alert);
+	background-image: escape-svg($form-feedback-icon-invalid);
+	background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 1rem 1rem;
+
+    &:focus,
+    &:active {
+    	border-color: get-color(alert);
+		box-shadow: 0 0 0 0.2rem rgba(get-color(alert), 0.25);
+	}
 }
 
 // 9. Badge
@@ -63,9 +134,9 @@ $theme-color-interval: 8% !default;
 
 // Borrowed from Bootstrap (theme-color-level), (c) The Bootstrap Authors
 @function the-color-level($color, $level: 0) {
-  $color-base: if($level > 0, #000, #fff);
-  $level: abs($level);
-  @return mix($color-base, $color, $level * $theme-color-interval);
+	$color-base: if($level > 0, #000, #fff);
+	$level: abs($level);
+	@return mix($color-base, $color, $level * $theme-color-interval);
 }
 
 .callout {

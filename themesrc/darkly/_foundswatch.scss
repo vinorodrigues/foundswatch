@@ -30,39 +30,77 @@
 	--font-family-monospace: #{inspect($font-family-monospace)};
 }
 
+@each $color, $value in $foundation-palette {
+	.text-#{$color} {
+		color: #{$value};
+	}
+}
+.text-muted {
+	color: scale-color($body-font-color, $lightness: 50%);
+}
+
 // 11. Button
 // ----------
 
 .button.clear {
-	color: $__bs__green;
+	color: get-color(success);
 
 	&:hover,
-	&:focus,
-	&.success:hover,
-	&.success:focus {
+	&:focus {
 		color: scale-color(get-color(success), $lightness: 15%);
 	}
 
-	&.primary:hover,
-	&.primary:focus {
-		color: scale-color(get-color(primary), $lightness: 15%);
-	}
-
-	&.secondary:hover,
-	&.secondary:focus {
-		color: scale-color(get-color(secondary), $lightness: 15%);
-	}
-
-	&.warning:hover,
-	&.warning:focus {
-		color: scale-color(get-color(warning), $lightness: 15%);
-	}
-
-	&.alert:hover,
-	&.alert:focus {
-		color: scale-color(get-color(alert), $lightness: 15%);
+	@each $color, $value in $foundation-palette {
+		&.#{$color}:hover,
+		&.#{$color}:focus {
+			color: scale-color($value, $lightness: 15%);
+		}
 	}
 }
+
+.button.hollow {
+	color: scale-color($__bs__white, $lightness: -15%);;
+	border-color: scale-color($__bs__white, $lightness: -15%);;
+
+	&:hover,
+	&:focus {
+		color: $primary-color;
+		border-color: $primary-color;
+	}
+
+	@each $color, $value in $foundation-palette {
+		&.#{$color}:hover,
+		&.#{$color}:focus {
+			color: scale-color($value, $lightness: 15%);
+			border-color: scale-color($value, $lightness: 15%);
+		}
+	}
+}
+
+
+// 13. Callout
+// -----------
+
+.callout {
+	a:not(.button) {
+		text-decoration: underline;
+		color: $black
+	}
+	a:hover:not(.button) {
+		// text-decoration: underline;
+		color: darken($black, 10%);
+	}
+	.close-button {
+		color: inherit;
+	}
+	@each $color, $value in $foundation-palette {
+		&.#{$color} {
+			border-color: $value;
+		}
+	}
+}
+
+
 
 // 55. Top bar
 // -----------

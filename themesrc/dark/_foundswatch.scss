@@ -35,6 +35,16 @@ img {
 	}
 }
 
+// 5. Typo
+// -------
+
+.code-inline,
+code {
+	a {
+		color: scale-color($primary-color, $lightness: 10%);
+	}
+}
+
 // 55. Top Bar
 // -----------
 

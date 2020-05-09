@@ -385,9 +385,9 @@ headHere($theme_name, 'injectStyles');
 				  <div class="clearfix">
 				    <div class="grid-x grid-margin-x">
 				      <div class="cell small-12">
-				        <label>Number Required
-				          <input type="text" placeholder="1234" aria-describedby="example1Hint1" aria-errormessage="example1Error1" required pattern="number">
-				          <span class="form-error">
+				        <label class="is-invalid-label">Number Required
+				          <input type="text" placeholder="1234" aria-describedby="example1Hint1" aria-errormessage="example1Error1" required pattern="number" class="is-invalid-input" data-invalid aria-invalid="true">
+				          <span class="form-error is-visible" role="alert">
 				            Yo, you had better fill this out, it's required.
 				          </span>
 				        </label>

@@ -30,6 +30,15 @@
 	--font-family-monospace: #{inspect($font-family-monospace)};
 }
 
+@each $color, $value in $foundation-palette {
+	.text-#{$color} {
+		color: #{$value};
+	}
+}
+.text-muted {
+	color: scale-color($body-font-color, $lightness: 50%);
+}
+
 // 8. Accordian Menu
 // -----------------
 

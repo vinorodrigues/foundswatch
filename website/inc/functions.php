@@ -2,6 +2,7 @@
 
 if (is_file(stream_resolve_include_path('_debug.php'))) include_once '_debug.php';
 if (!defined('INIT')) include_once 'variables.php';
+include_once 'Browser.php';
 
 if (!defined('DOTMIN')) {
 	if (defined('DEBUG') && DEBUG) {
@@ -17,6 +18,50 @@ function _v() {
 	} else {
 		return '';
 	}
+}
+
+function versionCompare($a, $b) {
+	$a = explode(".", rtrim($a, ".0"));
+	$b = explode(".", rtrim($b, ".0"));
+	foreach ($a as $depth => $aVal) {
+		if (isset($b[$depth])) {
+			if ($aVal > $b[$depth]) return 1;
+			else if ($aVal < $b[$depth]) return -1;
+		} else {
+			return 1;
+		}
+	}
+	return (count($a) < count($b)) ? -1 : 0;
+}
+
+function supportsDarkMode() {
+	/** @see https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#Browser_compatibility */
+	$browser = new Browser();
+	$is_desktop = !( $browser->isMobile() || $browser->isTablet() );
+	$version = $browser->getVersion();
+	// $platform = $browser->getPlatform();
+	$browser = $browser->getBrowser();
+	$ret = false;
+	if ($is_desktop) {
+		switch ($browser) {
+			case Browser::BROWSER_OPERA: $ret = versionCompare($version, '62') >= 0; break;
+			case Browser::BROWSER_EDGE: $ret = versionCompare($version, '79') >= 0; break;
+			case Browser::BROWSER_FIREFOX: $ret = versionCompare($version, '67') >= 0; break;
+			case Browser::BROWSER_SAFARI: $ret = versionCompare($version, '12.1') >= 0; break;
+			case Browser::BROWSER_CHROME: $ret = versionCompare($version, '76') >= 0; break;
+		}
+	} else {
+		switch ($browser) {
+			// case Browser::BROWSER_OPERA:
+			case Browser::BROWSER_OPERA_MINI: $ret = versionCompare($version, '54') >= 0; break;
+			// case Browser::BROWSER_SAFARI:
+			case Browser::BROWSER_IPHONE:
+			case Browser::BROWSER_IPAD: $ret = versionCompare($version, '13') >= 0; break;
+			case Browser::BROWSER_CHROME: $ret = versionCompare($version, '76') >= 0; break;
+			case Browser::BROWSER_ANDROID: $ret = versionCompare($version, '76') >= 0; break;
+		}
+	}
+	return  $ret;
 }
 
 function getVersion() {
@@ -94,9 +139,39 @@ function full_url( $s = null, $use_forwarded_host = true ) {
 function headHere(string $title, $injection_callback = '') {
 	global $theme;
 	$usetheme = isset($theme) ? $theme : false;
+	$html_class = 'no-js';
+
+	if (defined('DEBUG') && DEBUG) {
+		$browser = new Browser();
+		$html_class .= ' browser-' . strtolower(str_replace(' ', '-', $browser->getBrowser()));
+		$html_class .= ' browser-v' . strtolower(str_replace([' ', '.'], '-', $browser->getVersion()));
+		$html_class .= ' platform-' . strtolower(str_replace(' ', '-', $browser->getPlatform()));
+		$html_class .= ' is-' . (( $browser->isMobile() || $browser->isTablet() ) ? 'mobile' : 'desktop');
+	}
+
+	$css_file = array( ABSPATH . 'css/site.min.css' . _v() );
+
+	if (false !== $usetheme) {
+		$css_file[] = ABSPATH . 'themes/' . $usetheme . '/foundation' . DOTMIN . '.css' . _v() . '|css';
+	} else {
+		$css_file[] = (empty(DOTMIN) ?
+			ABSPATH . 'themes/default/foundation' . DOTMIN . '.css' . _v() :
+			'https://cdnjs.cloudflare.com/ajax/libs/foundation/' . FOUNDATION_VERSION . '/css/foundation' . DOTMIN . '.css' );
+		if (supportsDarkMode()) {
+			// $i = $css_file[1];
+			$css_file[1] .= '|css-light|(prefers-color-scheme: no-preference), (prefers-color-scheme: light)';
+			$css_file[] = (empty(DOTMIN) ?
+				ABSPATH . 'themes/dark/foundation' . DOTMIN . '.css' . _v() :
+				'https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/dist/dark/foundation' . DOTMIN . '.css' ) .
+				'|css-dark|(prefers-color-scheme: dark)';
+			// $css_file[] = $i . '|css';
+		} else {
+			$css_file[1] .= '|css';
+		}
+	}
 ?>
 <!doctype html>
-<html class="no-js" lang="en">
+<html class="<?= $html_class ?>" lang="en">
 <head>
 <?php
 	if (function_exists('headInjection')) headInjection();
@@ -108,19 +183,16 @@ function headHere(string $title, $injection_callback = '') {
 	<link rel="icon" type="image/svg+xml" href="<?= ABSPATH ?>favicon.svg" />
 	<link rel="alternate icon" href="<?= ABSPATH ?>favicon.ico" />
 	<link rel="icon" type="image/gif" href="<?= ABSPATH ?>favicon.gif" />
-<?php if (false === $usetheme): ?>
-	<?php if (empty(DOTMIN)) : ?>
-	<link rel="stylesheet" href="<?= ABSPATH ?>themes/dark/foundation<?= DOTMIN ?>.css<?= _v() ?>" media="(prefers-color-scheme: dark)" id="css-dark" />
-	<link rel="stylesheet" href="<?= ABSPATH ?>themes/default/foundation<?= DOTMIN ?>.css<?= _v() ?>" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" id="css-light" />
-	<?php else: ?>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/dist/dark/foundation.min.css" media="(prefers-color-scheme: dark)" id="css-dark" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/<?= FOUNDATION_VERSION ?>/css/foundation.min.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" id="css-light" />
-	<?php endif; ?>
-<?php else: ?>
-	<link rel="stylesheet" href="<?= ABSPATH ?>themes/<?= $usetheme ?>/foundation<?= DOTMIN ?>.css<?= _v() ?>" />
-<?php endif; ?>
-	<link rel="stylesheet" href="<?= ABSPATH ?>css/site.min.css<?= _v() ?>" />
+	<style>:root { --top-bar-bg: #e6e6e6; }</style>
 <?php
+	for ($i=count($css_file)-1; $i>=0; $i--) {
+		$css = explode('|', $css_file[$i]);
+		echo "\t" . '<link rel="stylesheet"';
+		echo ' href="' . $css[0] . '"';
+		if (isset($css[1])) echo ' id="' . $css[1] . '"';
+		if (isset($css[2])) echo ' media="' . $css[2] . '"';
+		echo '>' . PHP_EOL;
+	}
 	if (!empty($injection_callback)) call_user_func($injection_callback);
 ?>
 </head>
@@ -213,8 +285,29 @@ function footerHere($injection_callback = '', $anythingelse_callback = '') {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/<?= FOUNDATION_VERSION ?>/js/foundation<?= DOTMIN ?>.js"></script>
 <?php if (!empty($injection_callback)) call_user_func($injection_callback); ?>
 	<script>
+		function setColorMode() {
+			if ( window.matchMedia('(prefers-color-scheme: dark)').matches ) {
+				$("html").addClass("mode-dark").removeClass("mode-light");
+			} else {
+				$("html").addClass("mode-light").removeClass("mode-dark");
+			}
+		}
+
 		$(document).ready(function() {
 			$(document).foundation();
+
+			if ( !window.matchMedia || (
+				!window.matchMedia('(prefers-color-scheme: dark)').matches &&
+				!window.matchMedia('(prefers-color-scheme: light)').matches &&
+				!window.matchMedia('(prefers-color-scheme: no-preference)').matches ) ) {
+				// prefers-color-scheme not supported
+				$("#css-dark").remove();
+				$("#css-light").attr( { "media": "", "id": "css" });
+				$("html").addClass("mode-light");
+			} else {
+				setColorMode();
+				window.matchMedia("(prefers-color-scheme: dark)").addListener(setColorMode);
+			}
 		});
 	</script>
 <?php

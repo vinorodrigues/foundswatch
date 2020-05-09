@@ -156,15 +156,15 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 <pre><code class="code-block language-json">{
 	"version":"<?= $v ?>",
 	"themes":[ {
-			"name":"&hellip;",
-			"description":"&hellip;",
-			"screenshot":"&hellip;",
-			"preview":"&hellip;",
-			"css":"&hellip;",
-			"cssMin":"&hellip;",
-			"scssSettings":"&hellip;",
-			"scss":"&hellip;"
-		}  // , (more themes)
+			"name":"{string}",
+			"description":"{string}",
+			"screenshot":"{url}",
+			"preview":"{url}",
+			"css":"{url}",
+			"cssMin":"{url}",
+			"scssSettings":"{url}",
+			"scss":"{url}"
+		}  // , { &hellip; more themes &hellip; }
 	]
 }
 </code></pre></p>
@@ -181,12 +181,25 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 						<li><a href="../themes/default/">Default</a> and <a href="../themes/dark/">Dark</a> <i>(As used on this site.)</i></li>
 						<li><a href="../themes/flatly/">Flatly</a> and <a href="../themes/darkly/">Darkly</a></li>
 					</ul></p>
-				<p>
-<pre><code class="code-block language-css">/* Alternative color mode (loaded first) */
-&lt;link rel="stylesheet" href="<i>dark/</i>foundation.min.css" media="<b>(prefers-color-scheme: dark)</b>"&gt;
+<p><pre><code class="code-block language-css">/* Alternative color mode (loaded first) */
+&lt;link id="css-dark" rel="stylesheet" href="<i>dark/</i>foundation.min.css" media="<b>(prefers-color-scheme: dark)</b>"&gt;
 /* Default and/or 'no preference' color mode (loaded last) */
-&lt;link rel="stylesheet" href="<i>default/</i>foundation.min.css" media="<b>(prefers-color-scheme: no-preference), (prefers-color-scheme: light)</b>"&gt;
+&lt;link id="css-light" rel="stylesheet" href="<i>default/</i>foundation.min.css" media="<b>(prefers-color-scheme: no-preference), (prefers-color-scheme: light)</b>"&gt;
 </code></pre></p>
+			<p>The above code will not work with a sweet-spot of browsers that support the <code>media</code> CSS filter but do not support the <code>prefers-color-scheme</code> subset. <i>e.g. older iPads on iOS 12.4.</i><br>
+				In these cases you will need to either add an un-filtered CSS file before the two above, or add the following code to disable the filtered CSS.</p>
+<p><pre><code class="code-block language-js">$(document).ready(function() {
+	// assumes jQuery running
+	if ( !window.matchMedia || (
+		!window.matchMedia("(prefers-color-scheme: dark)").matches &&
+		!window.matchMedia("(prefers-color-scheme: light)").matches &&
+		!window.matchMedia("(prefers-color-scheme: no-preference)").matches ) ) {
+		// matchMedia function, or, prefers-color-scheme media query not supported
+		$("#css-dark").remove();  // remove the dark mode CSS file link
+		$("#css-light").attr( "media", "" );  // remove the media filter
+	}
+}</code></pre></p>
+
 			<p>Take a look at <a href="https://jsfiddle.net/vinorodrigues/qyx5o6tv/" target="_blank">this</a> jsFiddle for an example (with toggle button).</p>
 			</div>
 		</div>

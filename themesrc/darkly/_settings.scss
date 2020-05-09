@@ -71,15 +71,6 @@ $__bs__green:   #00bc8c !default;
 $__bs__teal:    #20c997 !default;
 $__bs__cyan:    #3498DB !default;
 
-// $primary:       $blue !default;
-// $secondary:     $gray-700 !default;
-// $success:       $green !default;
-// $info:          $cyan !default;
-// $warning:       $yellow !default;
-// $danger:        $red !default;
-// $light:         $gray-500 !default;
-// $dark:          $gray-800 !default;
-
 $contrast-warnings: false;
 
 // 1. Global
@@ -244,7 +235,7 @@ $code-block-margin-bottom: 1.5rem;
 // 6. Abide
 // --------
 
-$abide-inputs: true;
+$abide-inputs: false;  // true;
 $abide-labels: true;
 $input-background-invalid: get-color(alert);
 $form-label-color-invalid: get-color(alert);
@@ -350,8 +341,8 @@ $buttongroup-radius-on-each: false;
 // 13. Callout
 // -----------
 
-$callout-background: $white;
-$callout-background-fade: 25%;
+$callout-background: $body-background;
+$callout-background-fade: 0%;
 $callout-border: 1px solid rgba($black, 0.25);
 $callout-margin: 0 0 1rem 0;
 $callout-sizes: (
@@ -362,7 +353,7 @@ $callout-sizes: (
 $callout-font-color: $body-font-color;
 $callout-font-color-alt: $body-background;
 $callout-radius: $global-radius;
-$callout-link-tint: 30%;
+$callout-link-tint: 0%;
 
 // 14. Card
 // --------
@@ -468,20 +459,20 @@ $form-label-color: $black;
 $form-label-font-size: rem-calc(14);
 $form-label-font-weight: $global-weight-normal;
 $form-label-line-height: 1.8;
-$select-background: $white;
-$select-triangle-color: $dark-gray;
+$select-background: $black;
+$select-triangle-color: $white;
 $select-radius: $global-radius;
-$input-color: $black;
-$input-placeholder-color: $medium-gray;
+$input-color: $white;
+$input-placeholder-color: $light-gray;
 $input-font-family: inherit;
 $input-font-size: rem-calc(16);
 $input-font-weight: $global-weight-normal;
 $input-line-height: $global-lineheight;
-$input-background: $white;
-$input-background-focus: $white;
-$input-background-disabled: $light-gray;
-$input-border: 1px solid $medium-gray;
-$input-border-focus: 1px solid $dark-gray;
+$input-background: $black;
+$input-background-focus: $black;
+$input-background-disabled: $black;
+$input-border: 1px solid $black;
+$input-border-focus: 1px solid $black;
 $input-padding: $form-spacing / 2;
 $input-shadow: inset 0 1px 2px rgba($black, 0.1);
 $input-shadow-focus: 0 0 5px $medium-gray;
@@ -617,10 +608,10 @@ $reveal-background: $white;
 $reveal-width: 600px;
 $reveal-max-width: $global-width;
 $reveal-padding: $global-padding;
-$reveal-border: 1px solid $medium-gray;
+$reveal-border: 1px solid $light-gray;  // $medium-gray;
 $reveal-radius: $global-radius;
 $reveal-zindex: 1005;
-$reveal-overlay-background: rgba($black, 0.45);
+$reveal-overlay-background: rgba($__bs__black, 0.80);
 
 // 48. Slider
 // ----------
@@ -639,7 +630,7 @@ $slider-radius: $global-radius;
 // 49. Switch
 // ----------
 
-$switch-background: $medium-gray;
+$switch-background: $light-gray;
 $switch-background-active: $primary-color;
 $switch-height: 2rem;
 $switch-height-tiny: 1.5rem;

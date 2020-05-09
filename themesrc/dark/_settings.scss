@@ -206,8 +206,8 @@ $cite-pseudo-content: '\2014 \0020';
 $code-color: $black;
 $code-font-family: $font-family-monospace;
 $code-font-weight: $global-weight-normal;
-$code-background: $light-gray;
-$code-border: 1px solid $medium-gray;
+$code-background: scale-color($white, $lightness: 10%);
+$code-border: 1px solid scale-color($white, $lightness: 20%);
 $code-padding: rem-calc(2 5 1);
 $code-block-padding: 1rem;
 $code-block-margin-bottom: 1.5rem;
@@ -598,7 +598,7 @@ $reveal-padding: $global-padding;
 $reveal-border: 1px solid $medium-gray;
 $reveal-radius: $global-radius;
 $reveal-zindex: 1005;
-$reveal-overlay-background: rgba($black, 0.45);
+$reveal-overlay-background: rgba($white, 0.85);
 
 // 48. Slider
 // ----------
