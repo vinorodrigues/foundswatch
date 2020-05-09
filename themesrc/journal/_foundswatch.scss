@@ -1,0 +1,138 @@
+// ----------------------------------------------------------------------------
+// Foundswatch v1.0.0 - Journal
+// @see https://foundswatch.com
+// (c) 2020 Vino Rodrigues
+// Licensed under MIT
+// Based on ZURB Foundation for Sites, https://get.foundation
+// Based on Bootswatch - Journal, (c) Thomas Park, https://bootswatch.com/journal
+// ----------------------------------------------------------------------------
+
+@import url('https://fonts.googleapis.com/css2?family=News+Cycle:wght@400;700&display=swap');
+
+// 0. borrowed from bootstrap
+// --------------------------
+
+:root {
+	@each $color, $value in $foundation-palette {
+		--#{$color}: #{$value};
+	}
+	--light-gray: #{$light-gray};
+	--medium-gray: #{$medium-gray};
+	--dark-gray: #{$dark-gray};
+	--black: #{$black};
+	--white: #{$white};
+	@each $bp, $value in $breakpoints {
+		--breakpoint-#{$bp}: #{$value};
+	}
+	--top-bar-bg: #{$topbar-background};
+	--title-bar-bg: #{$titlebar-background};
+	--font-family-sans-serif: #{inspect($body-font-family)};
+	--font-family-monospace: #{inspect($font-family-monospace)};
+}
+
+@each $color, $value in $foundation-palette {
+	.text-#{$color} {
+		color: #{$value};
+	}
+}
+.text-muted {
+	color: scale-color($body-font-color, $lightness: 50%);
+}
+
+// 9. Badge
+// --------
+
+.badge {
+	font-weight: 700;
+}
+
+// 13. Callout
+// -----------
+
+$theme-color-interval: 8% !default;
+
+// Borrowed from Bootstrap (alert-variant), (c) The Bootstrap Authors
+@mixin callout-variant($background, $border, $color) {
+	color: $color;
+	background-color: $background;
+	border-color: $border;
+
+	hr {
+		border-top-color: darken($border, 5%);
+	}
+	// a:not(.button) {
+	// 	color: darken($color, 10%);
+	// }
+	// a:hover:not(.button) {
+	// 	text-decoration: underline;
+	// }
+	.close-button {
+		color: $color;
+	}
+}
+
+// Borrowed from Bootstrap (theme-color-level), (c) The Bootstrap Authors
+@function the-color-level($color, $level: 0) {
+  $color-base: if($level > 0, #000, #fff);
+  $level: abs($level);
+  @return mix($color-base, $color, $level * $theme-color-interval);
+}
+
+.callout {
+	@each $color, $value in $foundation-palette {
+		&.#{$color} {
+			@include callout-variant(the-color-level($value, -10), the-color-level($value, -9), the-color-level($value, 6));
+		}
+	}
+}
+
+// 21. Label
+// ---------
+
+.label {
+	font-weight: 700;
+}
+
+// 55. Top bar
+// -----------
+
+// $topbar-text-color: $black;
+$topbar-link-color: rgba($black, 0.7);
+$topbar-link-active-color: $black;
+
+.menu-text {
+	text-transform: uppercase;
+}
+
+.top-bar {
+	font-size: rem-calc(18);
+
+	.dropdown.menu {
+		> li > a {
+			color: $topbar-link-color;
+			&:hover, &:active {
+				color: $topbar-link-active-color;
+			}
+		}
+		> li.is-dropdown-submenu-parent > a::after {
+			@include css-triangle($dropdownmenu-arrow-size, $topbar-link-color, down);
+		}
+		// > li.menu-text {
+		// 	&,
+		// 	& > a {
+		// 		color: $topbar-text-color;
+		// 	}
+		// }
+		> li.is-active > a {
+			color: $topbar-link-active-color;
+		}
+		.is-dropdown-submenu {
+			> li > a {
+				color: $topbar-link-color;
+				&:hover, &:active {
+					color: $topbar-link-active-color;
+				}
+			}
+		}
+	}
+}
