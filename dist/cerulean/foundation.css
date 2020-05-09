@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * Foundswatch v0.1.0 - Cerulean
+ * Foundswatch v0.1.2 - Cerulean
  * @see https://foundswatch.com
  * (c) 2020 Vino Rodrigues
  * Licensed under MIT
@@ -7765,10 +7765,38 @@ html.is-reveal-open body {
   --breakpoint-large: 1024px;
   --breakpoint-xlarge: 1200px;
   --breakpoint-xxlarge: 1440px;
-  --top-bar-bg: #2FA4E7;
+  --top-bar-bg: #2FA4E7 linear-gradient(#54b4eb, #2FA4E7, 60%, #1d9ce5) no-repeat no-repeat;
   --title-bar-bg: #000;
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.text-primary {
+  color: #2FA4E7;
+}
+
+.text-secondary {
+  color: #e9ecef;
+}
+
+.text-success {
+  color: #73A839;
+}
+
+.text-warning {
+  color: #DD5600;
+}
+
+.text-alert {
+  color: #C71C22;
+}
+
+.text-info {
+  color: #033C73;
+}
+
+.text-muted {
+  color: #a0a8af;
 }
 
 button,

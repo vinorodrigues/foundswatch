@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * Foundswatch v0.1.0
+ * Foundswatch v0.1.2
  * @see https://foundswatch.com
  * (c) 2020 Vino Rodrigues
  * Licensed under MIT
@@ -919,8 +919,8 @@ ul.no-bullet, ol.no-bullet {
 }
 
 .code-inline, code {
-  border: 1px solid #cacaca;
-  background-color: #8a8a8a;
+  border: 1px solid #44444a;
+  background-color: #2e2e32;
   font-family: Consolas, "Liberation Mono", Courier, monospace;
   font-weight: normal;
   color: #dcdcdc;
@@ -931,8 +931,8 @@ ul.no-bullet, ol.no-bullet {
 }
 
 .code-block {
-  border: 1px solid #cacaca;
-  background-color: #8a8a8a;
+  border: 1px solid #44444a;
+  background-color: #2e2e32;
   font-family: Consolas, "Liberation Mono", Courier, monospace;
   font-weight: normal;
   color: #dcdcdc;
@@ -6751,7 +6751,7 @@ html.is-reveal-open body {
   left: 0;
   z-index: 1005;
   display: none;
-  background-color: rgba(220, 220, 220, 0.45);
+  background-color: rgba(24, 24, 26, 0.85);
   overflow-y: auto;
 }
 
@@ -7649,6 +7649,11 @@ img {
 
 img:hover {
   opacity: 1;
+}
+
+.code-inline a, code a,
+code a {
+  color: #1a8ad5;
 }
 
 .top-bar .dropdown.menu > li > a {

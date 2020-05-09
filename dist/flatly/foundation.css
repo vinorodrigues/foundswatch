@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * Foundswatch v0.1.0 - Flatly
+ * Foundswatch v0.1.2 - Flatly
  * @see https://foundswatch.com
  * (c) 2020 Vino Rodrigues
  * Licensed under MIT
@@ -7685,6 +7685,30 @@ html.is-reveal-open body {
   --title-bar-bg: #000;
   --font-family-sans-serif: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.text-primary {
+  color: #2C3E50;
+}
+
+.text-secondary {
+  color: #95a5a6;
+}
+
+.text-success {
+  color: #18BC9C;
+}
+
+.text-warning {
+  color: #F39C12;
+}
+
+.text-alert {
+  color: #E74C3C;
+}
+
+.text-muted {
+  color: gray;
 }
 
 .top-bar .dropdown.menu > li > a {

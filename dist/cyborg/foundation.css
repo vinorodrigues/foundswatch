@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * Foundswatch v0.1.0 - Cyborg
+ * Foundswatch v0.1.2 - Cyborg
  * @see https://foundswatch.com
  * (c) 2020 Vino Rodrigues
  * Licensed under MIT
@@ -7765,6 +7765,34 @@ html.is-reveal-open body {
   --title-bar-bg: #ADAFAE;
   --font-family-sans-serif: "Roboto", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   --font-family-monospace: "Roboto Mono", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.text-primary {
+  color: #2A9FD6;
+}
+
+.text-secondary {
+  color: #555;
+}
+
+.text-success {
+  color: #77B300;
+}
+
+.text-warning {
+  color: #FF8800;
+}
+
+.text-alert {
+  color: #CC0000;
+}
+
+.text-info {
+  color: #9933CC;
+}
+
+.text-muted {
+  color: #d6d7d7;
 }
 
 .accordion-menu .is-accordion-submenu a {

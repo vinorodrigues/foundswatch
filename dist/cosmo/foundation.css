@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * Foundswatch v0.1.0 - Cosmo
+ * Foundswatch v0.1.2 - Cosmo
  * @see https://foundswatch.com
  * (c) 2020 Vino Rodrigues
  * Licensed under MIT
@@ -7643,6 +7643,30 @@ html.is-reveal-open body {
   --title-bar-bg: #000;
   --font-family-sans-serif: "Segoe UI", "Source Sans Pro", Calibri, Candara, Arial, sans-serif;
   --font-family-monospace: "Source Code Pro", SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.text-primary {
+  color: #2780E3;
+}
+
+.text-secondary {
+  color: #373a3c;
+}
+
+.text-success {
+  color: #3FB618;
+}
+
+.text-warning {
+  color: #FF7518;
+}
+
+.text-alert {
+  color: #FF0039;
+}
+
+.text-muted {
+  color: gray;
 }
 
 .badge {

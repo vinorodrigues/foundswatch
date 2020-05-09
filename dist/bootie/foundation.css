@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * Foundswatch v0.1.0 - Bootie
+ * Foundswatch v0.1.2 - Bootie
  * @see https://foundswatch.com
  * (c) 2020 Vino Rodrigues
  * Licensed under MIT
@@ -326,10 +326,10 @@ textarea {
 [type='text']:focus, [type='password']:focus, [type='date']:focus, [type='datetime']:focus, [type='datetime-local']:focus, [type='month']:focus, [type='week']:focus, [type='email']:focus, [type='number']:focus, [type='search']:focus, [type='tel']:focus, [type='time']:focus, [type='url']:focus, [type='color']:focus,
 textarea:focus {
   outline: none;
-  border: 1px solid #343a40;
+  border: 1px solid #007bff;
   background-color: #fff;
-  -webkit-box-shadow: 0 0 5px #adb5bd;
-          box-shadow: 0 0 5px #adb5bd;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+          box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   -webkit-transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
   transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
@@ -586,10 +586,10 @@ select {
 
 select:focus {
   outline: none;
-  border: 1px solid #343a40;
+  border: 1px solid #007bff;
   background-color: #fff;
-  -webkit-box-shadow: 0 0 5px #adb5bd;
-          box-shadow: 0 0 5px #adb5bd;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+          box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   -webkit-transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
   transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
   transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
@@ -613,31 +613,6 @@ select[multiple] {
 select:not([multiple]) {
   padding-top: 0;
   padding-bottom: 0;
-}
-
-.is-invalid-input:not(:focus) {
-  border-color: #dc3545;
-  background-color: #fcebec;
-}
-
-.is-invalid-input:not(:focus)::-webkit-input-placeholder {
-  color: #dc3545;
-}
-
-.is-invalid-input:not(:focus)::-moz-placeholder {
-  color: #dc3545;
-}
-
-.is-invalid-input:not(:focus):-ms-input-placeholder {
-  color: #dc3545;
-}
-
-.is-invalid-input:not(:focus)::-ms-input-placeholder {
-  color: #dc3545;
-}
-
-.is-invalid-input:not(:focus)::placeholder {
-  color: #dc3545;
 }
 
 .is-invalid-label {
@@ -4616,32 +4591,32 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 }
 
 .callout.primary {
-  background-color: #d9ebff;
+  background-color: #007bff;
   color: #000;
 }
 
 .callout.secondary {
-  background-color: #e9eaec;
+  background-color: #6c757d;
   color: #000;
 }
 
 .callout.success {
-  background-color: #daf6e1;
+  background-color: #28a745;
   color: #000;
 }
 
 .callout.warning {
-  background-color: #fff6da;
+  background-color: #ffc107;
   color: #000;
 }
 
 .callout.alert {
-  background-color: #fae1e3;
+  background-color: #dc3545;
   color: #000;
 }
 
 .callout.info {
-  background-color: #d7f5fa;
+  background-color: #17a2b8;
   color: #000;
 }
 
@@ -7721,6 +7696,48 @@ html.is-reveal-open body {
   --title-bar-bg: #000;
   --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   --font-family-monospace: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+.text-primary {
+  color: #007bff;
+}
+
+.text-secondary {
+  color: #6c757d;
+}
+
+.text-success {
+  color: #28a745;
+}
+
+.text-warning {
+  color: #ffc107;
+}
+
+.text-alert {
+  color: #dc3545;
+}
+
+.text-info {
+  color: #17a2b8;
+}
+
+.text-muted {
+  color: gray;
+}
+
+.is-invalid-input {
+  border-color: #dc3545;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem 1rem;
+}
+
+.is-invalid-input:focus, .is-invalid-input:active {
+  border-color: #dc3545;
+  -webkit-box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+          box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
 }
 
 .badge {
