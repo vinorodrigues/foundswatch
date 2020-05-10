@@ -158,6 +158,9 @@ dd {
 }
 
 @media (prefers-color-scheme: dark) {
+	img:not([src*=".svg"]) {
+		filter: grayscale(50%);
+	}
 
 	.top-bar-wrapper.is-stuck {
 		box-shadow: 0 8px 6px -6px rgba(#333, 50%);
@@ -166,5 +169,4 @@ dd {
 	.tout {
 		background-color: #282c34;
 	}
-
 }

@@ -150,6 +150,7 @@ function headHere(string $title, $injection_callback = '') {
 	}
 
 	$css_file = array( ABSPATH . 'css/site.min.css' . _v() );
+	$sdm = false;
 
 	if (false !== $usetheme) {
 		$css_file[] = ABSPATH . 'themes/' . $usetheme . '/foundation' . DOTMIN . '.css' . _v() . '|css';
@@ -157,7 +158,8 @@ function headHere(string $title, $injection_callback = '') {
 		$css_file[] = (empty(DOTMIN) ?
 			ABSPATH . 'themes/default/foundation' . DOTMIN . '.css' . _v() :
 			'https://cdnjs.cloudflare.com/ajax/libs/foundation/' . FOUNDATION_VERSION . '/css/foundation' . DOTMIN . '.css' );
-		if (supportsDarkMode()) {
+		$sdm = supportsDarkMode();
+		if ($sdm) {
 			// $i = $css_file[1];
 			$css_file[1] .= '|css-light|(prefers-color-scheme: no-preference), (prefers-color-scheme: light)';
 			$css_file[] = (empty(DOTMIN) ?
@@ -185,11 +187,21 @@ function headHere(string $title, $injection_callback = '') {
 	<link rel="icon" type="image/gif" href="<?= ABSPATH ?>favicon.gif" />
 	<style>:root { --top-bar-bg: #e6e6e6; }</style>
 <?php
+	if ($sdm) {
+?>
+	<script>
+		if ( !window.matchMedia || (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") )
+			document.head.insertAdjacentHTML( "beforeend",
+				"<link id=\"css\" rel=\"stylesheet\" href=\"<?= explode('|', $css_file[1])[0] ?>\">" );
+	</script>
+<?php
+	}
 	for ($i=count($css_file)-1; $i>=0; $i--) {
 		$css = explode('|', $css_file[$i]);
-		echo "\t" . '<link rel="stylesheet"';
-		echo ' href="' . $css[0] . '"';
+		echo "\t" . '<link';
 		if (isset($css[1])) echo ' id="' . $css[1] . '"';
+		echo ' rel="stylesheet"';
+		echo ' href="' . $css[0] . '"';
 		if (isset($css[2])) echo ' media="' . $css[2] . '"';
 		echo '>' . PHP_EOL;
 	}

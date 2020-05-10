@@ -21,11 +21,20 @@ function injectPrismHead() {
 		.special-url-format i { opacity: 0.5; }
 		.special-url-format b { font-size: 100%; }
 	</style>
-<?php if (supportsDarkMode()) : ?>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-tomorrow.min.css" media="(prefers-color-scheme: dark)" />
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-coy.min.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" />
+<?php
+	$c = ['https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-coy.min.css',
+		'https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-tomorrow.min.css'];
+	if (supportsDarkMode()) :
+?>
+	<script>
+		if ( !window.matchMedia || (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") )
+			document.head.insertAdjacentHTML( "beforeend",
+				"<link rel=\"stylesheet\" href=\"<?= $c[0] ?>\">" );
+	</script>
+	<link rel="stylesheet" href="<?= $c[1] ?>" media="(prefers-color-scheme: dark)" />
+	<link rel="stylesheet" href="<?= $c[0] ?>" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" />
 <?php else : ?>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-coy.min.css" />
+	<link rel="stylesheet" href="<?= $c[0] ?>" />
 <?php endif; ?>
 <?php
 }
@@ -52,33 +61,37 @@ function injectPrismFooter() {
 				});
 			});
 
-			// Show information on `prefers-color-scheme` media query
-			var supports = [];
-			if (!window.matchMedia) {
-				supports.push( "does not support the <code>matchMedia</code> function" );
-			} else {
-				supports.push( "supports the <code>matchMedia</code> function" );
-				if (window.matchMedia("(prefers-color-scheme: no-preference)").matches)
-					supports.push( "and prefers a <b>no-preference</b> color scheme" );
-				if (window.matchMedia("(prefers-color-scheme: light)").matches)
-					supports.push( "and prefers a <b>light</b> color scheme" );
-				if (window.matchMedia("(prefers-color-scheme: dark)").matches)
-					supports.push( "and prefers a <b>dark</b> color scheme" );
-				if (supports.length <= 1) {
-					supports.push( "but does not set the <code>prefers-color-scheme</code> media query" );
-					supports.push( "so will <b><i><u>not</u></i></b> support the above code" );
+			function injectBrowserSupports() {
+				// Show information on `prefers-color-scheme` media query
+				var supports = [];
+				if (!window.matchMedia) {
+					supports.push( "does not support the <code>matchMedia</code> function" );
 				} else {
-					supports.push( "so will support the above code" );
+					supports.push( "supports the <code>matchMedia</code> function" );
+					if (window.matchMedia("(prefers-color-scheme: no-preference)").matches)
+						supports.push( "and prefers a <b>no-preference</b> color scheme" );
+					if (window.matchMedia("(prefers-color-scheme: light)").matches)
+						supports.push( "and prefers a <small>&#xFE0F;</small> <b>light</b> color scheme" );
+					if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+						supports.push( "and prefers a <small>&#x1F319;</small> <b>dark</b> color scheme" );
+					if (supports.length <= 1) {
+						supports.push( "but does not set the <code>prefers-color-scheme</code> media query" );
+						supports.push( "so will <b><i><u>not</u></i></b> support the above code" );
+					} else {
+						supports.push( "so will support the above code" );
+					}
+				}
+				if (supports.length > 0) {
+					var htmltext = "Your browser, for example:<ul>";
+					supports.forEach(function(entry) { htmltext += "<li>" + entry + "</li>"; });
+					htmltext += "</ul>";
+					// console.log( htmltext );
+					$("#the-dark-side").html( htmltext );
 				}
 			}
-			if (supports.length > 0) {
-				var htmltext = "Your browser, for example:<ul>";
-				supports.forEach(function(entry) { htmltext += "<li>" + entry + "</li>"; });
-				htmltext += "</ul>";
-				console.log( htmltext );
-				$("#the-dark-side").html( htmltext );
-			}
 
+			injectBrowserSupports();  // Update on first load.
+			if (window.matchMedia) window.matchMedia("(prefers-color-scheme: dark)").addListener( injectBrowserSupports );  // and every time it changes
 		});
 	</script>
 	<?php
@@ -215,21 +228,24 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 						<li><a href="../themes/default/">Default</a> and <a href="../themes/dark/">Dark</a> <i>(As used on this site.)</i></li>
 						<li><a href="../themes/flatly/">Flatly</a> and <a href="../themes/darkly/">Darkly</a></li>
 					</ul></p>
-<p><pre><code class="code-block language-css">/* Alternative color mode (loaded first) */
+<p><pre><code class="code-block language-html">&lt;!-- Alternative color mode (loaded first) --&gt;
 &lt;link id="css-dark" rel="stylesheet" href="<i>dark/</i>foundation.min.css" media="<b>(prefers-color-scheme: dark)</b>"&gt;
-/* Default and/or 'no preference' color mode (loaded last) */
+&lt;!-- Default and/or 'no preference' color mode (loaded last) --&gt;
 &lt;link id="css-light" rel="stylesheet" href="<i>default/</i>foundation.min.css" media="<b>(prefers-color-scheme: no-preference), (prefers-color-scheme: light)</b>"&gt;
 </code></pre></p>
-			<p>The above 2-option code will not work with a nattow set of browsers that support the <code>media</code> CSS filter but do not support the <code>prefers-color-scheme</code> subset.<br>
+			<p>The above 2-option code will not work with a narrow set of browsers that support the <code>media</code> CSS filter but do not support the <code>prefers-color-scheme</code> subset.<br>
 				<i>e.g. older iPads on iOS 12.4.</i></p>
 			<span id="the-dark-side"></span>
-			<p>In these cases you will need to either add an un-filtered CSS file before the two above, or add the following code to disable the filtered CSS.</p>
+			<p>In these cases you will need to either add an un-filtered CSS file before the lines above, using the following JavaScript:</p>
+<p><pre><code class="code-block language-js">// If `prefers-color-scheme` is not supported, inject the light mode without filter.
+if ( !window.matchMedia || (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") )
+	document.head.insertAdjacentHTML( "beforeend",
+		"&lt;link id=\"css\" rel=\"stylesheet\" href=\"default/foundation.min.css\"&gt;" );
+</code></pre></p>
+			<p>, or add the following JavaScript to the bottom of your html to disable the filtered CSS.</p>
 <p><pre><code class="code-block language-js">$(document).ready(function() {
 	// assumes jQuery running
-	if ( !window.matchMedia || (
-		!window.matchMedia("(prefers-color-scheme: dark)").matches &&
-		!window.matchMedia("(prefers-color-scheme: light)").matches &&
-		!window.matchMedia("(prefers-color-scheme: no-preference)").matches ) ) {
+	if ( !window.matchMedia || (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") ) {
 		// matchMedia function, or, prefers-color-scheme media query not supported
 		$("#css-dark").remove();  // remove the dark mode CSS file link
 		$("#css-light").attr( "media", "" );  // remove the media filter
@@ -238,7 +254,7 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 			<p>Take a look at <a href="https://jsfiddle.net/vinorodrigues/qyx5o6tv/" target="_blank">this</a> jsFiddle for an example (with toggle button).</p>
 			<p>Alternatively, you could use server-side code to only generate the 2-option CSS code when the browser supports it.
 				However, there is no server-side dark-mode support specification, and browsers will not send any requests identifying the color mode or even of its preference.
-				One can however identify the browser version from the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent" target="_blank">User-Agent</a> request header, and then only generate the 2-option CSS code is the browser version is equal to or larger/later than the first support version of each browser.
+				One can however identify the browser version from the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent" target="_blank">User-Agent</a> request header, and then only generate the 2-option CSS code if the browser version is equal to or larger/later than the first support version of each browser.
 				The following table is a guide:<br>
 				<center><img src="../img/browser-dark-mode.jpg" />
 				<br><small>Sourced from: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#Browser_compatibility" target="_blank">developer.mozilla.org</a></small></center></p>
