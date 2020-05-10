@@ -7,7 +7,7 @@ $v0 = preg_match('/(\d)/', $v, $out) ? $out[0] : '1';
 $v00 = preg_match('/(\d+\.)(\d)/', $v, $out) ? $out[0] : '1.0';
 
 function injectPrismHead() {
-	?>
+?>
 	<style>
 		h3 { margin-top: 3rem; }
 		pre[class*=language-] {
@@ -21,9 +21,13 @@ function injectPrismHead() {
 		.special-url-format i { opacity: 0.5; }
 		.special-url-format b { font-size: 100%; }
 	</style>
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-tomorrow.min.css" rel="stylesheet" media="(prefers-color-scheme: dark)" />
-	<link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-coy.min.css" rel="stylesheet" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" />
-	<?php
+<?php if (supportsDarkMode()) : ?>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-tomorrow.min.css" media="(prefers-color-scheme: dark)" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-coy.min.css" media="(prefers-color-scheme: no-preference), (prefers-color-scheme: light)" />
+<?php else : ?>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/themes/prism-coy.min.css" />
+<?php endif; ?>
+<?php
 }
 
 function injectPrismFooter() {
@@ -31,20 +35,50 @@ function injectPrismFooter() {
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/components/prism-core.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.20.0/plugins/autoloader/prism-autoloader.min.js"></script>
 	<script>
-		function copyToClipboard(element) {
-			var $temp = $("<input>");
-			$("body").append($temp);
-			$temp.val($(element).text()).select();
-			document.execCommand("copy");
-			// console.log("\""+$(element).text()+"\" copied to clipboard.");
-			$temp.remove();
-		}
-
 		$(document).ready(function() {
 			// only works if jQuery loaded
-			$('.special-url-button').each(function() {
+
+			// Copy URL buttons
+			$('.copy-url-button').each(function() {
 				$(this).css( {"display": "inline-block"} );
+				$(this).click( function() {
+					var target_element = $(this).data("copy");
+					// if (!element_name) { console.log("data-copy not defined"); return };
+					var $temp = $("<input>");
+					$("body").append($temp);
+					$temp.val($(target_element).text()).select();
+					document.execCommand("copy");
+					$temp.remove();
+				});
 			});
+
+			// Show information on `prefers-color-scheme` media query
+			var supports = [];
+			if (!window.matchMedia) {
+				supports.push( "does not support the <code>matchMedia</code> function" );
+			} else {
+				supports.push( "supports the <code>matchMedia</code> function" );
+				if (window.matchMedia("(prefers-color-scheme: no-preference)").matches)
+					supports.push( "and prefers a <b>no-preference</b> color scheme" );
+				if (window.matchMedia("(prefers-color-scheme: light)").matches)
+					supports.push( "and prefers a <b>light</b> color scheme" );
+				if (window.matchMedia("(prefers-color-scheme: dark)").matches)
+					supports.push( "and prefers a <b>dark</b> color scheme" );
+				if (supports.length <= 1) {
+					supports.push( "but does not set the <code>prefers-color-scheme</code> media query" );
+					supports.push( "so will <b><i><u>not</u></i></b> support the above code" );
+				} else {
+					supports.push( "so will support the above code" );
+				}
+			}
+			if (supports.length > 0) {
+				var htmltext = "Your browser, for example:<ul>";
+				supports.forEach(function(entry) { htmltext += "<li>" + entry + "</li>"; });
+				htmltext += "</ul>";
+				console.log( htmltext );
+				$("#the-dark-side").html( htmltext );
+			}
+
 		});
 	</script>
 	<?php
@@ -125,7 +159,7 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 				?>
 				<tr>
 					<td width="90%"><tt class="special-url-format" id="copy-<?= $name ?>-url"><u>https://cdn.jsdelivr.net</u><i>/gh/vinorodrigues/foundswatch@<?= $v ?>/dist/</i><b><?= $name ?></b><i>/foundation.min.css</i></tt></td>
-					<td width="10%" style="text-align: center;"><button class="tiny button special-url-button" style="margin: 0; display: none;" onClick="copyToClipboard('#copy-<?= $name ?>-url')">Copy URL</button></td>
+					<td width="10%" style="text-align: center;"><button class="tiny button copy-url-button" style="margin: 0; display: none;" data-copy="#copy-<?= $name ?>-url">Copy URL</button></td>
 				</tr>
 				<?php
 				}
@@ -186,8 +220,10 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 /* Default and/or 'no preference' color mode (loaded last) */
 &lt;link id="css-light" rel="stylesheet" href="<i>default/</i>foundation.min.css" media="<b>(prefers-color-scheme: no-preference), (prefers-color-scheme: light)</b>"&gt;
 </code></pre></p>
-			<p>The above code will not work with a sweet-spot of browsers that support the <code>media</code> CSS filter but do not support the <code>prefers-color-scheme</code> subset. <i>e.g. older iPads on iOS 12.4.</i><br>
-				In these cases you will need to either add an un-filtered CSS file before the two above, or add the following code to disable the filtered CSS.</p>
+			<p>The above 2-option code will not work with a nattow set of browsers that support the <code>media</code> CSS filter but do not support the <code>prefers-color-scheme</code> subset.<br>
+				<i>e.g. older iPads on iOS 12.4.</i></p>
+			<span id="the-dark-side"></span>
+			<p>In these cases you will need to either add an un-filtered CSS file before the two above, or add the following code to disable the filtered CSS.</p>
 <p><pre><code class="code-block language-js">$(document).ready(function() {
 	// assumes jQuery running
 	if ( !window.matchMedia || (
@@ -199,8 +235,13 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 		$("#css-light").attr( "media", "" );  // remove the media filter
 	}
 }</code></pre></p>
-
 			<p>Take a look at <a href="https://jsfiddle.net/vinorodrigues/qyx5o6tv/" target="_blank">this</a> jsFiddle for an example (with toggle button).</p>
+			<p>Alternatively, you could use server-side code to only generate the 2-option CSS code when the browser supports it.
+				However, there is no server-side dark-mode support specification, and browsers will not send any requests identifying the color mode or even of its preference.
+				One can however identify the browser version from the <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent" target="_blank">User-Agent</a> request header, and then only generate the 2-option CSS code is the browser version is equal to or larger/later than the first support version of each browser.
+				The following table is a guide:<br>
+				<center><img src="../img/browser-dark-mode.jpg" />
+				<br><small>Sourced from: <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme#Browser_compatibility" target="_blank">developer.mozilla.org</a></small></center></p>
 			</div>
 		</div>
 	</main>
