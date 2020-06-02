@@ -96,16 +96,18 @@ $theme-color-interval: 8% !default;
 // 55. Top bar
 // -----------
 
-// $topbar-text-color: $black;
-$topbar-link-color: rgba($black, 0.7);
-$topbar-link-active-color: $black;
+$topbar-text-color: $white;
+$topbar-link-color: rgba($white, 0.5);
+$topbar-link-active-color: $white;
 
 .menu-text {
 	text-transform: uppercase;
 }
 
 .top-bar {
+	font-family: $header-font-family;
 	font-size: rem-calc(18);
+	font-weight: 700;
 
 	.dropdown.menu {
 		> li > a {
@@ -117,12 +119,12 @@ $topbar-link-active-color: $black;
 		> li.is-dropdown-submenu-parent > a::after {
 			@include css-triangle($dropdownmenu-arrow-size, $topbar-link-color, down);
 		}
-		// > li.menu-text {
-		// 	&,
-		// 	& > a {
-		// 		color: $topbar-text-color;
-		// 	}
-		// }
+		> li.menu-text {
+			&,
+			& > a {
+				color: $topbar-text-color;
+			}
+		}
 		> li.is-active > a {
 			color: $topbar-link-active-color;
 		}
