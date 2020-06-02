@@ -118,6 +118,37 @@ button.clear,
 	}
 }
 
+// 11b. Button ripple
+// ------------------
+// based on Ben Szabo - https://codepen.io/finnhvman/pen/jLXKJw
+
+.ripple,
+.button {
+	background-position: center;
+	transition: background 0.8s;
+	&:hover {
+		background: scale-color($button-background, $lightness: 15%) radial-gradient(circle, transparent 1%, scale-color($button-background, $lightness: 15%) 1%) center/15000%;
+	}
+	&:active {
+		background-color: scale-color($button-background, $lightness: -5%);;
+		background-size: 100%;
+		transition: background 0s;
+	}
+
+	@each $name, $color in $button-palette {
+		background-position: center;
+		transition: background 0.8s;
+		&.#{$name}:hover {
+			background: scale-color($color, $lightness: 15%) radial-gradient(circle, transparent 1%, scale-color($color, $lightness: 15%) 1%) center/15000%;
+		}
+		&.#{$name}:active {
+			background-color: scale-color($color, $lightness: -5%);;
+			background-size: 100%;
+			transition: background 0s;
+		}
+	}
+}
+
 // 13. Callout
 // -----------
 
