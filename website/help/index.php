@@ -137,7 +137,7 @@ headHere('Help', 'injectPrismHead');
 			</div>
 			<div class="cell small-12">
 				<a name="cdn"></a><h3>CDN</h3>
-				<p>You can also hotlink the themes via CDN via <a href="https://www.jsdelivr.com" target="_blank">jsdelivr.com</a></p>
+				<p>You can also hotlink the themes via CDN with <a href="https://www.jsdelivr.com" target="_blank">jsdelivr.com</a></p>
 				<p>You can access the theme CSS file from the GitHub release:
 
 <pre><code class="code-block language-clike">// load Foundswatch v<?= $v ?> Theme
@@ -190,7 +190,7 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 						<li>Install Node dependencies: <code class="language-bash">npm install</code></li>
 						<li>In the <code>/themesrc</code> folder, modify <code>_settings.scss</code> and <code>_foundswatch.scss</code> in one of the theme sub-folders, or duplicate a theme folder to create a new one.</li>
 						<li>Run <code class="language-bash">gulp sass:themes</code> to build your themes.</li>
-						<li>The compliled code will be in the <code>/website/themes</code> folder.</li>
+						<li>The compiled code will be in the <code>/website/themes</code> folder.</li>
 					</ol>
 			</div>
 			<div class="cell small-12">

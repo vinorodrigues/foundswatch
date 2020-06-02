@@ -12,13 +12,14 @@ const sass = require( 'gulp-sass' );
 sass.compiler = require( 'node-sass' );
 const maps = require( 'gulp-sourcemaps' );
 const prfx = require( 'gulp-autoprefixer' );
+const tidy = require( 'gulp-prettier' );
 const mini = require( 'gulp-clean-css' );
 const imgs = require( 'gulp-imagemin' );
 const renm = require( 'gulp-rename' );
 const repl = require( 'gulp-replace' );
 const bump = require( 'gulp-bump' );
+const _log = require( 'fancy-log' );
 const __if = require( 'gulp-if' );
-const clog = require( 'fancy-log' );
 
 var paths = {
 	sassSrc: './scss/**/*.scss',
@@ -59,7 +60,7 @@ var paths = {
 	prvwSrc: './assets/index-preview.php',
 	prvwFldr: './themesrc',
 	prvwOutM: './website/themes/%1%/',
-}
+};
 
 // thanks to @kennebec https://stackoverflow.com/questions/3954438
 Array.prototype.remove = function() {
@@ -100,11 +101,12 @@ function sassTask(name, srcPath, destPath, min = false, map = true ) {
 			.pipe( prfx( {
 				overrideBrowserslist: ['last 2 versions', 'ie >= 9', 'android >= 4.4', 'ios >= 7']
 				} ) )
+			.pipe( __if( !min, tidy( { useTabs: true, tabWidth: 8 } ) ) )  // @see: https://prettier.io/docs/en/options.html
 			.pipe( __if( min, mini( {compatibility: 'ie9'} ) ) )
 			.pipe( __if( min, renm( {
 				suffix: '.min'
 				}) ) )
-	 		.pipe( __if( map, maps.write( '.' ) ) )
+	 		.pipe( __if( map, maps.write( '.', { includeContent: false } ) ) )
 			.pipe( __if( !min, repl(/Foundswatch\sv(\d+\.)(\d+\.)(\d)/g, 'Foundswatch v'+version ) ) )
 			.pipe( gulp.dest( destPath ) );
 	});
@@ -133,7 +135,7 @@ theme_list.remove( '_template' );
 
 var version = getVersion();
 
-// clog(theme_list);
+// _log(theme_list);
 
 /* Tasks =================================================================== */
 
@@ -276,7 +278,7 @@ gulp.task( 'copy:403s', function(done) {
 	var folders = paths.e403Out;
 
 	var tasks = folders.map(function(folder) {
-		// clog( '... to \'\x1b[32m' + folder + '\'\x1b[0m...' );
+		// _log( '... to \'\x1b[32m' + folder + '\'\x1b[0m...' );
 		return gulp.src( paths.e403Src )
 			.on( 'error', console.error.bind( console ))
 			.pipe( renm('index.php') )
@@ -294,7 +296,7 @@ gulp.task( 'copy:preview', function(done) {
 	if (folders.length === 0) return done();  // nothing to do!
 
 	var tasks = folders.map(function(folder) {
-		// clog( '... for \'\x1b[32m' + folder + '\'\x1b[0m...' );
+		// _log( '... for \'\x1b[32m' + folder + '\'\x1b[0m...' );
 		return gulp.src( paths.prvwSrc )
 			.on( 'error', console.error.bind( console ))
 			.pipe( renm( 'index.php' ) )
@@ -309,7 +311,7 @@ gulp.task( 'copy' , gulp.series( 'copy:js', 'copy:scss', 'copy:preview', 'copy:4
 /* General & Default Tasks ================================================= */
 
 gulp.task( 'watch', function(done) {
-	clog( 'Watching ... \x1b[94m(Press Control-C to end.)\x1b[0m' );
+	_log( 'Watching ... \x1b[94m(Press Control-C to end.)\x1b[0m' );
 	gulp.watch( paths.sassSrc, gulp.parallel( 'sass:css' ) );
 	gulp.watch( paths.imgSrc, gulp.parallel( 'images' ) );
 
@@ -320,16 +322,16 @@ gulp.task( 'watch', function(done) {
 });
 
 gulp.task( 'note', function(done) {
-	clog( '============================================' );
-	clog( 'Foundswatch v'+version );
-	clog( 'Use "\x1b[32mgulp all\x1b[0m", "\x1b[31mgulp watch\x1b[0m" or "\x1b[34mgulp dist\x1b[0m".' );
-	clog( 'Use "\x1b[33mgulp --tasks\x1b[0m" to view all.')
-	clog( '============================================' );
+	_log( '============================================' );
+	_log( 'Foundswatch v'+version );
+	_log( 'Use "\x1b[32mgulp all\x1b[0m", "\x1b[31mgulp watch\x1b[0m" or "\x1b[34mgulp dist\x1b[0m".' );
+	_log( 'Use "\x1b[33mgulp --tasks\x1b[0m" to view all.')
+	_log( '============================================' );
 	return done();
 });
 
-gulp.task( 'all' , gulp.series( 'sass', 'images', 'copy' ) );
+gulp.task( 'all', gulp.series( 'sass', 'images', 'copy' ) );
 
-gulp.task( 'default' , gulp.series( 'note' ) );
+gulp.task( 'default', gulp.series( 'note' ) );
 
 // eof

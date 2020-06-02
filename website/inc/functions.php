@@ -185,7 +185,14 @@ function headHere(string $title, $injection_callback = '') {
 	<link rel="icon" type="image/svg+xml" href="<?= ABSPATH ?>favicon.svg" />
 	<link rel="alternate icon" href="<?= ABSPATH ?>favicon.ico" />
 	<link rel="icon" type="image/gif" href="<?= ABSPATH ?>favicon.gif" />
-	<style>:root { --top-bar-bg: #e6e6e6; }</style>
+	<style>
+		:root {
+			--top-bar-bg: #e6e6e6;
+		}
+		.z100 {
+			z-index: 100;
+		}
+	</style>
 <?php
 	if ($sdm) {
 ?>
@@ -214,7 +221,7 @@ function headHere(string $title, $injection_callback = '') {
 function headerHere($add_on_menu_callback = '') {
 ?>
 	<header>
-	<div class="" data-sticky-container>
+	<div class="z100" data-sticky-container>
 		<div class="sticky top-bar-wrapper" data-sticky data-options="anchor: page; marginTop: 0; stickyOn: small;">
 			<div class="grid-container">
 				<div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium" style="display: none;">
