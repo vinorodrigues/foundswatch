@@ -2,9 +2,7 @@
 
 # Foundswatch
 
-<p align="center">
 ![](https://foundswatch.com/img/logo.png)
-</p>
 
 Foundswatch is a collection of open source themes for Foundation for Sites. Check it out at [foundswatch.com](https://foundswatch.com/).
 
