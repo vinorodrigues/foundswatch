@@ -101,7 +101,10 @@ function sassTask(name, srcPath, destPath, min = false, map = true ) {
 			.pipe( prfx( {
 				overrideBrowserslist: ['last 2 versions', 'ie >= 9', 'android >= 4.4', 'ios >= 7']
 				} ) )
-			.pipe( __if( !min, tidy( { useTabs: true, tabWidth: 8 } ) ) )  // @see: https://prettier.io/docs/en/options.html
+			.pipe( __if( !min, tidy( {  // @see: https://prettier.io/docs/en/options.html
+				useTabs: true,
+				tabWidth: 8
+				} ) ) )
 			.pipe( __if( min, mini( {compatibility: 'ie9'} ) ) )
 			.pipe( __if( min, renm( {
 				suffix: '.min'

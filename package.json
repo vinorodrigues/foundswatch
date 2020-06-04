@@ -32,13 +32,13 @@
     "gulp-sass": "^4.1.0",
     "gulp-sourcemaps": "^2.6.5",
     "merge-stream": "^2.0.0",
-    "node-sass": "^4.14.0",
+    "node-sass": "^4.14.1",
     "path": "^0.12.7",
     "semver": "^7.3.2"
   },
   "dependencies": {
     "foundation-sites": "^6.6.3",
-    "jquery": "^3.5.0",
-    "what-input": "^5.2.7"
+    "jquery": "^3.5.1",
+    "what-input": "^5.2.10"
   }
 }
