@@ -7,6 +7,10 @@
  * Based on Bootswatch - United, (c) Thomas Park, https://bootswatch.com/flatly
  */
 
+:root {
+	color-scheme: dark;
+}
+
 @import 'settings';
 @import '../scss/foundation';
 @include foundation-everything;

@@ -6,6 +6,10 @@
  * Based on ZURB Foundation for Sites, https://get.foundation
  */
 
+:root {
+	color-scheme: dark;
+}
+
 @import 'settings';
 @import '../scss/foundation';
 @include foundation-everything;
