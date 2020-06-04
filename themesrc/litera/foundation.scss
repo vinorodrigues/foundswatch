@@ -1,0 +1,13 @@
+/**
+ * Foundswatch v1.0.0 - Litera
+ * @see https://foundswatch.com
+ * (c) 2020 Vino Rodrigues
+ * Licensed under MIT
+ * Based on ZURB Foundation for Sites, https://get.foundation
+ * Based on Bootswatch - Litera, (c) Thomas Park, https://bootswatch.com/litera
+ */
+
+@import 'settings';
+@import '../scss/foundation';
+@include foundation-everything;
+@import '_foundswatch';

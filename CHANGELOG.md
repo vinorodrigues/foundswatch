@@ -5,7 +5,6 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
-- 'Litera' theme.
 - 'Lumen' theme.
 - 'Sandstone' theme.
 - 'Simplex' theme.
@@ -13,7 +12,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 - 'Spacelab' theme.
 - 'Superhero' theme.
 
-## [0.1.2] - 2020-05-10
+
+## [0.1.3](https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@0.1.3/) - 2020-06-04
+### Added
+- 'Litera' theme.
+
+### Changed
+- Minor changes to prior themes
+
+
+## [0.1.2](https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@0.1.2/) - 2020-05-10
 ### Added
 - Browser detection to enable dark mode
 - 'Journal' theme.
