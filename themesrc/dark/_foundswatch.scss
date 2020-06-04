@@ -45,6 +45,26 @@ code {
 	}
 }
 
+// 11. Buttons
+// -----------
+
+.button.dropdown {
+	&::after {
+		border-color: $body-font-color transparent transparent;
+	}
+
+	@each $bname, $__dmp in $foundation-palette {
+		&.#{$bname}::after {
+			@if (success != $bname) and (warning != $bname) {
+				border-color: $body-font-color transparent transparent;
+			} @else {
+				border-color: $white transparent transparent;
+			}
+		}
+	}
+}
+
+
 // 55. Top Bar
 // -----------
 
