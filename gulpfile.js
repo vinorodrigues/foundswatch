@@ -109,7 +109,7 @@ function sassTask(name, srcPath, destPath, min = false, map = true ) {
 			.pipe( __if( min, renm( {
 				suffix: '.min'
 				}) ) )
-	 		.pipe( __if( map, maps.write( '.', { includeContent: false } ) ) )
+	 		.pipe( __if( map, maps.write( '.', { includeContent: !min } ) ) )
 			.pipe( __if( !min, repl(/Foundswatch\sv(\d+\.)(\d+\.)(\d)/g, 'Foundswatch v'+version ) ) )
 			.pipe( gulp.dest( destPath ) );
 	});
