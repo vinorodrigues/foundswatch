@@ -91,6 +91,10 @@ $escaped-characters: (
 // --------
 
 .is-invalid-input {
+	&:not(:focus) {
+		background-color: inherit;
+	}
+
 	border-color: get-color(alert);
 	background-image: escape-svg($form-feedback-icon-invalid);
 	background-repeat: no-repeat;
@@ -104,11 +108,81 @@ $escaped-characters: (
 	}
 }
 
+// 7. Accordion
+// ------------
+
+.accordion {
+	.is-active {
+		.accordion-title {
+			background-color: $light-gray;
+			color: $body-font-color;
+		}
+	}
+}
+
+// 8. Accordion Menu
+// -----------------
+
+.accordion-menu {
+	.is-accordion-submenu-parent {
+		&.is-active > a::after {
+			border-top-color: $white;
+		}
+		&[aria-expanded='true'].is-active > a {
+			background-color: $accordion-item-background-hover;
+			color: $accordion-item-color;
+
+			&::after {
+				border-top-color: $accordion-item-color;
+			}
+		}
+	}
+}
+
 // 9. Badge
 // --------
 
 .badge {
 	font-weight: bold;
+}
+
+// 10. Breadcrumbs
+// ---------------
+
+.breadcrumbs {
+	padding: rem-calc(12 16);
+	background-color: $light-gray;
+	border-radius: $global-radius;
+
+	li {
+		text-transform: inherit;
+		font-size: 1rem;
+	}
+}
+
+// 12. Button Group
+// ----------------
+
+.button-group.no-gaps {
+	.button {
+		border-radius: 0;
+
+		&:first-child {
+			border-top-left-radius: $global-radius;
+			border-bottom-left-radius: $global-radius;
+		}
+		&:last-child {
+			border-top-right-radius: $global-radius;
+			border-bottom-right-radius: $global-radius;
+		}
+	}
+}
+
+.button-group .button {
+	&:focus,
+	&:active {
+		z-index: 1;
+	}
 }
 
 // 13. Callout
@@ -142,6 +216,7 @@ $theme-color-interval: 8% !default;
 .callout {
 	a:not(.button) {
 		color: darken($black, 10%);
+		font-weight: $global-weight-bold;
 	}
 	a:hover:not(.button) {
 		text-decoration: underline;
@@ -154,6 +229,103 @@ $theme-color-interval: 8% !default;
 			@include callout-variant(the-color-level($value, -10), the-color-level($value, -9), the-color-level($value, 6));
 		}
 	}
+}
+
+// 16. Drilldown
+// -------------
+
+.drilldown {
+	.is-drilldown-submenu-parent.is-active > a::after {
+		border-left-color: $white;
+	}
+}
+
+// 23. Menu
+// --------
+
+.menu .is-active > a {
+	border-radius: $global-radius;
+}
+
+// ***TODO*** menu with dropdown `.is-active`
+
+// 51. Tabs
+// --------
+
+.tabs {
+	border: none;
+	border-bottom: 1px solid $tab-content-border;
+
+	li {
+		border: 1px solid transparent;
+		margin-bottom: -1px;
+
+		border-top-left-radius: $global-radius;
+		border-top-right-radius: $global-radius;
+
+		&:hover {
+			border: 1px solid $tab-content-border;
+		}
+
+		&.is-active {
+			border: 1px solid $tab-content-border;
+			border-bottom-color: $body-background;
+		}
+	}
+}
+
+.tabs-title > a:focus,
+.tabs-title > a[aria-selected="true"] {
+	background-color: inherit;
+	color: inherit;
+}
+
+.tabs-content {
+	border: none;
+}
+
+// 27. Pagination
+// --------------
+
+.pagination {
+	display: flex;
+	border-radius: $global-radius;
+
+	li {
+		border-radius: 0;
+		border: 1px solid mix($light-gray, $medium-gray);
+
+		&:first-child {
+			border-top-left-radius: $global-radius;
+			border-bottom-left-radius: $global-radius;
+		}
+		&:last-child {
+			border-top-right-radius: $global-radius;
+			border-bottom-right-radius: $global-radius;
+		}
+
+		&.current {
+			border-color: scale-color($pagination-item-background-current, $lightness: $button-background-hover-lightness);
+		}
+
+		&.ellipsis {
+			padding: $pagination-item-padding;
+		}
+	}
+}
+
+// 49. Switch
+// ----------
+
+.switch {
+	.switch-inactive,
+	.switch-active {
+		font-size: 75%;
+	}
+
+	&.tiny .switch-paddle { border-radius: $switch-height-tiny / 2;	}
+	&.small .switch-paddle { border-radius: $switch-height-small / 2; }
+	&.large .switch-paddle { border-radius: $switch-height-large / 2; }
 }
 
 // 55. Top bar
