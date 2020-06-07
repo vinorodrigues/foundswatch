@@ -9,22 +9,25 @@ function injectFoundationIcons() {
 		picture.overlay {
 			position: relative;
 		}
-		picture.overlay img {
-		}
+		picture.overlay img {}
 		picture.overlay .overlay {
 			position: absolute;
 			bottom: 0;
 			background: rgba(0, 0, 0, 0.5); /* Black see-through */
 			color: #f1f1f1;
+			text-shadow: 1px 1px #0e0e0e;
 			width: 100%;
 			transition: .5s ease;
 			font-size: 75%;
-			padding: 0.25rem 1rem;
+			padding: 1rem;
 			text-align: center;
 			opacity: 0;
 		}
 		picture.overlay:hover .overlay {
 			opacity: 1;
+		}
+		picture.overlay:hover img {
+			filter: brightness(.8) contrast(1.2) grayscale(50%);
 		}
 	</style>
 	<?php

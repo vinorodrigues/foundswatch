@@ -59,6 +59,10 @@ dd {
 	&.is-stuck {
 		box-shadow: 0 8px 6px -6px rgba(#777, 50%);
 	}
+
+	.theme-cerulean & {
+		background: #2fa4e7 linear-gradient(#54b4eb, #2fa4e7 60%, #1d9ce5) no-repeat;
+	}
 }
 
 .top-bar {
