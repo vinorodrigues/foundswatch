@@ -61,7 +61,7 @@ function injectStyles() {
 headHere($theme_name, 'injectStyles');
 
 ?>
-<body>
+<body class="theme-<?= $theme ?>">
 	<?php headerHere('add_on_menu_callback'); ?>
 
 	<main class="grid-container content">
@@ -70,6 +70,11 @@ headHere($theme_name, 'injectStyles');
 			<div class="cell small-12">
 				<h1 id="top"><?= $theme_name ?></h1>
 				<p class="lead"><?= $theme_desc ?></p>
+				<?php
+					if (key_exists($theme, $authorlist)) {
+						echo '<p class="text-muted">' . $authorlist[$theme] . '</p>';
+					}
+				?>
 			</div>
 		</div>
 
@@ -129,11 +134,11 @@ headHere($theme_name, 'injectStyles');
 				<a class="hollow button warning" href="#">Warning</a>
 				<a class="hollow button alert" href="#">Alert</a>
 				<br>
-				<a class="button primary disabled" href="#">Primary</a>
-				<a class="button secondary disabled" href="#">Secondary</a>
-				<a class="button success" href="#" disabled>Success</a>
-				<a class="button warning" href="#" disabled>Warning</a>
-				<a class="button alert" href="#" disabled>Alert</a>
+				<a class="button primary disabled" href="#">Primary&deg;</a>
+				<a class="button secondary disabled" href="#">Secondary&deg;</a>
+				<a class="button success" href="#" disabled>Success&deg;</a>
+				<a class="button warning" href="#" disabled>Warning&deg;</a>
+				<a class="button alert" href="#" disabled>Alert&deg;</a>
 				<br>
 				<a class="clear button primary" href="#">Primary</a>
 				<a class="clear button secondary" href="#">Secondary</a>
@@ -153,7 +158,7 @@ headHere($theme_name, 'injectStyles');
 				</div>
 				<br>
 				<button class="button large">Large</button>
-				<button class="button info">Info</button>
+				<button class="button info">Info&sup2;</button>
 				<button class="button small">Small</button>
 				<button class="button tiny">Tiny</button>
 			</div>
@@ -161,9 +166,9 @@ headHere($theme_name, 'injectStyles');
 				<button class="button expanded">Expanded</button>
 				<br>
 				<div class="primary button-group">
-					<a class="button is-active">Button</a>
 					<a class="button">Button</a>
-					<a class="button disabled">Disabled</a>
+					<a class="button">Button</a>
+					<a class="button disabled">Disabled&deg;</a>
 				</div>
 				<br>
 				<div class="button-group">
@@ -347,14 +352,14 @@ headHere($theme_name, 'injectStyles');
 						<legend>Check these out</legend>
 						<input id="checkbox1" type="checkbox" checked><label for="checkbox1">Checkbox 1</label>
 						<input id="checkbox2" type="checkbox"><label for="checkbox2">Checkbox 2</label>
-						<input id="checkbox3" type="checkbox" disabled><label for="checkbox3" disabled>Checkbox 3</label>
+						<input id="checkbox3" type="checkbox" disabled><label for="checkbox3" disabled>Checkbox 3&deg;</label>
 					</fieldset>
 					<br>
 					<fieldset class="fieldset">
 						<legend>Choose Your Favorite</legend>
 						<input type="radio" name="pokemon" value="Red" id="pokemonRed" checked><label for="pokemonRed">Red</label>
 						<input type="radio" name="pokemon" value="Blue" id="pokemonBlue"><label for="pokemonBlue">Blue</label>
-						<input type="radio" name="pokemon" value="Yellow" id="pokemonYellow" disabled><label for="pokemonYellow" disabled>Yellow</label>
+						<input type="radio" name="pokemon" value="Yellow" id="pokemonYellow" disabled><label for="pokemonYellow" disabled>Yellow&deg;</label>
 					</fieldset>
 					<br>
 					<div class="grid-x grid-margin-x">
@@ -490,9 +495,9 @@ headHere($theme_name, 'injectStyles');
 				<h4>Menu</h4>
 				<ul class="menu">
 					<li class="menu-text">Menu</li>
-					<li class="is-active"><a href="#">One</a></li>
+					<li><a href="#">One</a></li>
 					<li><a href="#">Two</a></li>
-					<li><a href="#">Three</a></li>
+					<li class="is-active"><a href="#">Three&ordf;</a></li>
 					<li><a href="#">Four</a></li>
 				</ul>
 
@@ -503,11 +508,16 @@ headHere($theme_name, 'injectStyles');
 					<li><a href="#">One</a></li>
 					<li class="is-dropdown-submenu-parent"><a href="#">Two</a>
 						<ul class="menu">
-							<li><a href="#">Item 3</a></li>
+							<li><a href="#">Item 1</a></li>
+							<li><a href="#">Item 2</a></li>
+						</ul>
+					</li>
+					<li class="is-dropdown-submenu-parent is-active"><a href="#">Three&ordf;</a>
+						<ul class="menu">
+							<li class="is-active"><a href="#">Item 3&ordf;</a></li>
 							<li><a href="#">Item 4</a></li>
 						</ul>
 					</li>
-					<li><a href="#">Three</a></li>
 				</ul>
 
 				<br>
@@ -516,14 +526,21 @@ headHere($theme_name, 'injectStyles');
 				<ul class="vertical menu drilldown" style="max-width: 250px;" data-auto-height="true" data-animate-height="true" data-drilldown>
 					<li><a href="#">One</a></li>
 					<li><a href="#">Two</a>
-						<ul class="menu vertical nested is-active">
+						<ul class="menu vertical nested">
 							<li><a href="#">Two A</a></li>
 							<li><a href="#">Two B</a></li>
 							<li><a href="#">Two C</a></li>
 							<li><a href="#">Two D</a></li>
 						</ul>
 					</li>
-					<li><a href="#">Three</a></li>
+					<li class="is-active"><a href="#">Three&ordf;</a>
+						<ul class="menu vertical nested">
+							<li><a href="#">Three A</a></li>
+							<li><a href="#">Three B</a></li>
+							<li class="is-active"><a href="#">Three C&ordf;</a></li>
+							<li><a href="#">Three D</a></li>
+						</ul>
+					</li>
 					<li><a href="#">Four</a></li>
 				</ul>
 
@@ -539,6 +556,14 @@ headHere($theme_name, 'injectStyles');
 						</ul>
 					</li>
 					<li><a href="#">Item 2</a></li>
+					<li class="is-active"><a href="#">Item 3&ordf;</a>
+						<ul class="menu vertical nested">
+							<li><a href="#">Item 3A</a></li>
+							<li><a href="#">Item 3B</a></li>
+							<li class="is-active"><a href="#">Item 3C&ordf;</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Item 4</a></li>
 				</ul>
 
 				<br> <!-- -->
@@ -546,8 +571,8 @@ headHere($theme_name, 'injectStyles');
 				<h4>Pagination</h4>
 				<nav aria-label="Pagination">
 					<ul class="pagination">
-						<li class="pagination-previous disabled">Previous <span class="show-for-sr">page</span></li>
-						<li class="current"><span class="show-for-sr">You're on page </span>1</li>
+						<li class="pagination-previous disabled">Previous&deg; <span class="show-for-sr">page</span></li>
+						<li class="current"><span class="show-for-sr">You're on page </span>1&ordf;</li>
 						<li><a href="#" aria-label="Page 2">2</a></li>
 						<li><a href="#" aria-label="Page 3">3</a></li>
 						<li><a href="#" aria-label="Page 4">4</a></li>
@@ -565,7 +590,7 @@ headHere($theme_name, 'injectStyles');
 					<ul class="breadcrumbs">
 						<li><a href="#">Home</a></li>
 						<li><a href="#">Features</a></li>
-						<li class="disabled">Gene Splicing</li>
+						<li class="disabled">Gene Splicing&deg;</li>
 						<li><span class="show-for-sr">Current: </span> Cloning</li>
 					</ul>
 				</nav>
@@ -585,7 +610,7 @@ headHere($theme_name, 'injectStyles');
 				<h4>Accordian</h4>
 				<ul class="accordion" data-accordion>
 					<li class="accordion-item is-active" data-accordion-item>
-						<a href="#" class="accordion-title">Accordion 1</a>
+						<a href="#" class="accordion-title">Accordion 1&ordf;</a>
 						<div class="accordion-content" data-tab-content>
 							<p>Panel 1. Lorem ipsum dolor</p>
 							<a href="#">Nowhere to Go</a>
@@ -604,7 +629,7 @@ headHere($theme_name, 'injectStyles');
 
 				<h4>Tabs</h4>
 				<ul class="tabs" data-tabs id="example-tabs">
-					<li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Tab 1</a></li>
+					<li class="tabs-title is-active"><a href="#panel1" aria-selected="true">Tab 1&ordf;</a></li>
 					<li class="tabs-title"><a href="#panel2">Tab 2</a></li>
 					<li class="tabs-title"><a href="#panel3">Tab 3</a></li>
 				</ul>
@@ -798,8 +823,8 @@ headHere($theme_name, 'injectStyles');
 					</div>
 				</div>
 				<div class="alert progress">
-					<div class="progress-meter" style="width: 95%">
-						<p class="progress-meter-text">95%</p>
+					<div class="progress-meter" style="width: 85%">
+						<p class="progress-meter-text">85%</p>
 					</div>
 				</div>
 
@@ -853,7 +878,7 @@ headHere($theme_name, 'injectStyles');
 						<div class="switch">
 						  <input class="switch-input" id="exampleRadioSwitch3" type="radio" name="testGroup" disabled>
 						  <label class="switch-paddle" for="exampleRadioSwitch3">
-						    <span class="show-for-sr">Bulbasaur</span>
+						    <span class="show-for-sr">Bulbasaur&deg;</span>
 						  </label>
 						</div>
 
@@ -861,7 +886,7 @@ headHere($theme_name, 'injectStyles');
 						  <input class="switch-input" id="yes-no" type="checkbox" name="exampleSwitch">
 						  <label class="switch-paddle" for="yes-no">
 						    <span class="show-for-sr">Power</span>
-						    <span class="switch-active text-center" aria-hidden="true">Yes</span>
+						    <span class="switch-active text-center" aria-hidden="true">Yes&ordf;</span>
 						    <span class="switch-inactive text-center" aria-hidden="true">No</span>
 						  </label>
 						</div>
@@ -937,7 +962,7 @@ headHere($theme_name, 'injectStyles');
 				    </li>
 				  </ul>
 				  <nav class="orbit-bullets">
-				    <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide</span></button>
+				    <button class="is-active" data-slide="0"><span class="show-for-sr">First slide details.</span><span class="show-for-sr">Current Slide&ordf;</span></button>
 				    <button data-slide="1"><span class="show-for-sr">Second slide details.</span></button>
 				    <button data-slide="2"><span class="show-for-sr">Third slide details.</span></button>
 				    <button data-slide="3"><span class="show-for-sr">Fourth slide details.</span></button>
@@ -994,12 +1019,27 @@ headHere($theme_name, 'injectStyles');
 
 		<!-- =============================================================== -->
 		<hr>
+
+		<small><b>Key:</b> &ordf; = Active state; &deg; = Disabled state; &sup2; = Not in F6, borrowed from B4</small>
 	</main>
 
 
 	<?php footerHere(); ?>
 	<script>
-		$(document)
+		$( document ).ready(function() {
+			// disable links
+			$("a").each(function() {
+				var href = this.getAttribute("href");
+				if ((!href) || ("#" == href)) {
+					$(this).removeAttr("href");
+					$(this).bind( "click", function(event) {
+						event.preventDefault();
+					});
+				}
+			})
+		});
+
+		$( document )
 			// field element is invalid
 			.on("invalid.zf.abide", function(ev,elem) {
 				console.log("Field id "+ev.target.id+" is invalid");

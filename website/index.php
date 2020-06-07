@@ -5,6 +5,28 @@ include_once 'inc/functions.php';
 function injectFoundationIcons() {
 	?>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundicons/3.0.0/foundation-icons.min.css">
+	<style>
+		picture.overlay {
+			position: relative;
+		}
+		picture.overlay img {
+		}
+		picture.overlay .overlay {
+			position: absolute;
+			bottom: 0;
+			background: rgba(0, 0, 0, 0.5); /* Black see-through */
+			color: #f1f1f1;
+			width: 100%;
+			transition: .5s ease;
+			font-size: 75%;
+			padding: 0.25rem 1rem;
+			text-align: center;
+			opacity: 0;
+		}
+		picture.overlay:hover .overlay {
+			opacity: 1;
+		}
+	</style>
 	<?php
 }
 
@@ -69,14 +91,19 @@ headHere('Free themes for Foundation', 'injectFoundationIcons');
 		<div class="grid-x grid-margin-x" data-equalize-on="medium" data-equalizer="eq">
 			<?php
 			$cnt = 0;
-			foreach ($themelist as $name => $desc) :
+			$list = $themelist;  ksort($list);
+			foreach ($list as $name => $desc) :
 				$link = strtolower($name);
 				if ('default' == $link) continue;
 				$cnt++;
 			?>
 			<div class="cell medium-6 large-4">
 				<div class="card theme-card" data-equalizer-watch="eq">
-					<img src="themes/<?= $link ?>/screenshot.jpg" class="screenshot">
+					<picture class="overlay"><img src="themes/<?= $link ?>/screenshot.jpg" class="screenshot"><?php
+						if (key_exists($link, $authorlist)) {
+							echo '<div class="overlay">' . $authorlist[$link] . '</div>';
+						}
+					?></picture>
 					<div class="card-section text-center">
 						<h4><?= $name ?></h4>
 						<p><?= $desc ?></p>

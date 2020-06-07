@@ -53,7 +53,7 @@ if (false === $theme) {
 		}
 	</style>
 </head>
-<body>
+<body class="theme-<?= $theme ?>">
 	<header>
 		<div class="top-bar" id="main-menu">
 			<div class="top-bar-left">

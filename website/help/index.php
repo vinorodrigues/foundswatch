@@ -228,7 +228,9 @@ https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch/
 						<li><a href="../themes/default/">Default</a> and <a href="../themes/dark/">Dark</a> <i>(As used on this site.)</i></li>
 						<li><a href="../themes/flatly/">Flatly</a> and <a href="../themes/darkly/">Darkly</a></li>
 					</ul></p>
-<p><pre><code class="code-block language-html">&lt;!-- Alternative color mode (loaded first) --&gt;
+<p><pre><code class="code-block language-html">&lt;!-- Inform the browser that this page supports both dark and light color schemes --&gt;
+&lt;meta name="color-scheme" content="light dark"&gt;
+&lt;!-- Alternative color mode (loaded first) --&gt;
 &lt;link id="css-dark" rel="stylesheet" href="<i>dark/</i>foundation.min.css" media="<b>(prefers-color-scheme: dark)</b>"&gt;
 &lt;!-- Default and/or 'no preference' color mode (loaded last) --&gt;
 &lt;link id="css-light" rel="stylesheet" href="<i>default/</i>foundation.min.css" media="<b>(prefers-color-scheme: no-preference), (prefers-color-scheme: light)</b>"&gt;
@@ -242,13 +244,14 @@ if ( !window.matchMedia || (window.matchMedia("(prefers-color-scheme: dark)").me
 	document.head.insertAdjacentHTML( "beforeend",
 		"&lt;link id=\"css\" rel=\"stylesheet\" href=\"default/foundation.min.css\"&gt;" );
 </code></pre></p>
-			<p>, or add the following JavaScript to the bottom of your html to disable the filtered CSS.</p>
+			<p>, <b style="font-size:150%;font-style:oblique;text-decoration:underline;">or</b> add the following JavaScript to the bottom of your html to disable the filtered CSS.</p>
 <p><pre><code class="code-block language-js">$(document).ready(function() {
 	// assumes jQuery running
 	if ( !window.matchMedia || (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") ) {
 		// matchMedia function, or, prefers-color-scheme media query not supported
 		$("#css-dark").remove();  // remove the dark mode CSS file link
 		$("#css-light").attr( "media", "" );  // remove the media filter
+		// $("#css-light").attr( "id", "css" );  // **optional** - rename the id
 	}
 }</code></pre></p>
 			<p>Take a look at <a href="https://jsfiddle.net/vinorodrigues/qyx5o6tv/" target="_blank">this</a> jsFiddle for an example (with toggle button).</p>

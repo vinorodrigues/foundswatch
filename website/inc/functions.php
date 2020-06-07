@@ -196,6 +196,7 @@ function headHere(string $title, $injection_callback = '') {
 <?php
 	if ($sdm) {
 ?>
+	<meta name="color-scheme" content="light dark">
 	<script>
 		if ( !window.matchMedia || (window.matchMedia("(prefers-color-scheme: dark)").media === "not all") )
 			document.head.insertAdjacentHTML( "beforeend",
@@ -240,7 +241,8 @@ function headerHere($add_on_menu_callback = '') {
 								<ul class="submenu menu vertical" data-submenu>
 									<?php
 									global $themelist;
-									foreach ($themelist as $name => $desc) {
+									$list = $themelist;  ksort($list);
+									foreach ($list as $name => $desc) {
 										$thm = strtolower($name);
 										if ('default' == $thm) continue;
 										echo '<li><a href="' . ABSPATH . 'themes/' . $thm . '/">' . $name . '</a></li>';
