@@ -96,7 +96,7 @@ $btn-secondary-color-alt: scale-color(get-color(secondary), $lightness: 20%);
 		background-color: $button-background;
 	}
 
-	@each $bname, $bcolor in $foundation-palette {
+	@each $bname, $bcolor in $button-palette {
 		&.#{$bname}:active,
 		&.#{$bname}:hover {
 			color: $__bs__white;
@@ -114,7 +114,7 @@ $btn-secondary-color-alt: scale-color(get-color(secondary), $lightness: 20%);
 		color: $anchor-color-hover;
 	}
 
-	@each $bname, $bcolor in $foundation-palette {
+	@each $bname, $bcolor in $button-palette {
 		&.#{$bname}:active,
 		&.#{$bname}:hover {
 			color: scale-color($bcolor, $lightness: 20%);
@@ -127,7 +127,7 @@ $btn-secondary-color-alt: scale-color(get-color(secondary), $lightness: 20%);
 		border-color: $button-color transparent transparent;
 	}
 
-	@each $bname, $__dmp in $foundation-palette {
+	@each $bname, $__dmp in $button-palette {
 		&.#{$bname}::after {
 			border-color: $__bs__white transparent transparent;
 		}

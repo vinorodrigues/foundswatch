@@ -53,7 +53,7 @@ code {
 		border-color: $body-font-color transparent transparent;
 	}
 
-	@each $bname, $__dmp in $foundation-palette {
+	@each $bname, $__dmp in $button-palette {
 		&.#{$bname}::after {
 			@if (success != $bname) and (warning != $bname) {
 				border-color: $body-font-color transparent transparent;
