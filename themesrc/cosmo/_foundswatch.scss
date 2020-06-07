@@ -40,6 +40,26 @@
 	color: scale-color($body-font-color, $lightness: 50%);
 }
 
+// 6. Abide
+// --------
+
+.is-invalid-input {
+	&:not(:focus) {
+		background-color: inherit;
+	}
+}
+
+// 8. Accordion Menu
+// -----------------
+
+.accordion-menu {
+	.is-accordion-submenu-parent {
+		&.is-active > a::after {
+			border-top-color: $white;
+		}
+	}
+}
+
 // 9. Badge
 // --------
 
@@ -47,11 +67,98 @@
 	font-weight: 700;
 }
 
+// 10. Breadcrumbs
+// ---------------
+
+.breadcrumbs {
+	padding: rem-calc(12 16);
+	background-color: $light-gray;
+
+	li {
+		font-size: 1rem;
+	}
+}
+
+// 16. Drilldown
+// -------------
+
+.drilldown {
+	.is-drilldown-submenu-parent.is-active > a::after {
+		border-left-color: $white;
+	}
+}
+
 // 21. Label
 // ---------
 
 .label {
 	font-weight: 700;
+}
+
+// 27. Pagination
+// --------------
+
+.pagination {
+	display: flex;
+
+	li {
+		border: 1px solid $global-content-border;
+
+		&.ellipsis {
+			padding: $pagination-item-padding;
+		}
+	}
+}
+
+// 49. Switch
+// ----------
+
+.switch {
+	.switch-inactive,
+	.switch-active {
+		font-size: 75%;
+	}
+
+	&.tiny .switch-paddle { border-radius: $switch-height-tiny / 2;	}
+	&.small .switch-paddle { border-radius: $switch-height-small / 2; }
+	&.large .switch-paddle { border-radius: $switch-height-large / 2; }
+}
+
+// 51. Tabs
+// --------
+
+.tabs {
+	border: none;
+	border-bottom: 1px solid $tab-content-border;
+
+	li {
+		border: 1px solid transparent;
+		margin-bottom: -1px;
+
+		border-top-left-radius: $global-radius;
+		border-top-right-radius: $global-radius;
+
+		&:hover {
+			border: 1px solid $tab-content-border;
+		}
+
+		&.is-active {
+			border: 1px solid $tab-content-border;
+			border-bottom-color: $body-background;
+		}
+	}
+}
+
+.tabs-title {
+	> a:focus,
+	> a[aria-selected="true"] {
+		background-color: inherit;
+		color: inherit;
+	}
+}
+
+.tabs-content {
+	border: none;
 }
 
 // 55. Top bar

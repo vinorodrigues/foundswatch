@@ -9,8 +9,14 @@ if (!defined('FOUNDATION_VERSION')) define('FOUNDATION_VERSION', '6.6.3');
 global $themelist;
 
 $themelist = array(
+	// by Zurb
 	'Default' => 'Basic Foundation for Sites',
 	'Dark' => 'Default Foundation, but dark',
+
+	// by Vino
+	'Bootie' => 'A well-worn bootstrap',
+
+	// by Thomas Park
 	'Cerulean' => 'A calm blue sky',
 	'Cosmo' => 'An ode to Metro',
 	'Cyborg' => 'Jet black and electric blue',
@@ -31,31 +37,30 @@ $themelist = array(
 	// 'Spacelab' => 'Silvery and sleek',
 	// 'Superhero' => 'The brave and the blue',
 	'United' => 'Ubuntu orange and unique font',
-	'Bootie' => 'A well-worn bootstrap',
 	);
 
 $authorlist = array(
-	// 'bootie' => 'Vino Rodrigues',
-	'cerulean' => 'Inspired by Thomas Park\'s Bootswatch Cerulean',
-	'cosmo' => 'Inspired by Thomas Park\'s Bootswatch Cosmo',
-	'cyborg' => 'Inspired by Thomas Park\'s Bootswatch Cyborg',
+	'bootie' => 'Inspired by Bootstrap 4, &copy; Twitter & The Bootstrap Authors',
+	'cerulean' => 'Inspired by Bootswatch Cerulean, &copy; Thomas Park',
+	'cosmo' => 'Inspired by Bootswatch Cosmo, &copy; Thomas Park',
+	'cyborg' => 'Inspired by Bootswatch Cyborg, &copy; Thomas Park',
 	// 'dark' => '&copy; Vino Rodrigues',
-	'darkly' => 'Inspired by Thomas Park\'s Bootswatch Darkly',
-	'default' => '&copy; ZURB, Inc.',
-	'flatly' => 'Inspired by Thomas Park\'s Bootswatch Flatly',
-	'journal' => 'Inspired by Thomas Park\'s Bootswatch Journal',
-	'litera' => 'Inspired by Thomas Park\'s Bootswatch Litera',
-	'lumen' => 'Inspired by Thomas Park\'s Bootswatch Lumen',
-	'lux' => 'Inspired by Thomas Park\'s Bootswatch Lux',
-	'materia' => 'Inspired by Thomas Park\'s Bootswatch Materia',
-	'minty' => 'Inspired by Thomas Park\'s Bootswatch Minty',
-	'pulse' => 'Inspired by Thomas Park\'s Bootswatch Pulse',
-	'sandstone' => 'Inspired by Thomas Park\'s Bootswatch Sandstone',
-	'simplex' => 'Inspired by Thomas Park\'s Bootswatch Simplex',
-	'sketchy' => 'Inspired by Thomas Park\'s Bootswatch Sketchy',
-	'slate' => 'Inspired by Thomas Park\'s Bootswatch Slate',
-	'solar' => 'Inspired by Thomas Park\'s Bootswatch Solar',
-	'spacelab' => 'Inspired by Thomas Park\'s Bootswatch Spacelab',
-	'superhero' => 'Inspired by Thomas Park\'s Bootswatch Superhero',
-	'united' => 'Inspired by Thomas Park\'s Bootswatch United',
+	'darkly' => 'Inspired by Bootswatch Darkly, &copy; Thomas Park',
+	'default' => 'Foundation for Sites &copy; ZURB, Inc.',
+	'flatly' => 'Inspired by Bootswatch Flatly, &copy; Thomas Park',
+	'journal' => 'Inspired by Bootswatch Journal, &copy; Thomas Park',
+	'litera' => 'Inspired by Bootswatch Litera, &copy; Thomas Park',
+	'lumen' => 'Inspired by Bootswatch Lumen, &copy; Thomas Park',
+	'lux' => 'Inspired by Bootswatch Lux, &copy; Thomas Park',
+	'materia' => 'Inspired by Bootswatch Materia, &copy; Thomas Park',
+	'minty' => 'Inspired by Bootswatch Minty, &copy; Thomas Park',
+	'pulse' => 'Inspired by Bootswatch Pulse, &copy; Thomas Park',
+	'sandstone' => 'Inspired by Bootswatch Sandstone, &copy; Thomas Park',
+	'simplex' => 'Inspired by Bootswatch Simplex, &copy; Thomas Park',
+	'sketchy' => 'Inspired by Bootswatch Sketchy, &copy; Thomas Park',
+	'slate' => 'Inspired by Bootswatch Slate, &copy; Thomas Park',
+	'solar' => 'Inspired by Bootswatch Solar, &copy; Thomas Park',
+	'spacelab' => 'Inspired by Bootswatch Spacelab, &copy; Thomas Park',
+	'superhero' => 'Inspired by Bootswatch Superhero, &copy; Thomas Park',
+	'united' => 'Inspired by Bootswatch United, &copy; Thomas Park',
 	);
