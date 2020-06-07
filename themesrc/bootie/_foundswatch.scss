@@ -188,8 +188,6 @@ $escaped-characters: (
 // 13. Callout
 // -----------
 
-$theme-color-interval: 8% !default;
-
 // Borrowed from Bootstrap (alert-variant), (c) The Bootstrap Authors
 @mixin callout-variant($background, $border, $color) {
 	color: $color;
@@ -210,7 +208,7 @@ $theme-color-interval: 8% !default;
 @function the-color-level($color, $level: 0) {
 	$color-base: if($level > 0, #000, #fff);
 	$level: abs($level);
-	@return mix($color-base, $color, $level * $theme-color-interval);
+	@return mix($color-base, $color, $level * $callout-background-fade);
 }
 
 .callout {
@@ -274,10 +272,12 @@ $theme-color-interval: 8% !default;
 	}
 }
 
-.tabs-title > a:focus,
-.tabs-title > a[aria-selected="true"] {
-	background-color: inherit;
-	color: inherit;
+.tabs-title {
+	> a:focus,
+	> a[aria-selected="true"] {
+		background-color: inherit;
+		color: inherit;
+	}
 }
 
 .tabs-content {

@@ -306,7 +306,7 @@ $breadcrumbs-item-color: $primary-color;
 $breadcrumbs-item-color-current: $dark-gray;
 $breadcrumbs-item-color-disabled: $medium-gray;
 $breadcrumbs-item-margin: 0.75rem;
-$breadcrumbs-item-uppercase: true;
+$breadcrumbs-item-uppercase: false;
 $breadcrumbs-item-separator: true;
 $breadcrumbs-item-separator-item: '/';
 $breadcrumbs-item-separator-item-rtl: '\\';
@@ -353,7 +353,7 @@ $buttongroup-radius-on-each: true;
 // -----------
 
 $callout-background: $white;
-$callout-background-fade: 0%;  // 85%;
+$callout-background-fade: 8%;  // 85%;
 $callout-border: 1px solid rgba($black, 0.25);
 $callout-margin: 0 0 1rem 0;
 $callout-sizes: (
