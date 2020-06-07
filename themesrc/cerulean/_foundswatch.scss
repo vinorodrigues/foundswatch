@@ -10,7 +10,7 @@
 // 0. borrowed from bootstrap
 // --------------------------
 
-$new-topbar-background: $topbar-background linear-gradient(lighten($topbar-background, 8%), $topbar-background, 60%, darken($topbar-background, 4%)) no-repeat no-repeat;
+// $new-topbar-background: $topbar-background linear-gradient(lighten($topbar-background, 8%), $topbar-background, 60%, darken($topbar-background, 4%)) no-repeat no-repeat;
 
 :root {
 	@each $color, $value in $foundation-palette {
@@ -24,7 +24,7 @@ $new-topbar-background: $topbar-background linear-gradient(lighten($topbar-backg
 	@each $bp, $value in $breakpoints {
 		--breakpoint-#{$bp}: #{$value};
 	}
-	--top-bar-bg: #{$new-topbar-background};
+	--top-bar-bg: #{$topbar-background};
 	--title-bar-bg: #{$titlebar-background};
 	--font-family-sans-serif: #{inspect($body-font-family)};
 	--font-family-monospace: #{inspect($font-family-monospace)};
@@ -37,6 +37,52 @@ $new-topbar-background: $topbar-background linear-gradient(lighten($topbar-backg
 }
 .text-muted {
 	color: scale-color($body-font-color, $lightness: 50%);
+}
+
+// 6. Abide
+// --------
+
+.is-invalid-input:not(:focus) {
+	background-color: inherit;
+}
+
+// 8. Accordion Menu
+// -----------------
+
+.accordion-menu {
+	.is-accordion-submenu-parent {
+		&.is-active > a::after {
+			border-top-color: $white;
+		}
+		&[aria-expanded='true'].is-active > a {
+			background: inherit;
+			color: $accordion-item-color;
+
+			&::after {
+				border-top-color: $accordion-item-color;
+			}
+		}
+	}
+}
+
+// 9. Badge
+// --------
+
+.badge {
+	border-radius: rem-calc(10);
+}
+
+// 10. Breadcrumbs
+// ---------------
+
+.breadcrumbs {
+	padding: rem-calc(12 16);
+	background-color: $light-gray;
+	border-radius: $global-radius;
+
+	li {
+		font-size: 1rem;
+	}
 }
 
 // 11. Buttons
@@ -79,13 +125,176 @@ button:not(.hollow):not(.clear):not(.close-button),
 	}
 }
 
+// 13. Callout
+// -----------
+
+// Borrowed from Bootstrap (alert-variant), (c) The Bootstrap Authors
+@mixin callout-variant($background, $border, $color) {
+	color: $color;
+	background-color: $background;
+	border-color: $border;
+	h1, h2, h3, h4, h5, h6 {
+		color: $color;
+	}
+	hr {
+		border-top-color: darken($border, 5%);
+	}
+	a:not(.button) {
+		color: darken($color, 10%);
+	}
+	a:hover:not(.button) {
+		text-decoration: underline;
+	}
+}
+
+// Borrowed from Bootstrap (theme-color-level), (c) The Bootstrap Authors
+@function the-color-level($color, $level: 0) {
+	$color-base: if($level > 0, #000, #fff);
+	$level: abs($level);
+	@return mix($color-base, $color, $level * $callout-background-fade);
+}
+
+.callout {
+	h1, h2, h3, h4, h5, h6 {
+		color: $body-font-color;
+	}
+	a:not(.button) {
+		color: darken($body-font-color, 10%);
+		font-weight: $global-weight-bold;
+	}
+	a:hover:not(.button) {
+		text-decoration: underline;
+	}
+	.close-button {
+		color: inherit;
+	}
+	@each $color, $value in $foundation-palette {
+		&.#{$color} {
+			@include callout-variant(the-color-level($value, -10), the-color-level($value, -9), the-color-level($value, 6));
+		}
+	}
+}
+
+// 16. Drilldown
+// -------------
+
+.drilldown {
+	.is-drilldown-submenu-parent.is-active > a::after {
+		border-left-color: $white;
+	}
+}
+
+// 16. Drilldown
+// -------------
+
+.drilldown {
+	.is-drilldown-submenu-parent.is-active > a::after {
+		border-left-color: $white;
+	}
+}
+
+// 23. Menu
+// --------
+
+.menu {
+	.is-active {
+		& > a {
+			@include btn-shadow($primary-color);
+		}
+	}
+}
+
+// 27. Pagination
+// --------------
+
+.pagination {
+	display: flex;
+	border-radius: $global-radius;
+
+	li {
+		border-radius: 0;
+		border: 1px solid $light-gray;
+
+		&:first-child {
+			border-top-left-radius: $global-radius;
+			border-bottom-left-radius: $global-radius;
+		}
+		&:last-child {
+			border-top-right-radius: $global-radius;
+			border-bottom-right-radius: $global-radius;
+		}
+
+		&.current {
+			border-color: scale-color($pagination-item-background-current, $lightness: $button-background-hover-lightness);
+		}
+
+		&.ellipsis {
+			padding: $pagination-item-padding;
+		}
+	}
+}
+
 // 28. Progress Bar
 // ----------------
 
 .progress.secondary {
-	& .progress-meter-text {
-		color: $__bs__gray-700;
+	.progress-meter {
+		background: $medium-gray;
 	}
+	.progress-meter-text {
+		color: $dark-gray;
+	}
+}
+
+// 49. Switch
+// ----------
+
+.switch {
+	.switch-inactive,
+	.switch-active {
+		font-size: 75%;
+	}
+
+	&.tiny .switch-paddle { border-radius: $switch-height-tiny / 2;	}
+	&.small .switch-paddle { border-radius: $switch-height-small / 2; }
+	&.large .switch-paddle { border-radius: $switch-height-large / 2; }
+}
+
+// 51. Tabs
+// --------
+
+.tabs {
+	border: none;
+	border-bottom: 1px solid $tab-content-border;
+
+	li {
+		border: 1px solid transparent;
+		margin-bottom: -1px;
+
+		border-top-left-radius: $global-radius;
+		border-top-right-radius: $global-radius;
+
+		&:hover {
+			border: 1px solid $tab-content-border;
+		}
+
+		&.is-active {
+			border: 1px solid $tab-content-border;
+			border-bottom-color: $body-background;
+		}
+	}
+}
+
+.tabs-title {
+	> a:focus,
+	> a[aria-selected="true"] {
+		background-color: inherit;
+		color: inherit;
+	}
+}
+
+.tabs-content {
+	border: none;
 }
 
 // 55. Top Bar
