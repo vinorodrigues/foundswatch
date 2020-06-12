@@ -1,0 +1,13 @@
+/**
+ * Foundswatch v1.0.0 - Lumen
+ * @see https://foundswatch.com
+ * (c) 2020 Vino Rodrigues
+ * Licensed under MIT
+ * Based on ZURB Foundation for Sites, https://get.foundation
+ * Based on Bootswatch - Lumen, (c) Thomas Park, https://bootswatch.com/lumen
+ */
+
+@import 'settings';
+@import '../scss/foundation';
+@include foundation-everything;
+@import '_foundswatch';

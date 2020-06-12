@@ -1,0 +1,414 @@
+// ----------------------------------------------------------------------------
+// Foundswatch v1.0.0 - Lumen
+// @see https://foundswatch.com
+// (c) 2020 Vino Rodrigues
+// Licensed under MIT
+// Based on ZURB Foundation for Sites, https://get.foundation
+// Based on Bootswatch - Lumen, (c) Thomas Park, https://bootswatch.com/lumen
+// ----------------------------------------------------------------------------
+
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+@mixin lumen-shadow($wbottom: rem-calc(4), $wtop: 0){
+  border-style: solid;
+  border-width: $wtop rem-calc(1) $wbottom rem-calc(1);
+}
+
+// 0. borrowed from bootstrap
+// --------------------------
+
+:root {
+	@each $color, $value in $foundation-palette {
+		--#{$color}: #{$value};
+	}
+	--light-gray: #{$light-gray};
+	--medium-gray: #{$medium-gray};
+	--dark-gray: #{$dark-gray};
+	--black: #{$black};
+	--white: #{$white};
+	@each $bp, $value in $breakpoints {
+		--breakpoint-#{$bp}: #{$value};
+	}
+	--top-bar-bg: #{$topbar-background};
+	--title-bar-bg: #{$titlebar-background};
+	--font-family-sans-serif: #{inspect($body-font-family)};
+	--font-family-monospace: #{inspect($font-family-monospace)};
+}
+
+@each $color, $value in $foundation-palette {
+	.text-#{$color} {
+		color: #{$value};
+	}
+}
+.text-muted {
+	color: scale-color($body-font-color, $lightness: 50%);
+}
+
+// 6. Abide
+// --------
+
+.is-invalid-input:not(:focus) {
+	background-color: inherit;
+}
+
+// 7. Accordion
+// ------------
+
+.accordion {
+	.is-active {
+		.accordion-title {
+			background-color: $global-background-active;
+			color: $body-font-color;
+		}
+	}
+}
+
+// 8. Accordion Menu
+// -----------------
+
+.accordion-menu {
+	.is-accordion-submenu-parent {
+		&.is-active > a::after {
+			border-top-color: $white;
+		}
+		&[aria-expanded='true'].is-active > a {
+			background-color: $accordion-item-background-hover;
+			color: $accordion-item-color;
+
+			&::after {
+				border-top-color: $accordion-item-color;
+			}
+		}
+	}
+}
+
+// 9. Badge
+// --------
+
+.badge {
+	border-radius: $badge-font-size;
+	font-weight: $global-weight-bold;
+}
+
+// 10. Breadcrumbs
+// ---------------
+
+.breadcrumbs {
+	padding: rem-calc(12 16);
+	background-color: $__bs__gray-200;
+	border-radius: $global-radius;
+	border-color: $__bs__gray-300;
+	@include lumen-shadow();
+
+	li {
+		text-transform: inherit;
+		font-size: 1rem;
+	}
+}
+
+// 11. Button
+// ----------
+
+.button,
+.button-group .button {
+	font-size: .75rem;
+	text-transform: uppercase;
+	transition: all .2s ease-in-out;
+}
+
+.button:not(.clear) {
+	border-color: scale-color($button-background, $lightness: $button-background-hover-lightness);
+	@include lumen-shadow();
+
+	@each $bname, $color in $button-palette {
+		 &.#{$bname} {
+		 	border-color: scale-color($color, $lightness: $button-background-hover-lightness);
+		 }
+	}
+
+	&.hollow {
+		@include lumen-shadow($wtop: 1px);
+	}
+
+	&:hover {
+		margin-top: 1px;
+		border-bottom-width: 3px;
+	}
+}
+
+.button.secondary {
+	&.hollow {
+		color: $button-color-alt;
+		border-color: $button-color-alt;
+	}
+	&.clear {
+		color: $button-color-alt;
+	}
+}
+
+// 12. Button Group
+// ----------------
+
+.button-group .button {
+	&:focus,
+	&:active {
+		z-index: 1;
+	}
+}
+
+// 13. Callout
+// -----------
+
+.callout {
+	border-bottom-width: 4px;
+
+	a:not(.button) {
+		color: darken($body-font-color, 10%);
+		font-weight: $global-weight-bold;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.close-button {
+		font-weight: $global-weight-bold;
+	}
+
+	@each $name, $color in $foundation-palette {
+		&.#{$name} {
+			color: color-pick-contrast($color, ($white, $black));
+			border-color: scale-color($color, $lightness: $button-background-hover-lightness);
+
+			a {
+				color: color-pick-contrast($color, ($white, $black));
+				text-decoration: underline;
+
+				&:hover {
+					color: color-pick-contrast($color, ($white, $black));
+				}
+			}
+
+			.close-button {
+				color: color-pick-contrast($color, ($medium-gray, $dark-gray));
+
+				&:hover,
+				&:focus {
+					color: color-pick-contrast($color, ($white, $black)) !important;
+				}
+			}
+		}
+	}
+}
+
+// 14. Card
+// --------
+
+.card {
+	border-bottom-width: rem-calc(4);
+}
+
+// 16. Drilldown
+// -------------
+
+.drilldown {
+	.is-drilldown-submenu-parent.is-active > a::after {
+		border-left-color: $white;
+	}
+}
+
+// 23. Menu
+// --------
+
+.menu .is-active > a {
+	border-radius: $global-radius;
+}
+
+// 27. Pagination
+// --------------
+
+.pagination {
+	display: flex;
+	border-radius: $global-radius;
+
+	a:hover {
+		border-radius: 0;
+	}
+
+	li {
+		border-radius: 0;
+		background-color: $light-gray;
+		border-color: $medium-gray;
+
+		@include lumen-shadow();
+
+		transition: all .2s ease-in-out;
+
+		&:first-child,
+		&:first-child a {
+			border-top-left-radius: $global-radius;
+			border-bottom-left-radius: $global-radius;
+		}
+		&:last-child,
+		&:last-child a {
+			border-top-right-radius: $global-radius;
+			border-bottom-right-radius: $global-radius;
+		}
+
+		&:not(.ellipsis):not(.disabled):hover a {
+			background-color: $medium-gray;
+			margin-top: 1px;
+			margin-bottom: -1px;
+			border-top-color: transparent;
+		}
+
+		&.current {
+			border-color: scale-color($pagination-item-background-current, $lightness: $button-background-hover-lightness);
+		}
+
+		&.ellipsis {
+			padding: $pagination-item-padding;
+
+			&::after {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+	}
+}
+
+// 28. Progress bar
+// ----------------
+
+.progress {
+	&.secondary {
+		.progress-meter {
+			background-color: $medium-gray;
+		}
+		.progress-meter-text {
+			color: $body-font-color;
+		}
+	}
+}
+
+// 49. Switch
+// ----------
+
+.switch {
+	.switch-inactive,
+	.switch-active {
+		font-size: 75%;
+	}
+
+	&.tiny .switch-paddle { border-radius: $switch-height-tiny / 2;	}
+	&.small .switch-paddle { border-radius: $switch-height-small / 2; }
+	&.large .switch-paddle { border-radius: $switch-height-large / 2; }
+}
+
+// 51. Tabs
+// --------
+
+.tabs {
+	border: none;
+	border-bottom: 1px solid $tab-content-border;
+
+	li {
+		border: 1px solid transparent;
+		margin-bottom: -1px;
+
+		border-top-left-radius: $global-radius;
+		border-top-right-radius: $global-radius;
+		border: 1px solid $tab-content-border;
+
+		margin-top: 6px;
+
+		transition: all .2s ease-in-out;
+
+		&:hover {
+			padding-bottom: 4px;
+			margin-top: 2px;
+		}
+
+		&:hover:not(.is-active) {
+			background-color: $global-background-hover;
+		}
+
+		&.is-active {
+			padding-bottom: 6px;
+			margin-top: 0;
+
+			border: 1px solid $tab-content-border;
+			border-bottom-color: $body-background;
+		}
+	}
+}
+
+.tabs-title {
+	> a:focus,
+	> a[aria-selected="true"] {
+		background-color: inherit;
+		color: inherit;
+	}
+}
+
+.tabs-content {
+	border: none;
+}
+
+// 55. Top bar
+// -----------
+
+$topbar-text-color: $white;
+$topbar-link-color: rgba( $white, .5 );
+$topbar-link-active-color: lighten( $white, 10% );
+
+.top-bar {
+	border-color: scale-color($topbar-background, $lightness: $button-background-hover-lightness);
+	@include lumen-shadow();
+
+	input,
+	button {
+		min-height: 100%;
+		margin-right: 0.5rem;
+	}
+
+	.menu {
+		.menu-text {
+			font-weight: $global-weight-bold;
+		}
+		li.menu-text {
+			font-size: 1.09375rem;
+		}
+	}
+
+	.dropdown.menu {
+		> li > a {
+			color: $topbar-link-color;
+			&:hover, &:active {
+				color: $topbar-link-active-color;
+			}
+		}
+		> li.is-dropdown-submenu-parent > a::after {
+			@include css-triangle($dropdownmenu-arrow-size, $topbar-link-color, down);
+		}
+		> li.menu-text {
+			&,
+			& > a {
+				color: $topbar-text-color;
+			}
+		}
+		> li.is-active > a {
+			color: $topbar-link-active-color;
+		}
+		.is-dropdown-submenu {
+			> li > a {
+				color: $topbar-link-color;
+				&:hover,
+				&:focus,
+				&:active {
+					color: $topbar-link-active-color;
+				}
+			}
+		}
+	}
+}
