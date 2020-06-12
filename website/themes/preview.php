@@ -107,7 +107,7 @@ headHere($theme_name, 'injectStyles');
 					<div class="top-bar-right">
 						<ul class="menu">
 							<li><input type="search" placeholder="Search"></li>
-							<li><button type="button" class="button">Search</button></li>
+							<li><button type="button" class="button secondary">Search</button></li>
 						</ul>
 					</div>
 				</div>
@@ -381,6 +381,16 @@ headHere($theme_name, 'injectStyles');
 				</form>
 			</div>
 			<div class="cell medium-6">
+				<form>
+					<label>Disabled input
+						<input type="text" placeholder="Disabled input" disabled>
+					</label>
+					<br>
+					<label>Readonly input
+						<input type="text" placeholder="Readonly input" value="Readonly input" readonly>
+					</label>
+				</form>
+
 				<h3>Abide Demo</h3>
 
 				<form data-abide novalidate><!-- novalidate is required -->
@@ -512,9 +522,9 @@ headHere($theme_name, 'injectStyles');
 							<li><a href="#">Item 2</a></li>
 						</ul>
 					</li>
-					<li class="is-dropdown-submenu-parent is-active"><a href="#">Three&ordf;</a>
+					<li class="is-dropdown-submenu-parent"><a href="#">Three</a>
 						<ul class="menu">
-							<li class="is-active"><a href="#">Item 3&ordf;</a></li>
+							<li><a href="#">Item 3</a></li>
 							<li><a href="#">Item 4</a></li>
 						</ul>
 					</li>
@@ -793,6 +803,11 @@ headHere($theme_name, 'injectStyles');
 					<input type="hidden">
 				</div>
 
+				<!-- <h4>Meter</h4>
+				<label for="meter1">Percentage:
+				<meter id="meter1" value="45" min="0" max="100">45%</meter>
+				</label> -->
+
 			</div>
 			<div class="cell medium-6">
 
@@ -1020,7 +1035,9 @@ headHere($theme_name, 'injectStyles');
 		<!-- =============================================================== -->
 		<hr>
 
-		<small><b>Key:</b> &ordf; = Active state; &deg; = Disabled state; &sup2; = Not in F6, borrowed from B4</small>
+		<div class="text-center">
+			<small><b>Key:</b> &ordf; = Active state; &deg; = Disabled state; &sup2; = Not in F6, borrowed from B4</small>
+		</div>
 	</main>
 
 
