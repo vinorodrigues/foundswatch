@@ -189,9 +189,6 @@ function headHere(string $title, $injection_callback = '') {
 		:root {
 			--top-bar-bg: #e6e6e6;
 		}
-		.z100 {
-			z-index: 100;
-		}
 	</style>
 <?php
 	if ($sdm) {
@@ -222,7 +219,7 @@ function headHere(string $title, $injection_callback = '') {
 function headerHere($add_on_menu_callback = '') {
 ?>
 	<header>
-	<div class="z100" data-sticky-container>
+	<div data-sticky-container style="z-index:10;">
 		<div class="sticky top-bar-wrapper" data-sticky data-options="anchor: page; marginTop: 0; stickyOn: small;">
 			<div class="grid-container">
 				<div class="title-bar" data-responsive-toggle="main-menu" data-hide-for="medium" style="display: none;">
