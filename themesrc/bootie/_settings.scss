@@ -82,6 +82,7 @@ $__bs__teal:    #20c997 !default;
 $__bs__cyan:    #17a2b8 !default;
 
 $contrast-warnings: false;
+$global-color-pick-contrast-tolerance: 10;
 
 // 1. Global
 // ---------
@@ -119,7 +120,7 @@ $global-text-direction: ltr;
 $global-flexbox: true;
 $global-prototype-breakpoints: false;
 $global-button-cursor: auto;
-$global-color-pick-contrast-tolerance: 10;  // !!!
+// $global-color-pick-contrast-tolerance: 0;  // !!!
 $print-transparent-backgrounds: true;
 $print-hrefs: true;
 
@@ -347,13 +348,13 @@ $buttongroup-margin: 1rem;
 $buttongroup-spacing: 4px;
 $buttongroup-child-selector: '.button';
 $buttongroup-expand-max: 6;
-$buttongroup-radius-on-each: true;
+$buttongroup-radius-on-each: false;
 
 // 13. Callout
 // -----------
 
 $callout-background: $white;
-$callout-background-fade: 8%;  // 85%;
+$callout-background-fade: 80%;  // 85%;
 $callout-border: 1px solid rgba($black, 0.25);
 $callout-margin: 0 0 1rem 0;
 $callout-sizes: (
@@ -369,7 +370,7 @@ $callout-link-tint: 30%;
 // 14. Card
 // --------
 
-$card-background: inherit;  // $white;
+$card-background: transparent;  // $white;
 $card-font-color: $body-font-color;
 $card-divider-background: $light-gray;
 $card-border: 1px solid mix($light-gray, $medium-gray);

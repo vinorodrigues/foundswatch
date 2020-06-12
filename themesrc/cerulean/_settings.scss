@@ -343,8 +343,8 @@ $buttongroup-radius-on-each: false;
 // -----------
 
 $callout-background: $white;
-$callout-background-fade: 8%;
-$callout-border: 1px solid rgba($black, 0.25);
+$callout-background-fade: 80%;
+$callout-border: 1px solid $__bs__gray-100;
 $callout-margin: 0 0 1rem 0;
 $callout-sizes: (
 	small: 0.5rem,
@@ -476,7 +476,7 @@ $input-border: 1px solid $medium-gray;
 $input-border-focus: 1px solid $dark-gray;
 $input-padding: $form-spacing / 2;
 $input-shadow: inset 0 1px 2px rgba($black, 0.1);
-$input-shadow-focus: 0 0 5px $medium-gray;
+$input-shadow-focus: 0 0 0 0.2rem rgba(get-color(primary), 0.25);  // 0 0 5px $medium-gray;
 $input-cursor-disabled: not-allowed;
 $input-transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
 $input-number-spinners: true;
@@ -575,7 +575,7 @@ $pagination-item-spacing: rem-calc(-1);
 $pagination-radius: $global-radius;
 $pagination-item-background-hover: $light-gray;
 $pagination-item-background-current: $primary-color;
-$pagination-item-color-current: transparent;  // $white;
+$pagination-item-color-current: $white;
 $pagination-item-color-disabled: $medium-gray;
 $pagination-ellipsis-color: $dark-gray;  // $black;
 $pagination-mobile-items: false;

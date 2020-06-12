@@ -39,49 +39,190 @@
 	color: scale-color($body-font-color, $lightness: 50%);
 }
 
+// 6. Abide
+// --------
+
+.is-invalid-input {
+	border-color: get-color(alert);
+
+	&:focus,
+	&:active {
+		border-color: get-color(alert);
+		box-shadow: 0 0 0 0.2rem rgba(get-color(alert), 0.25);
+	}
+
+	&:not(:focus) {
+		background-color: inherit;
+	}
+}
+
+// 7. Accordion
+// ------------
+
+.accordion {
+	.is-active {
+		.accordion-title {
+			background-color: $global-background-active;
+			color: $body-font-color;
+		}
+	}
+}
+
+// 8. Accordion Menu
+// -----------------
+
+.accordion-menu {
+	.is-accordion-submenu-parent {
+		&.is-active > a::after {
+			border-top-color: $white;
+		}
+		&[aria-expanded='true'].is-active > a {
+			background-color: $accordion-item-background-hover;
+			color: $accordion-item-color;
+
+			&::after {
+				border-top-color: $accordion-item-color;
+			}
+		}
+	}
+}
+
 // 9. Badge
 // --------
 
 .badge {
-	font-weight: 700;
+	border-radius: $badge-font-size;
+	font-weight: $global-weight-bold;
+}
+
+// 10. Breadcrumbs
+// ---------------
+
+.breadcrumbs {
+	padding: rem-calc(12 16);
+	background-color: $global-background-active;
+	border-radius: $global-radius;
+
+	li {
+		text-transform: inherit;
+		font-size: 1rem;
+	}
+}
+
+// 12. Button Group
+// ----------------
+
+.button-group .button {
+	&:focus,
+	&:active {
+		z-index: 1;
+	}
 }
 
 // 13. Callout
 // -----------
 
-$theme-color-interval: 8% !default;
-
-// Borrowed from Bootstrap (alert-variant), (c) The Bootstrap Authors
-@mixin callout-variant($background, $border, $color) {
-	color: $color;
-	background-color: $background;
-	border-color: $border;
-
-	hr {
-		border-top-color: darken($border, 5%);
-	}
-	// a:not(.button) {
-	// 	color: darken($color, 10%);
-	// }
-	// a:hover:not(.button) {
-	// 	text-decoration: underline;
-	// }
-	.close-button {
-		color: $color;
-	}
-}
-
-// Borrowed from Bootstrap (theme-color-level), (c) The Bootstrap Authors
-@function the-color-level($color, $level: 0) {
-  $color-base: if($level > 0, #000, #fff);
-  $level: abs($level);
-  @return mix($color-base, $color, $level * $theme-color-interval);
-}
-
 .callout {
+	a:not(.button) {
+		color: darken($body-font-color, 10%);
+		font-weight: $global-weight-bold;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.close-button {
+		color: lighten($body-font-color, 60%);
+		font-weight: $global-weight-bold;
+
+		&:hover {
+			color: lighten($body-font-color, 20%);
+		}
+	}
+
 	@each $color, $value in $foundation-palette {
 		&.#{$color} {
-			@include callout-variant(the-color-level($value, -10), the-color-level($value, -9), the-color-level($value, 6));
+			$clr: mix($value, #000, percentage((6 * ($callout-background-fade / 10%)) / 100) );
+			$bdr: mix($value, #fff, percentage((9 * ($callout-background-fade / 10%)) / 100) );
+
+			color: $clr;
+			border-color: $bdr;
+
+			a:not(.button) {
+				color: darken($clr, 10%);
+			}
+
+			hr {
+				border-color: darken($bdr, 5%);
+			}
+
+			.close-button {
+				color: lighten($clr, 30%);
+
+				&:hover {
+					color: darken($clr, 10%);
+				}
+			}
+		}
+	}
+}
+
+// $theme-color-interval: 8% !default;
+
+// // Borrowed from Bootstrap (alert-variant), (c) The Bootstrap Authors
+// @mixin callout-variant($background, $border, $color) {
+// 	color: $color;
+// 	background-color: $background;
+// 	border-color: $border;
+
+// 	hr {
+// 		border-top-color: darken($border, 5%);
+// 	}
+// 	// a:not(.button) {
+// 	// 	color: darken($color, 10%);
+// 	// }
+// 	// a:hover:not(.button) {
+// 	// 	text-decoration: underline;
+// 	// }
+// 	.close-button {
+// 		color: $color;
+// 	}
+// }
+
+// // Borrowed from Bootstrap (theme-color-level), (c) The Bootstrap Authors
+// @function the-color-level($color, $level: 0) {
+//   $color-base: if($level > 0, #000, #fff);
+//   $level: abs($level);
+//   @return mix($color-base, $color, $level * $theme-color-interval);
+// }
+
+// .callout {
+// 	@each $color, $value in $foundation-palette {
+// 		&.#{$color} {
+// 			@include callout-variant(the-color-level($value, -10), the-color-level($value, -9), the-color-level($value, 6));
+// 		}
+// 	}
+// }
+
+// 16. Drilldown
+// -------------
+
+.drilldown {
+	.is-drilldown-submenu-parent.is-active > a::after {
+		border-left-color: $white;
+	}
+}
+
+// 18. Dropdown menu
+// -----------------
+
+.dropdown.menu {
+	.is-dropdown-submenu-parent {
+		&.is-active,
+		&.is-active a {
+			border-top-left-radius: $global-radius;
+			border-top-left-radius: $global-radius;
 		}
 	}
 }
@@ -90,7 +231,115 @@ $theme-color-interval: 8% !default;
 // ---------
 
 .label {
-	font-weight: 700;
+	font-weight: $global-weight-bold;
+}
+
+// 23. Menu
+// --------
+
+.menu .is-active > a {
+	border-radius: $global-radius;
+}
+
+// 27. Pagination
+// --------------
+
+.pagination {
+	display: flex;
+	border-radius: $global-radius;
+
+	a:hover {
+		border-radius: 0;
+	}
+
+	li {
+		border-radius: 0;
+		border: 1px solid mix($light-gray, $medium-gray);  // $global-border;
+
+		&:first-child,
+		&:first-child a:hover {
+			border-top-left-radius: $global-radius;
+			border-bottom-left-radius: $global-radius;
+		}
+		&:last-child,
+		&:last-child a:hover {
+			border-top-right-radius: $global-radius;
+			border-bottom-right-radius: $global-radius;
+		}
+
+		&.current,
+		&:not(.ellipsis):not(.disabled):hover {
+			border-color: scale-color($pagination-item-background-current, $lightness: $button-background-hover-lightness);
+		}
+
+		&:not(.ellipsis):not(.disabled):hover a {
+			color: $white;
+		}
+
+		&.ellipsis {
+			padding: $pagination-item-padding;
+
+			&::after {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+	}
+}
+
+// 49. Switch
+// ----------
+
+.switch {
+	.switch-inactive,
+	.switch-active {
+		font-size: 75%;
+	}
+
+	&.tiny .switch-paddle { border-radius: $switch-height-tiny / 2;	}
+	&.small .switch-paddle { border-radius: $switch-height-small / 2; }
+	&.large .switch-paddle { border-radius: $switch-height-large / 2; }
+}
+
+// input:checked ~ .switch-paddle::after {
+// 	background-color: $white;
+// }
+
+// 51. Tabs
+// --------
+
+.tabs {
+	border: none;
+	border-bottom: 1px solid $tab-content-border;
+
+	li {
+		border: 1px solid transparent;
+		margin-bottom: -1px;
+
+		border-top-left-radius: $global-radius;
+		border-top-right-radius: $global-radius;
+
+		&:hover {
+			border: 1px solid $tab-content-border;
+		}
+
+		&.is-active {
+			border: 1px solid $tab-content-border;
+			border-bottom-color: $body-background;
+		}
+	}
+}
+
+.tabs-title {
+	> a:focus,
+	> a[aria-selected="true"] {
+		background-color: inherit;
+		color: inherit;
+	}
+}
+
+.tabs-content {
+	border: none;
 }
 
 // 55. Top bar
@@ -107,7 +356,17 @@ $topbar-link-active-color: $white;
 .top-bar {
 	font-family: $header-font-family;
 	font-size: rem-calc(18);
-	font-weight: 700;
+	font-weight: $global-weight-bold;
+
+	input,
+	button {
+		min-height: 100%;
+		margin-right: 0.5rem;
+	}
+
+	input {
+		font-family: $body-font-family;
+	}
 
 	.dropdown.menu {
 		> li > a {
@@ -127,11 +386,14 @@ $topbar-link-active-color: $white;
 		}
 		> li.is-active > a {
 			color: $topbar-link-active-color;
+			background-color: inherit;
 		}
 		.is-dropdown-submenu {
 			> li > a {
 				color: $topbar-link-color;
-				&:hover, &:active {
+				&:hover,
+				&:focus,
+				&:active {
 					color: $topbar-link-active-color;
 				}
 			}

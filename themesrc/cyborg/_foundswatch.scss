@@ -39,19 +39,53 @@
 	color: scale-color($body-font-color, $lightness: 50%);
 }
 
+// 6. Abide
+// --------
+
+.is-invalid-input {
+	&:focus,
+	&:active {
+		box-shadow: 0 0 0 0.2rem rgba(get-color(alert), 0.25);
+	}
+
+	&:not(:focus) {
+		background-color: inherit;
+	}
+}
+
+// 7. Accordion
+// ------------
+
+.accordion {
+	.is-active {
+		.accordion-title {
+			background-color: $global-background-active;
+			color: $body-font-color;
+		}
+	}
+}
+
 // 8. Accordian Menu
 // -----------------
 
 .accordion-menu {
+	.is-accordion-submenu-parent {
+		&:not(.has-submenu-toggle) a::after {
+			border-top-color: $__bs__white;
+		}
+		&[aria-expanded='true'].is-active > a {
+			background-color: $global-background-active;  // $accordion-item-background-hover;
+		}
+	}
+
 	.is-accordion-submenu {
 		a {
 			color: $__bs__white;
 		}
+	}
 
-		a:hover,
-		a:focus {
-			color: $primary-color;
-		}
+	.is-accordion-submenu-item:hover {
+		background-color: $accordion-item-background-hover;
 	}
 }
 
@@ -59,15 +93,16 @@
 // --------
 
 .badge {
-	font-weight: bold;
+	border-radius: $badge-font-size;
+	font-weight: $global-weight-bold;
 }
 
 // 10. Breadcrumbs
 // ---------------
 
 .breadcrumbs {
-	background-color: $__bs__gray-700;
 	padding: 0.75rem 1rem;
+	background-color: $global-background-active;
 	border-radius: $global-radius;
 
 	li {
@@ -134,6 +169,16 @@ $btn-secondary-color-alt: scale-color(get-color(secondary), $lightness: 20%);
 	}
 }
 
+// 12. Button Group
+// ----------------
+
+.button-group .button {
+	&:focus,
+	&:active {
+		z-index: 1;
+	}
+}
+
 // 13. Callout
 // -----------
 
@@ -141,6 +186,9 @@ $btn-secondary-color-alt: scale-color(get-color(secondary), $lightness: 20%);
 	a {
 		color: $__bs__white;
 		text-decoration: underline;
+	}
+	hr {
+		border-color: rgba($__bs__white, 0.5);
 	}
 }
 
@@ -156,7 +204,7 @@ $btn-secondary-color-alt: scale-color(get-color(secondary), $lightness: 20%);
 
 		a:hover,
 		a:focus {
-			background: $__bs__gray-700;
+			background: $global-background-hover;
 		}
 	}
 }
@@ -218,7 +266,7 @@ $btn-secondary-color-alt: scale-color(get-color(secondary), $lightness: 20%);
 
 		> a:hover,
 		> a:focus {
-			background: $__bs__gray-700;
+			background: $global-background-hover;
 		}
 	}
 
@@ -234,16 +282,46 @@ $btn-secondary-color-alt: scale-color(get-color(secondary), $lightness: 20%);
 // --------------
 
 .pagination {
+	display: flex;
+	border-radius: $global-radius;
+
+	a:hover {
+		border-radius: 0;
+	}
+
 	li {
-		background-color: $__bs__gray-700;
+		background-color: $global-background-active;
+		border-radius: 0;
+		border: $global-border;
+
+		&:first-child,
+		&:first-child a:hover {
+			border-top-left-radius: $global-radius;
+			border-bottom-left-radius: $global-radius;
+		}
+		&:last-child,
+		&:last-child a:hover {
+			border-top-right-radius: $global-radius;
+			border-bottom-right-radius: $global-radius;
+		}
+
+		&.current,
+		&:not(.ellipsis):not(.disabled):hover {
+			border-color: scale-color($pagination-item-background-current, $lightness: $button-background-hover-lightness);
+		}
 
 		&.ellipsis {
-			background-color: inherit;
+			padding: $pagination-item-padding;
+
+			&::after {
+				padding-left: 0;
+				padding-right: 0;
+			}
 		}
 	}
 
 	.disabled:hover {
-		background-color: $__bs__gray-700;
+		background-color: $global-background-active;
 	}
 }
 
@@ -257,9 +335,18 @@ $btn-secondary-color-alt: scale-color(get-color(secondary), $lightness: 20%);
 // 49. Switch
 // ----------
 
-.switch-paddle {
-	border-radius: $switch-height / 2;
+.switch {
+	.switch-inactive,
+	.switch-active {
+		font-size: 75%;
+	}
 
+	&.tiny .switch-paddle { border-radius: $switch-height-tiny / 2;	}
+	&.small .switch-paddle { border-radius: $switch-height-small / 2; }
+	&.large .switch-paddle { border-radius: $switch-height-large / 2; }
+}
+
+.switch-paddle {
 	input:checked ~ & {
 		&::after {
 			background-color: $__bs__gray-200;
@@ -269,25 +356,54 @@ $btn-secondary-color-alt: scale-color(get-color(secondary), $lightness: 20%);
 	.switch-active {
 		color: $__bs__white;
 	}
-
-	.switch.tiny & { border-radius: $switch-height-tiny / 2;	}
-	.switch.small & { border-radius: $switch-height-small / 2; }
-	.switch.large & { border-radius: $switch-height-large / 2; }
 }
 
 // 51. Tabs
 // --------
 
-.tabs {
-	border-bottom-color: $__bs__gray-700;
+// .tabs {
+// 	border-bottom-color: $__bs__gray-700;
 
-	.tabs-title {
-		> a {
-			border-top-right-radius: $global-radius;
-			border-top-left-radius: $global-radius;
+// 	.tabs-title {
+// 		> a {
+// 			border-top-right-radius: $global-radius;
+// 			border-top-left-radius: $global-radius;
+// 		}
+// 	}
+// }
+
+.tabs {
+	border: none;
+	border-bottom: 1px solid $tab-content-border;
+
+	li {
+		border: 1px solid transparent;
+		margin-bottom: -1px;
+
+		border-top-left-radius: $global-radius;
+		border-top-right-radius: $global-radius;
+
+		&:hover {
+			border: 1px solid $tab-content-border;
+		}
+
+		&.is-active {
+			border: 1px solid $tab-content-border;
+			border-bottom-color: $body-background;
 		}
 	}
+}
 
+.tabs-title {
+	> a:focus,
+	> a[aria-selected="true"] {
+		background-color: inherit;
+		color: inherit;
+	}
+}
+
+.tabs-content {
+	border: none;
 }
 
 // 52. Thumbnail
@@ -307,17 +423,13 @@ $topbar-link-color: rgba($__bs__white, 0.5);
 $topbar-link-active-color: rgba($__bs__white, 0.75);
 
 .top-bar {
-	.dropdown.menu {
-		> li {
-			> a {
-				color: $topbar-link-color;
-			}
+	border: $global-border;
 
-			> a:hover,
-			> a:focus,
-			> a:active {
+	.dropdown.menu {
+		> li > a {
+			color: $topbar-link-color;
+			&:hover, &:active {
 				color: $topbar-link-active-color;
-				background: transparent;
 			}
 		}
 		> li.is-dropdown-submenu-parent > a::after {
@@ -331,7 +443,6 @@ $topbar-link-active-color: rgba($__bs__white, 0.75);
 		}
 		> li.is-active > a {
 			color: $topbar-link-active-color;
-			background-color: $topbar-background;
 		}
 		.is-dropdown-submenu {
 			> li > a {
@@ -340,9 +451,16 @@ $topbar-link-active-color: rgba($__bs__white, 0.75);
 				&:focus,
 				&:active {
 					color: $topbar-link-active-color;
+					background-color: $global-background-hover;
 				}
 			}
 		}
+	}
+
+	input,
+	button {
+		min-height: 100%;
+		margin-right: 0.5rem;
 	}
 
 	input {
@@ -355,9 +473,5 @@ $topbar-link-active-color: rgba($__bs__white, 0.75);
 			color: $__bs__gray-600;
 			opacity: 1;
 		}
-	}
-
-	.button {
-		border-color: rgba(#000, 0.25);
 	}
 }

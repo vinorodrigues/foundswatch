@@ -46,11 +46,261 @@
 	color: scale-color($body-font-color, $lightness: 50%);
 }
 
+// 6. Abide
+// --------
+
+.is-invalid-input {
+	border-color: get-color(alert);
+
+	&:focus,
+	&:active {
+		border-color: get-color(alert);
+		box-shadow: 0 0 0 0.2rem rgba(get-color(alert), 0.25);
+	}
+
+	// &:not(:focus) {
+	// 	background-color: inherit;
+	// }
+}
+
+// 7. Accordion
+// ------------
+
+.accordion {
+	.is-active {
+		.accordion-title {
+			background-color: $global-background-active;
+			color: $body-font-color;
+		}
+	}
+}
+
+// 8. Accordion Menu
+// -----------------
+
+.accordion-menu {
+	.is-accordion-submenu-parent {
+		&.is-active > a::after {
+			border-top-color: $white;
+		}
+		&[aria-expanded='true'].is-active > a {
+			background-color: $accordion-item-background-hover;
+			color: $accordion-item-color;
+
+			&::after {
+				border-top-color: $accordion-item-color;
+			}
+		}
+	}
+}
+
 // 9. Badge
 // --------
 
 .badge {
 	font-weight: $global-weight-bold;
+	border-radius: $badge-font-size;
+}
+
+// 10. Breadcrumbs
+// ---------------
+
+.breadcrumbs {
+	padding: rem-calc(12 16);
+	background-color: $global-background-active;
+	border-radius: $global-radius;
+
+	// li {
+	// 	font-size: 1rem;
+	// }
+}
+
+// 11. Buttons
+// -----------
+
+button,
+.button {
+	font-size: 1rem;  // rem-calc(16);
+}
+
+// 12. Button Group
+// ----------------
+
+.button-group .button {
+	font-size: 1rem;  // rem-calc(16);
+
+	&:focus,
+	&:active {
+		z-index: 1;
+	}
+}
+
+// 13. Callout
+// -----------
+
+.callout {
+	a {
+		color: darken($body-font-color, 20%);;
+		font-weight: $global-weight-bold;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.close-button {
+		color: rgba($body-font-color, 0.50);
+		font-weight: $global-weight-bold;
+
+		&:hover {
+			color: $body-font-color;
+		}
+	}
+
+	@each $color, $value in $foundation-palette {
+		&.#{$color} {
+			color: darken($value, 10%);
+
+			border-color: darken(scale-color($value, $lightness: $callout-background-fade), 10%);
+
+			hr {
+				border-color: darken(scale-color($value, $lightness: $callout-background-fade), 15%);
+			}
+
+			a {
+				color: darken($value, 20%);
+			}
+
+			.close-button {
+				color: rgba($value, 0.50);
+
+				&:hover {
+					color: $value;
+				}
+			}
+		}
+	}
+}
+
+// 16. Drilldown
+// -------------
+
+.drilldown {
+	.is-drilldown-submenu-parent.is-active > a::after {
+		border-left-color: $white;
+	}
+}
+
+// 23. Menu
+// --------
+
+.menu .is-active > a {
+	color: $white;
+	border-radius: $global-radius;
+}
+
+// 27. Pagination
+// --------------
+
+.pagination {
+	display: flex;
+	border-radius: $global-radius;
+
+	a:hover {
+		border-radius: 0;
+	}
+
+	li {
+		border-radius: 0;
+		border: $global-border;
+
+		&:first-child,
+		&:first-child a:hover {
+			border-top-left-radius: $global-radius;
+			border-bottom-left-radius: $global-radius;
+		}
+		&:last-child,
+		&:last-child a:hover {
+			border-top-right-radius: $global-radius;
+			border-bottom-right-radius: $global-radius;
+		}
+
+		&.current {
+			border-color: scale-color($pagination-item-background-current, $lightness: $button-background-hover-lightness);
+		}
+
+		&.ellipsis {
+			padding: $pagination-item-padding;
+
+			&::after {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+	}
+}
+
+
+// 28. Progress Bar
+// ----------------
+
+.progress.secondary .progress-meter {
+	background-color: $dark-gray;  // scale-color($medium-gray, $lightness: -25%);
+}
+
+// 49. Switch
+// ----------
+
+.switch {
+	.switch-inactive,
+	.switch-active {
+		font-size: 75%;
+	}
+
+	&.tiny .switch-paddle { border-radius: $switch-height-tiny / 2; }
+	&.small .switch-paddle { border-radius: $switch-height-small / 2; }
+	&.large .switch-paddle { border-radius: $switch-height-large / 2; }
+}
+
+// input:checked ~ .switch-paddle::after {
+// 	background-color: $white;
+// }
+
+// 51. Tabs
+// --------
+
+.tabs {
+	border: none;
+	border-bottom: 1px solid $tab-content-border;
+
+	li {
+		border: 1px solid transparent;
+		margin-bottom: -1px;
+
+		border-top-left-radius: $global-radius;
+		border-top-right-radius: $global-radius;
+
+		&:hover {
+			border: 1px solid $tab-content-border;
+		}
+
+		&.is-active {
+			border: 1px solid $tab-content-border;
+			border-bottom-color: $body-background;
+		}
+	}
+}
+
+.tabs-title {
+	> a:focus,
+	> a[aria-selected="true"] {
+		background-color: inherit;
+		color: inherit;
+	}
+}
+
+.tabs-content {
+	border: none;
 }
 
 // 55. Top bar
@@ -61,6 +311,12 @@ $topbar-link-color: darken( $white, 10% );
 $topbar-link-active-color: lighten( $white, 10% );
 
 .top-bar {
+	input,
+	button {
+		min-height: 100%;
+		margin-right: 0.5rem;
+	}
+
 	.dropdown.menu {
 		> li > a {
 			color: $topbar-link-color;
@@ -79,21 +335,23 @@ $topbar-link-active-color: lighten( $white, 10% );
 		}
 		> li.is-active > a {
 			color: $topbar-link-active-color;
+			background-color: inherit;
 		}
 		.is-dropdown-submenu {
 			> li > a {
 				color: $topbar-link-color;
-				&:hover, &:active {
+				&:hover,
+				&:focus,
+				&:active {
 					color: $topbar-link-active-color;
 				}
 			}
 		}
 	}
-}
 
-// 28. Progress Bar
-// ----------------
-
-.progress.secondary .progress-meter {
-	background-color: scale-color($medium-gray, $lightness: -25%);
+	.menu-text {
+		font-weight: $global-weight-normal;
+		font-size: rem-calc(18);
+		margin: rem-calc(-1 0);
+	}
 }

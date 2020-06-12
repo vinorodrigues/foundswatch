@@ -72,6 +72,7 @@ $__bs__teal:    #20c997 !default;
 $__bs__cyan:    #3498DB !default;
 
 $contrast-warnings: false;
+$global-color-pick-contrast-tolerance: 20;  // !!!
 
 // 1. Global
 // ---------
@@ -83,6 +84,7 @@ $foundation-palette: (
 	primary: $__bs__blue,
 	secondary: $__bs__gray-600,
 	success: $__bs__green,
+	info: $__bs__cyan,
 	warning: $__bs__yellow,
 	alert: $__bs__red,
 );
@@ -102,13 +104,17 @@ $global-position: 1rem;
 $global-weight-normal: normal;
 $global-weight-bold: bold;
 $global-radius: 0.25rem;
-$global-menu-padding: 0.7rem 1rem;
+$global-menu-padding: 0.5rem 2rem;  // 0.7rem 1rem;
 $global-menu-nested-margin: 1rem;
 $global-text-direction: ltr;
 $global-flexbox: true;
 $global-prototype-breakpoints: false;
 $global-button-cursor: auto;
-$global-color-pick-contrast-tolerance: 17.5;  // !!!
+// $global-color-pick-contrast-tolerance: 0;
+$global-border-color: $light-gray;  // **NEW
+$global-border: 1px solid $global-border-color;  // **NEW
+$global-background-hover: get-color(primary);  // $light-gray;  // **NEW
+$global-background-active: $light-gray;  // **NEW
 $print-transparent-backgrounds: true;
 $print-hrefs: true;
 
@@ -182,12 +188,12 @@ $paragraph-lineheight: 1.6;
 $paragraph-margin-bottom: 1rem;
 $paragraph-text-rendering: optimizeLegibility;
 $enable-code-inline: true;
-$anchor-color: $primary-color;
+$anchor-color: $__bs__green;  // $primary-color;
 $anchor-color-hover: scale-color($anchor-color, $lightness: -14%);
 $anchor-text-decoration: none;
 $anchor-text-decoration-hover: none;
 $hr-width: $global-width;
-$hr-border: 1px solid $medium-gray;
+$hr-border: $global-border;  // 1px solid $medium-gray;
 $hr-margin: rem-calc(20) auto;
 $list-lineheight: $paragraph-lineheight;
 $list-margin-bottom: $paragraph-margin-bottom;
@@ -200,7 +206,7 @@ $defnlist-term-weight: $global-weight-bold;
 $defnlist-term-margin-bottom: 0.3rem;
 $blockquote-color: $dark-gray;
 $blockquote-padding: rem-calc(9 20 0 19);
-$blockquote-border: 1px solid $medium-gray;
+$blockquote-border: $global-border;  // 1px solid $medium-gray;
 $enable-cite-block: true;
 $keystroke-font: $font-family-monospace;
 $keystroke-color: $black;
@@ -227,7 +233,7 @@ $code-color: $black;
 $code-font-family: $font-family-monospace;
 $code-font-weight: $global-weight-normal;
 $code-background: $light-gray;
-$code-border: 1px solid $medium-gray;
+$code-border: $global-border;  // 1px solid $medium-gray;
 $code-padding: rem-calc(2 5 1);
 $code-block-padding: 1rem;
 $code-block-margin-bottom: 1.5rem;
@@ -235,7 +241,7 @@ $code-block-margin-bottom: 1.5rem;
 // 6. Abide
 // --------
 
-$abide-inputs: true;
+$abide-inputs: false;  // true;
 $abide-labels: true;
 $input-background-invalid: get-color(alert);
 $form-label-color-invalid: get-color(alert);
@@ -246,17 +252,17 @@ $input-error-font-weight: $global-weight-bold;
 // 7. Accordion
 // ------------
 
-$accordion-background: $white;
+$accordion-background: $global-background-active;  // $white;
 $accordion-plusminus: true;
 $accordion-plus-content: '\002B';
 $accordion-minus-content: '\2013';
-$accordion-title-font-size: rem-calc(12);
+$accordion-title-font-size: 1rem;  // rem-calc(12);
 $accordion-item-color: $primary-color;
-$accordion-item-background-hover: $light-gray;
+$accordion-item-background-hover: $global-background-hover;  // $light-gray;
 $accordion-item-padding: 1.25rem 1rem;
-$accordion-content-background: $white;
-$accordion-content-border: 1px solid $light-gray;
-$accordion-content-color: $body-font-color;
+$accordion-content-background: $body-background;  // $white;
+$accordion-content-border: $global-border;  // 1px solid $light-gray;
+$accordion-content-color: inherit;  // $body-font-color;
 $accordion-content-padding: 1rem;
 
 // 8. Accordion Menu
@@ -266,7 +272,7 @@ $accordionmenu-padding: $global-menu-padding;
 $accordionmenu-nested-margin: $global-menu-nested-margin;
 $accordionmenu-submenu-padding: $accordionmenu-padding;
 $accordionmenu-arrows: true;
-$accordionmenu-arrow-color: $primary-color;
+$accordionmenu-arrow-color: $anchor-color;  // $primary-color;
 $accordionmenu-item-background: null;
 $accordionmenu-border: null;
 $accordionmenu-submenu-toggle-background: null;
@@ -291,11 +297,11 @@ $badge-font-size: 0.6rem;
 
 $breadcrumbs-margin: 0 0 $global-margin 0;
 $breadcrumbs-item-font-size: rem-calc(11);
-$breadcrumbs-item-color: $primary-color;
-$breadcrumbs-item-color-current: $black;
+$breadcrumbs-item-color: $anchor-color;  // $primary-color;
+$breadcrumbs-item-color-current: $dark-gray;  // $black;
 $breadcrumbs-item-color-disabled: $medium-gray;
 $breadcrumbs-item-margin: 0.75rem;
-$breadcrumbs-item-uppercase: true;
+$breadcrumbs-item-uppercase: false;  // true;
 $breadcrumbs-item-separator: true;
 $breadcrumbs-item-separator-item: '/';
 $breadcrumbs-item-separator-item-rtl: '\\';
@@ -310,9 +316,10 @@ $button-padding: 0.85em 1em;
 $button-margin: 0 0 $global-margin 0;
 $button-fill: solid;
 $button-background: $primary-color;
-$button-background-hover: scale-color($button-background, $lightness: -15%);
+$button-background-hover-lightness: -20%;
+$button-background-hover: scale-color($button-background, $lightness: $button-background-hover-lightness);
 $button-color: $white;
-$button-color-alt: $black;
+$button-color-alt: $white;
 $button-radius: $global-radius;
 $button-border: 1px solid transparent;
 $button-hollow-border-width: 1px;
@@ -324,7 +331,7 @@ $button-sizes: (
 );
 $button-palette: $foundation-palette;
 $button-opacity-disabled: 0.25;
-$button-background-hover-lightness: -20%;
+// $button-background-hover-lightness: -20%;
 $button-hollow-hover-lightness: -50%;
 $button-transition: background-color 0.25s ease-out, color 0.25s ease-out;
 $button-responsive-expanded: false;
@@ -333,7 +340,7 @@ $button-responsive-expanded: false;
 // ----------------
 
 $buttongroup-margin: 1rem;
-$buttongroup-spacing: 1px;
+$buttongroup-spacing: 4px;  // 1px;
 $buttongroup-child-selector: '.button';
 $buttongroup-expand-max: 6;
 $buttongroup-radius-on-each: false;
@@ -343,7 +350,7 @@ $buttongroup-radius-on-each: false;
 
 $callout-background: $white;
 $callout-background-fade: 85%;
-$callout-border: 1px solid rgba($black, 0.25);
+$callout-border: $global-border;  // 1px solid rgba($black, 0.25);
 $callout-margin: 0 0 1rem 0;
 $callout-sizes: (
 	small: 0.5rem,
@@ -358,10 +365,10 @@ $callout-link-tint: 30%;
 // 14. Card
 // --------
 
-$card-background: $white;
+$card-background: transparent;  // $white;
 $card-font-color: $body-font-color;
 $card-divider-background: $light-gray;
-$card-border: 1px solid $light-gray;
+$card-border: $global-border; // 1px solid $light-gray;
 $card-shadow: none;
 $card-border-radius: $global-radius;
 $card-padding: $global-padding;
@@ -396,10 +403,10 @@ $drilldown-transition: transform 0.15s linear;
 $drilldown-arrows: true;
 $drilldown-padding: $global-menu-padding;
 $drilldown-nested-margin: 0;
-$drilldown-background: $white;
+$drilldown-background: $body-background;  // $white;
 $drilldown-submenu-padding: $drilldown-padding;
-$drilldown-submenu-background: $white;
-$drilldown-arrow-color: $primary-color;
+$drilldown-submenu-background: $body-background;  // $white;
+$drilldown-arrow-color: $anchor-color;  // $primary-color;
 $drilldown-arrow-size: 6px;
 
 // 17. Dropdown
@@ -407,7 +414,7 @@ $drilldown-arrow-size: 6px;
 
 $dropdown-padding: 1rem;
 $dropdown-background: $body-background;
-$dropdown-border: 1px solid $medium-gray;
+$dropdown-border: $global-border;  // 1px solid $medium-gray;
 $dropdown-font-size: 1rem;
 $dropdown-width: 300px;
 $dropdown-radius: $global-radius;
@@ -423,16 +430,16 @@ $dropdown-sizes: (
 $dropdownmenu-arrows: true;
 $dropdownmenu-arrow-color: $anchor-color;
 $dropdownmenu-arrow-size: 6px;
-$dropdownmenu-arrow-padding: 1.5rem;
+$dropdownmenu-arrow-padding: 2rem;  // 1.5rem;
 $dropdownmenu-min-width: 200px;
 $dropdownmenu-background: null;
-$dropdownmenu-submenu-background: $white;
+$dropdownmenu-submenu-background: $body-background;  // $white;
 $dropdownmenu-padding: $global-menu-padding;
 $dropdownmenu-nested-margin: 0;
 $dropdownmenu-submenu-padding: $dropdownmenu-padding;
-$dropdownmenu-border: 1px solid $medium-gray;
-$dropdown-menu-item-color-active: get-color(primary);
-$dropdown-menu-item-background-active: transparent;
+$dropdownmenu-border: $global-border;  // 1px solid $medium-gray;
+$dropdown-menu-item-color-active: $black;  // get-color(primary);
+$dropdown-menu-item-background-active: $global-background-active;  // transparent;
 
 // 19. Flexbox Utilities
 // ---------------------
@@ -443,7 +450,8 @@ $flexbox-responsive-breakpoints: true;
 // 20. Forms
 // ---------
 
-$fieldset-border: 1px solid $medium-gray;
+$__form-border: 1px solid $__bs__gray-400;
+$fieldset-border: $__form-border;  // 1px solid $medium-gray;
 $fieldset-padding: rem-calc(20);
 $fieldset-margin: rem-calc(18 0);
 $legend-padding: rem-calc(0 3);
@@ -451,19 +459,19 @@ $form-spacing: rem-calc(16);
 $helptext-color: $black;
 $helptext-font-size: rem-calc(13);
 $helptext-font-style: italic;
-$input-prefix-color: $black;
-$input-prefix-background: $light-gray;
-$input-prefix-border: 1px solid $medium-gray;
+$input-prefix-color: $body-font-color;  // $black;
+$input-prefix-background: $global-background-active;  // $light-gray;
+$input-prefix-border: $__form-border;  // 1px solid $medium-gray;
 $input-prefix-padding: 1rem;
 $form-label-color: $black;
 $form-label-font-size: rem-calc(14);
 $form-label-font-weight: $global-weight-normal;
 $form-label-line-height: 1.8;
-$select-background: $white;
+$select-background: $body-background;  // $white;
 $select-triangle-color: $dark-gray;
 $select-radius: $global-radius;
-$input-color: $black;
-$input-placeholder-color: $medium-gray;
+$input-color: $body-font-color;  // $black;
+$input-placeholder-color: $medium-gray;  // ??????????
 $input-font-family: inherit;
 $input-font-size: rem-calc(16);
 $input-font-weight: $global-weight-normal;
@@ -471,11 +479,11 @@ $input-line-height: $global-lineheight;
 $input-background: $white;
 $input-background-focus: $white;
 $input-background-disabled: $light-gray;
-$input-border: 1px solid $medium-gray;
-$input-border-focus: 1px solid $dark-gray;
+$input-border: $__form-border;  // $global-border;  // 1px solid $medium-gray;
+$input-border-focus: $global-border;  // 1px solid $dark-gray;
 $input-padding: $form-spacing / 2;
 $input-shadow: inset 0 1px 2px rgba($black, 0.1);
-$input-shadow-focus: 0 0 5px $medium-gray;
+$input-shadow-focus: 0 0 0 0.2rem rgba(get-color(primary), 0.25);  // 0 0 5px $medium-gray;
 $input-cursor-disabled: not-allowed;
 $input-transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
 $input-number-spinners: true;
@@ -566,17 +574,17 @@ $orbit-control-zindex: 10;
 // 27. Pagination
 // --------------
 
-$pagination-font-size: rem-calc(14);
+$pagination-font-size: 1rem;  // rem-calc(14);
 $pagination-margin-bottom: $global-margin;
-$pagination-item-color: $black;
-$pagination-item-padding: rem-calc(3 10);
-$pagination-item-spacing: rem-calc(1);
+$pagination-item-color: $white;  // $body-font-color;  // $black;
+$pagination-item-padding: rem-calc(8 12);  // rem-calc(3 10);
+$pagination-item-spacing: rem-calc(-1);  // rem-calc(1);
 $pagination-radius: $global-radius;
-$pagination-item-background-hover: $light-gray;
-$pagination-item-background-current: $primary-color;
+$pagination-item-background-hover: darken(get-color(success), 15%);  // $light-gray;
+$pagination-item-background-current: darken(get-color(success), 15%);  // $primary-color;
 $pagination-item-color-current: $white;
-$pagination-item-color-disabled: $medium-gray;
-$pagination-ellipsis-color: $black;
+$pagination-item-color-disabled: $light-gray;  // $medium-gray;
+$pagination-ellipsis-color: $pagination-item-color;  // $black;
 $pagination-mobile-items: false;
 $pagination-mobile-current-item: false;
 $pagination-arrows: true;
@@ -587,7 +595,7 @@ $pagination-arrow-next: '\00BB';
 // ----------------
 
 $progress-height: 1rem;
-$progress-background: $medium-gray;
+$progress-background: $global-background-active;  // $medium-gray;
 $progress-margin-bottom: $global-margin;
 $progress-meter-background: $primary-color;
 $progress-radius: $global-radius;
@@ -595,7 +603,7 @@ $progress-radius: $global-radius;
 // 46. Responsive Embed
 // --------------------
 
-$responsive-embed-margin-bottom: rem-calc(16);
+$responsive-embed-margin-bottom: $global-margin;  // rem-calc(16);
 $responsive-embed-ratios: (
 	default: 4 by 3,
 	widescreen: 16 by 9,
@@ -608,7 +616,7 @@ $reveal-background: $white;
 $reveal-width: 600px;
 $reveal-max-width: $global-width;
 $reveal-padding: $global-padding;
-$reveal-border: 1px solid $medium-gray;
+$reveal-border: $global-border;  // 1px solid $medium-gray;
 $reveal-radius: $global-radius;
 $reveal-zindex: 1005;
 $reveal-overlay-background: rgba($black, 0.45);
@@ -619,28 +627,28 @@ $reveal-overlay-background: rgba($black, 0.45);
 $slider-width-vertical: 0.5rem;
 $slider-transition: all 0.2s ease-in-out;
 $slider-height: 0.5rem;
-$slider-background: $light-gray;
-$slider-fill-background: $medium-gray;
+$slider-background: $global-background-active;  // $light-gray;
+$slider-fill-background: $slider-background;  // $medium-gray;
 $slider-handle-height: 1.4rem;
 $slider-handle-width: 1.4rem;
 $slider-handle-background: $primary-color;
 $slider-opacity-disabled: 0.25;
-$slider-radius: $global-radius;
+$slider-radius: 50%;  // $global-radius;
 
 // 49. Switch
 // ----------
 
 $switch-background: $medium-gray;
 $switch-background-active: $primary-color;
-$switch-height: 2rem;
-$switch-height-tiny: 1.5rem;
-$switch-height-small: 1.75rem;
-$switch-height-large: 2.5rem;
-$switch-radius: $global-radius;
+$switch-height: 1.5rem;  // 2rem
+$switch-height-tiny: 1.25rem;  // 1.5rem
+$switch-height-small: 1.33rem;  // 1.75rem
+$switch-height-large: 2rem;  // 2.5rem
+$switch-radius: $switch-height/2;  // $global-radius
 $switch-margin: $global-margin;
-$switch-paddle-background: $white;
-$switch-paddle-offset: 0.25rem;
-$switch-paddle-radius: $global-radius;
+$switch-paddle-background: $dark-gray;  // $white; ??????????
+$switch-paddle-offset: rem-calc(2);  // 0.25rem;
+$switch-paddle-radius: 50%;  // $global-radius;
 $switch-paddle-transition: all 0.25s ease-out;
 $switch-opacity-disabled: .5;
 $switch-cursor-disabled: not-allowed;
@@ -648,9 +656,9 @@ $switch-cursor-disabled: not-allowed;
 // 50. Table
 // ---------
 
-$table-background: $white;
+$table-background: transparent;  // $white;
 $table-color-scale: 5%;
-$table-border: 1px solid smart-scale($table-background, $table-color-scale);
+$table-border: $global-border;  // 1px solid smart-scale($table-background, $table-color-scale);
 $table-padding: rem-calc(8 10 10);
 $table-hover-scale: 2%;
 $table-row-hover: darken($table-background, $table-hover-scale);
@@ -671,15 +679,15 @@ $table-stack-breakpoint: medium;
 // --------
 
 $tab-margin: 0;
-$tab-background: $white;
-$tab-color: $primary-color;
-$tab-background-active: $light-gray;
-$tab-active-color: $primary-color;
-$tab-item-font-size: rem-calc(12);
-$tab-item-background-hover: $white;
-$tab-item-padding: 1.25rem 1.5rem;
-$tab-content-background: $white;
-$tab-content-border: $light-gray;
+$tab-background: inherit;  // $white;
+$tab-color: $black;  // $primary-color;
+$tab-background-active: $global-background-active;  // $light-gray;
+$tab-active-color: $black;  // $primary-color;
+$tab-item-font-size: 1rem;  // rem-calc(12);
+$tab-item-background-hover: inherit;  // $white;
+$tab-item-padding: 1rem 1.25rem;  // 1.25rem 1.5rem;
+$tab-content-background: inherit;  // $white;
+$tab-content-border: $global-border-color;  // $light-gray;
 $tab-content-color: $body-font-color;
 $tab-content-padding: 1rem;
 
@@ -722,8 +730,8 @@ $tooltip-radius: $global-radius;
 // 55. Top Bar
 // -----------
 
-$topbar-padding: 0.5rem;
-$topbar-background: $__bs__blue;
+$topbar-padding: 1rem 0.5rem;  // 0.5rem;
+$topbar-background: $primary-color;  // $light-gray;
 $topbar-submenu-background: $topbar-background;
 $topbar-title-spacing: 0.5rem 1rem 0.5rem 0;
 $topbar-input-width: 200px;

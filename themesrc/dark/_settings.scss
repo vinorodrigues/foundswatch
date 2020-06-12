@@ -57,6 +57,12 @@
 // 1. Global
 // ---------
 
+// ****************************************
+// NOTE: Because of the way F6 is written,
+// on dark themes $white is black and
+// $black is white, or colors are inverted
+// ****************************************
+
 $global-font-size: 100%;
 $global-width: rem-calc(1200);
 $global-lineheight: 1.5;

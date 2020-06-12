@@ -42,8 +42,15 @@
 // 6. Abide
 // --------
 
-.is-invalid-input:not(:focus) {
-	background-color: inherit;
+.is-invalid-input {
+	&:focus,
+	&:active {
+		box-shadow: 0 0 0 0.2rem rgba(get-color(alert), 0.25);
+	}
+
+	&:not(:focus) {
+		background-color: inherit;
+	}
 }
 
 // 8. Accordion Menu
@@ -128,59 +135,62 @@ button:not(.hollow):not(.clear):not(.close-button),
 // 13. Callout
 // -----------
 
-// Borrowed from Bootstrap (alert-variant), (c) The Bootstrap Authors
-@mixin callout-variant($background, $border, $color) {
-	color: $color;
-	background-color: $background;
-	border-color: $border;
-	h1, h2, h3, h4, h5, h6 {
-		color: $color;
-	}
-	hr {
-		border-top-color: darken($border, 5%);
-	}
-	a:not(.button) {
-		color: darken($color, 10%);
-	}
-	a:hover:not(.button) {
-		text-decoration: underline;
-	}
-}
-
-// Borrowed from Bootstrap (theme-color-level), (c) The Bootstrap Authors
-@function the-color-level($color, $level: 0) {
-	$color-base: if($level > 0, #000, #fff);
-	$level: abs($level);
-	@return mix($color-base, $color, $level * $callout-background-fade);
-}
-
 .callout {
 	h1, h2, h3, h4, h5, h6 {
 		color: $body-font-color;
 	}
+
 	a:not(.button) {
 		color: darken($body-font-color, 10%);
 		font-weight: $global-weight-bold;
-	}
-	a:hover:not(.button) {
-		text-decoration: underline;
-	}
-	.close-button {
-		color: inherit;
-	}
-	@each $color, $value in $foundation-palette {
-		&.#{$color} {
-			@include callout-variant(the-color-level($value, -10), the-color-level($value, -9), the-color-level($value, 6));
+
+		&:hover {
+			text-decoration: underline;
 		}
 	}
-}
 
-// 16. Drilldown
-// -------------
+	.close-button {
+		color: rgba($body-font-color, 0.50);
+		font-weight: $global-weight-bold;
 
-.drilldown {
-	.is-drilldown-submenu-parent.is-active > a::after {
-		border-left-color: $white;
+		&:hover {
+			color: $body-font-color;
+		}
+	}
+
+	@each $color, $value in $foundation-palette {
+		&.#{$color} {
+			$clr: mix($value, #000, percentage((6 * ($callout-background-fade / 10%)) / 100) );
+			$bdr: mix($value, #fff, percentage((3 * ($callout-background-fade / 10%)) / 100) );
+
+			color: $clr;
+			border-color: $bdr;
+
+			h1, h2, h3, h4, h5, h6 {
+				color: $clr;
+			}
+
+			a:not(.button) {
+				color: darken($clr, 10%);
+			}
+
+			hr {
+				border-color: darken($bdr, 5%);
+			}
+
+			// *** special case
+			@if (secondary == $color) {
+				$value: darken($value, 20%);
+			}
+
+			.close-button {
+				color: rgba($value, 0.50);
+
+				&:hover {
+					color: $value;
+				}
+			}
+		}
 	}
 }
 
@@ -211,15 +221,21 @@ button:not(.hollow):not(.clear):not(.close-button),
 	display: flex;
 	border-radius: $global-radius;
 
+	a:hover {
+		border-radius: 0;
+	}
+
 	li {
 		border-radius: 0;
 		border: 1px solid $light-gray;
 
-		&:first-child {
+		&:first-child,
+		&:first-child a:hover {
 			border-top-left-radius: $global-radius;
 			border-bottom-left-radius: $global-radius;
 		}
-		&:last-child {
+		&:last-child,
+		&:last-child a:hover {
 			border-top-right-radius: $global-radius;
 			border-bottom-right-radius: $global-radius;
 		}
@@ -230,6 +246,11 @@ button:not(.hollow):not(.clear):not(.close-button),
 
 		&.ellipsis {
 			padding: $pagination-item-padding;
+
+			&::after {
+				padding-left: 0;
+				padding-right: 0;
+			}
 		}
 	}
 }
@@ -305,6 +326,12 @@ $topbar-link-color: darken( $white, 10% );
 $topbar-link-active-color: lighten( $white, 10% );
 
 .top-bar {
+	input,
+	button {
+		min-height: 100%;
+		margin-right: 0.5rem;
+	}
+
 	@include btn-shadow( $topbar-background );
 	ul {
 		background: transparent;

@@ -44,6 +44,11 @@
 // --------
 
 .is-invalid-input {
+	&:focus,
+	&:active {
+		box-shadow: 0 0 0 0.2rem rgba(get-color(alert), 0.25);
+	}
+
 	&:not(:focus) {
 		background-color: inherit;
 	}
@@ -106,6 +111,11 @@
 
 		&.ellipsis {
 			padding: $pagination-item-padding;
+
+			&::after {
+				padding-left: 0;
+				padding-right: 0;
+			}
 		}
 	}
 }
@@ -169,6 +179,12 @@ $topbar-link-color: rgba($white, 0.9);
 $topbar-link-active-color: $white;
 
 .top-bar {
+	input,
+	button {
+		min-height: 100%;
+		margin-right: 0.5rem;
+	}
+
 	.dropdown.menu {
 		> li > a {
 			color: $topbar-link-color;

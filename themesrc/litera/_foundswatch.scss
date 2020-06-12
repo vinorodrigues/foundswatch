@@ -58,6 +58,76 @@ p:not(.progress-meter-text) {
 	font-weight: 300;
 }
 
+// 6. Abide
+// --------
+
+.is-invalid-input {
+	border-color: get-color(alert);
+
+	&:focus,
+	&:active {
+		border-color: get-color(alert);
+		box-shadow: 0 0 0 0.2rem rgba(get-color(alert), 0.25);
+	}
+
+	&:not(:focus) {
+		background-color: inherit;
+	}
+}
+
+// 7. Accordion
+// ------------
+
+.accordion {
+	.is-active {
+		.accordion-title {
+			background-color: $global-background-active;
+			color: $body-font-color;
+		}
+	}
+}
+
+// 8. Accordion Menu
+// -----------------
+
+.accordion-menu {
+	.is-accordion-submenu-parent {
+		&.is-active > a::after {
+			border-top-color: $white;
+		}
+		&[aria-expanded='true'].is-active > a {
+			background-color: $accordion-item-background-hover;
+			color: $accordion-item-color;
+
+			&::after {
+				border-top-color: $accordion-item-color;
+			}
+		}
+	}
+}
+
+// 9. Badge
+// --------
+
+.badge {
+	border-radius: $badge-font-size;
+	font-weight: $global-weight-bold;
+}
+
+// 10. Breadcrumbs
+// ---------------
+
+.breadcrumbs {
+	padding: rem-calc(12 16);
+	background-color: $global-background-active;
+	border-radius: $global-radius;
+
+	li {
+		text-transform: inherit;
+		font-size: 1rem;
+	}
+}
+
 // 11. Buttons
 // -----------
 
@@ -66,6 +136,16 @@ p:not(.progress-meter-text) {
 		.button.#{$size} {
 			border-radius: #{$value};
 		}
+	}
+}
+
+// 12. Button Group
+// ----------------
+
+.button-group .button {
+	&:focus,
+	&:active {
+		z-index: 1;
 	}
 }
 
@@ -81,6 +161,143 @@ p:not(.progress-meter-text) {
 			text-decoration: underline;
 		}
 	}
+	.close-button {
+		font-weight: $global-weight-bold;
+	}
+	hr {
+		border-color: $global-border-color;
+	}
+	@each $color, $value in $foundation-palette {
+		&.#{$color} {
+			.close-button {
+				color: rgba($white, .5);
+
+				&:hover {
+					color: $dark-gray;
+				}
+			}
+			hr {
+				border-color: $white;
+			}
+		}
+	}
+}
+
+// 16. Drilldown
+// -------------
+
+.drilldown {
+	.is-drilldown-submenu-parent.is-active > a::after {
+		border-left-color: $white;
+	}
+}
+
+// 23. Menu
+// --------
+
+.menu .is-active > a {
+	border-radius: $global-radius;
+}
+
+// 27. Pagination
+// --------------
+
+.pagination {
+	display: flex;
+	border-radius: $global-radius;
+
+	a:hover {
+		border-radius: 0;
+	}
+
+	li {
+		border-radius: 0;
+		border: $global-border;
+
+		&:first-child,
+		&:first-child a:hover {
+			border-top-left-radius: $global-radius;
+			border-bottom-left-radius: $global-radius;
+		}
+		&:last-child,
+		&:last-child a:hover {
+			border-top-right-radius: $global-radius;
+			border-bottom-right-radius: $global-radius;
+		}
+
+		&.current {
+			border-color: scale-color($pagination-item-background-current, $lightness: $button-background-hover-lightness);
+		}
+
+		&.ellipsis {
+			padding: $pagination-item-padding;
+
+			&::after {
+				padding-left: 0;
+				padding-right: 0;
+			}
+		}
+	}
+}
+
+// 49. Switch
+// ----------
+
+.switch {
+	.switch-inactive,
+	.switch-active {
+		font-size: 75%;
+	}
+
+	.switch-inactive {
+		color: $dark-gray;
+	}
+
+	&.tiny .switch-paddle { border-radius: $switch-height-tiny / 2;	}
+	&.small .switch-paddle { border-radius: $switch-height-small / 2; }
+	&.large .switch-paddle { border-radius: $switch-height-large / 2; }
+}
+
+input:checked ~ .switch-paddle::after {
+	background-color: $white;
+}
+
+// 51. Tabs
+// --------
+
+.tabs {
+	border: none;
+	border-bottom: 1px solid $tab-content-border;
+
+	li {
+		border: 1px solid transparent;
+		margin-bottom: -1px;
+
+		border-top-left-radius: $global-radius;
+		border-top-right-radius: $global-radius;
+
+		&:hover {
+			border: 1px solid $light-gray;  // $tab-content-border;
+			border-bottom-color: $tab-content-border;
+		}
+
+		&.is-active {
+			border: 1px solid $tab-content-border;
+			border-bottom-color: $body-background;
+		}
+	}
+}
+
+.tabs-title {
+	> a:focus,
+	> a[aria-selected="true"] {
+		background-color: inherit;
+		color: $dark-gray;
+	}
+}
+
+.tabs-content {
+	border: none;
 }
 
 // 55. Top bar
@@ -91,6 +308,12 @@ $topbar-link-color: rgba( $white, .6 );
 $topbar-link-active-color: $white;
 
 .top-bar {
+	input,
+	button {
+		min-height: 100%;
+		margin-right: 0.5rem;
+	}
+
 	.dropdown.menu {
 		> li > a {
 			color: $topbar-link-color;
@@ -109,11 +332,14 @@ $topbar-link-active-color: $white;
 		}
 		> li.is-active > a {
 			color: $topbar-link-active-color;
+			background-color: inherit;
 		}
 		.is-dropdown-submenu {
 			> li > a {
 				color: $topbar-link-color;
-				&:hover, &:active {
+				&:hover,
+				&:focus,
+				&:active {
 					color: $topbar-link-active-color;
 				}
 			}

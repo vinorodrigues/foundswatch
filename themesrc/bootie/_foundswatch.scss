@@ -163,21 +163,6 @@ $escaped-characters: (
 // 12. Button Group
 // ----------------
 
-.button-group.no-gaps {
-	.button {
-		border-radius: 0;
-
-		&:first-child {
-			border-top-left-radius: $global-radius;
-			border-bottom-left-radius: $global-radius;
-		}
-		&:last-child {
-			border-top-right-radius: $global-radius;
-			border-bottom-right-radius: $global-radius;
-		}
-	}
-}
-
 .button-group .button {
 	&:focus,
 	&:active {
@@ -188,43 +173,48 @@ $escaped-characters: (
 // 13. Callout
 // -----------
 
-// Borrowed from Bootstrap (alert-variant), (c) The Bootstrap Authors
-@mixin callout-variant($background, $border, $color) {
-	color: $color;
-	background-color: $background;
-	border-color: $border;
-	hr {
-		border-top-color: darken($border, 5%);
-	}
-	a:not(.button) {
-		color: darken($color, 10%);
-	}
-	a:hover:not(.button) {
-		text-decoration: underline;
-	}
-}
-
-// Borrowed from Bootstrap (theme-color-level), (c) The Bootstrap Authors
-@function the-color-level($color, $level: 0) {
-	$color-base: if($level > 0, #000, #fff);
-	$level: abs($level);
-	@return mix($color-base, $color, $level * $callout-background-fade);
-}
-
 .callout {
 	a:not(.button) {
-		color: darken($black, 10%);
+		color: darken($body-font-color, 10%);
 		font-weight: $global-weight-bold;
+
+		&:hover {
+			text-decoration: underline;
+		}
 	}
-	a:hover:not(.button) {
-		text-decoration: underline;
-	}
+
 	.close-button {
-		color: inherit;
+		color: rgba($body-font-color, 0.50);
+		font-weight: $global-weight-bold;
+
+		&:hover {
+			color: $body-font-color;
+		}
 	}
+
 	@each $color, $value in $foundation-palette {
 		&.#{$color} {
-			@include callout-variant(the-color-level($value, -10), the-color-level($value, -9), the-color-level($value, 6));
+			$clr: mix($value, #000, percentage((6 * ($callout-background-fade / 10%)) / 100) );
+			$bdr: mix($value, #fff, percentage((9 * ($callout-background-fade / 10%)) / 100) );
+
+			color: $clr;
+			border-color: $bdr;
+
+			a:not(.button) {
+				color: darken($clr, 10%);
+			}
+
+			hr {
+				border-color: darken($bdr, 5%);
+			}
+
+			.close-button {
+				color: rgba($value, 0.50);
+
+				&:hover {
+					color: $value;
+				}
+			}
 		}
 	}
 }
@@ -244,8 +234,6 @@ $escaped-characters: (
 .menu .is-active > a {
 	border-radius: $global-radius;
 }
-
-// ***TODO*** menu with dropdown `.is-active`
 
 // 51. Tabs
 // --------
@@ -310,6 +298,11 @@ $escaped-characters: (
 
 		&.ellipsis {
 			padding: $pagination-item-padding;
+
+			&::after {
+				padding-left: 0;
+				padding-right: 0;
+			}
 		}
 	}
 }
@@ -336,6 +329,12 @@ $topbar-link-color: rgba($white, 0.5);
 $topbar-link-active-color: $white;
 
 .top-bar {
+	input,
+	button {
+		min-height: 100%;
+		margin-right: 0.5rem;
+	}
+
 	.dropdown.menu {
 		> li > a {
 			color: $topbar-link-color;
