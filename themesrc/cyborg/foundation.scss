@@ -7,10 +7,6 @@
  * Based on Bootswatch - Cyborg, (c) Thomas Park, https://bootswatch.com/cyborg
  */
 
-:root {
-	color-scheme: dark;
-}
-
 @import 'settings';
 @import '../scss/foundation';
 @include foundation-everything;

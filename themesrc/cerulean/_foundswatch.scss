@@ -115,7 +115,7 @@ button,
 
 button:not(.hollow):not(.clear):not(.close-button),
 .button:not(.hollow):not(.clear):not(.close-button) {
-	@include btn-shadow( get-color(primary) )
+	@include btn-shadow( get-color(primary) );
 
 	&:hover, &:focus {
 		@include btn-shadow( scale-color(get-color(primary), $lightness: -15%) );
