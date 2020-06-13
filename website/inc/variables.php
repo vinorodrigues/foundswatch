@@ -3,7 +3,7 @@
 if (!defined('ABSPATH')) define('ABSPATH', '/');
 if (!defined('INIT')) define('INIT', '1.0.2');
 if (!defined('JQUERY_VERSION')) define('JQUERY_VERSION', '3.5.1');
-if (!defined('WHAT_INPUT_VERSION')) define('WHAT_INPUT_VERSION', '5.2.7');
+if (!defined('WHAT_INPUT_VERSION')) define('WHAT_INPUT_VERSION', '5.2.10');
 if (!defined('FOUNDATION_VERSION')) define('FOUNDATION_VERSION', '6.6.3');
 
 global $themelist;
@@ -29,7 +29,7 @@ $themelist = array(
 	'Materia' => 'Material is the metaphor',
 	// 'Minty' => 'A fresh feel',  // new in 4
 	// 'Pulse' => 'A trace of purple',  // new in 4
-	// 'Sandstone' => 'A touch of warmth',
+	'Sandstone' => 'A touch of warmth',
 	// 'Simplex' => 'Mini and minimalist',
 	// 'Sketchy' => 'A hand-drawn look for mockups and mirth',  // new in 4
 	// 'Slate' => 'Shades of gunmetal gray',
