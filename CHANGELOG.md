@@ -5,15 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/) and this project adheres to [Semantic Versioning](https://semver.org/).
 
 ## [Unreleased]
-- 'Lumen' theme.
-- 'Sandstone' theme.
-- 'Simplex' theme.
 - 'Slate' theme.
 - 'Spacelab' theme.
 - 'Superhero' theme.
 
 
-## [0.1.3](https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@0.1.3/) - 2020-06-04
+## [[0.1.4]](https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@0.1.4/) - 2020-06-14
+### Added
+- 'Lumen' theme.
+- 'Sandstone' theme.
+- 'Simplex' theme.
+
+### Changed
+- Re-do of most Bootswatch based themes so the things like Tabs, Menus (Drilldown, Accordian, etc.), Breadcrumbs, etc. look more like the originals.
+- Changed the location of the `color-scheme: dark;` statement in the scss (now in `_settings.scss`).
+
+
+## [[0.1.3]](https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@0.1.3/) - 2020-06-04
 ### Added
 - 'Litera' theme.
 
@@ -21,7 +29,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/) and this 
 - Minor changes to prior themes
 
 
-## [0.1.2](https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@0.1.2/) - 2020-05-10
+## [[0.1.2]](https://cdn.jsdelivr.net/gh/vinorodrigues/foundswatch@0.1.2/) - 2020-05-10
 ### Added
 - Browser detection to enable dark mode
 - 'Journal' theme.
