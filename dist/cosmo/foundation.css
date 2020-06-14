@@ -1,6 +1,6 @@
 @charset "UTF-8";
 /**
- * Foundswatch v0.1.3 - Cosmo
+ * Foundswatch v0.1.4 - Cosmo
  * @see https://foundswatch.com
  * (c) 2020 Vino Rodrigues
  * Licensed under MIT
@@ -364,8 +364,8 @@ textarea:focus {
 	outline: none;
 	border: 1px solid #373a3c;
 	background-color: #fff;
-	-webkit-box-shadow: 0 0 5px #adb5bd;
-	box-shadow: 0 0 5px #adb5bd;
+	-webkit-box-shadow: 0 0 0 0.2rem rgba(39, 128, 227, 0.25);
+	box-shadow: 0 0 0 0.2rem rgba(39, 128, 227, 0.25);
 	-webkit-transition: border-color 0.25s ease-in-out,
 		-webkit-box-shadow 0.5s;
 	transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
@@ -455,7 +455,7 @@ label > [type="radio"] {
 label {
 	display: block;
 	margin: 0;
-	font-size: 0.93333rem;
+	font-size: 1rem;
 	font-weight: 400;
 	line-height: 1.8;
 	color: #000;
@@ -586,7 +586,7 @@ legend {
 .fieldset {
 	margin: 1.2rem 0;
 	padding: 1.33333rem;
-	border: 1px solid #adb5bd;
+	border: 1px solid #dee2e6;
 }
 
 .fieldset legend {
@@ -634,8 +634,8 @@ select:focus {
 	outline: none;
 	border: 1px solid #373a3c;
 	background-color: #fff;
-	-webkit-box-shadow: 0 0 5px #adb5bd;
-	box-shadow: 0 0 5px #adb5bd;
+	-webkit-box-shadow: 0 0 0 0.2rem rgba(39, 128, 227, 0.25);
+	box-shadow: 0 0 0 0.2rem rgba(39, 128, 227, 0.25);
 	-webkit-transition: border-color 0.25s ease-in-out,
 		-webkit-box-shadow 0.5s;
 	transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
@@ -4650,7 +4650,7 @@ a.button:focus {
 	height: 1rem;
 	margin-bottom: 1rem;
 	border-radius: 0;
-	background-color: #adb5bd;
+	background-color: #d3d7dc;
 }
 
 .progress.primary .progress-meter {
@@ -4700,7 +4700,7 @@ a.button:focus {
 	height: 0.5rem;
 	margin-top: 1.25rem;
 	margin-bottom: 2.25rem;
-	background-color: #f8f9fa;
+	background-color: #d3d7dc;
 	cursor: pointer;
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -4717,7 +4717,7 @@ a.button:focus {
 	display: inline-block;
 	max-width: 100%;
 	height: 0.5rem;
-	background-color: #adb5bd;
+	background-color: #d3d7dc;
 	-webkit-transition: all 0.2s ease-in-out;
 	transition: all 0.2s ease-in-out;
 }
@@ -4738,7 +4738,7 @@ a.button:focus {
 	display: inline-block;
 	width: 1.4rem;
 	height: 1.4rem;
-	border-radius: 0;
+	border-radius: 50%;
 	background-color: #2780e3;
 	-webkit-transition: all 0.2s ease-in-out;
 	transition: all 0.2s ease-in-out;
@@ -4793,7 +4793,7 @@ a.button:focus {
 }
 
 .switch {
-	height: 2rem;
+	height: 1.5rem;
 	position: relative;
 	margin-bottom: 1rem;
 	outline: 0;
@@ -4815,9 +4815,9 @@ a.button:focus {
 .switch-paddle {
 	position: relative;
 	display: block;
-	width: 4rem;
-	height: 2rem;
-	border-radius: 0;
+	width: 3rem;
+	height: 1.5rem;
+	border-radius: 0.75rem;
 	background: #adb5bd;
 	-webkit-transition: all 0.25s ease-out;
 	transition: all 0.25s ease-out;
@@ -4832,14 +4832,14 @@ input + .switch-paddle {
 
 .switch-paddle::after {
 	position: absolute;
-	top: 0.25rem;
-	left: 0.25rem;
+	top: 0.13333rem;
+	left: 0.13333rem;
 	display: block;
-	width: 1.5rem;
-	height: 1.5rem;
+	width: 1.23333rem;
+	height: 1.23333rem;
 	-webkit-transform: translate3d(0, 0, 0);
 	transform: translate3d(0, 0, 0);
-	border-radius: 0;
+	border-radius: 50%;
 	background: #f8f9fa;
 	-webkit-transition: all 0.25s ease-out;
 	transition: all 0.25s ease-out;
@@ -4851,7 +4851,7 @@ input:checked ~ .switch-paddle {
 }
 
 input:checked ~ .switch-paddle::after {
-	left: 2.25rem;
+	left: 1.63333rem;
 }
 
 input:disabled ~ .switch-paddle {
@@ -4890,66 +4890,66 @@ input:checked + label > .switch-inactive {
 }
 
 .switch.tiny {
-	height: 1.5rem;
+	height: 1.25rem;
 }
 
 .switch.tiny .switch-paddle {
-	width: 3rem;
-	height: 1.5rem;
+	width: 2.5rem;
+	height: 1.25rem;
 	font-size: 0.66667rem;
 }
 
 .switch.tiny .switch-paddle::after {
-	top: 0.25rem;
-	left: 0.25rem;
-	width: 1rem;
-	height: 1rem;
+	top: 0.13333rem;
+	left: 0.13333rem;
+	width: 0.98333rem;
+	height: 0.98333rem;
 }
 
 .switch.tiny input:checked ~ .switch-paddle::after {
-	left: 1.75rem;
+	left: 1.38333rem;
 }
 
 .switch.small {
-	height: 1.75rem;
+	height: 1.33rem;
 }
 
 .switch.small .switch-paddle {
-	width: 3.5rem;
-	height: 1.75rem;
+	width: 2.66rem;
+	height: 1.33rem;
 	font-size: 0.8rem;
 }
 
 .switch.small .switch-paddle::after {
-	top: 0.25rem;
-	left: 0.25rem;
-	width: 1.25rem;
-	height: 1.25rem;
+	top: 0.13333rem;
+	left: 0.13333rem;
+	width: 1.06333rem;
+	height: 1.06333rem;
 }
 
 .switch.small input:checked ~ .switch-paddle::after {
-	left: 2rem;
+	left: 1.46333rem;
 }
 
 .switch.large {
-	height: 2.5rem;
+	height: 2rem;
 }
 
 .switch.large .switch-paddle {
-	width: 5rem;
-	height: 2.5rem;
+	width: 4rem;
+	height: 2rem;
 	font-size: 1.06667rem;
 }
 
 .switch.large .switch-paddle::after {
-	top: 0.25rem;
-	left: 0.25rem;
-	width: 2rem;
-	height: 2rem;
+	top: 0.13333rem;
+	left: 0.13333rem;
+	width: 1.73333rem;
+	height: 1.73333rem;
 }
 
 .switch.large input:checked ~ .switch-paddle::after {
-	left: 2.75rem;
+	left: 2.13333rem;
 }
 
 table {
@@ -4962,7 +4962,7 @@ table {
 thead,
 tbody,
 tfoot {
-	border: 1px solid #f2f2f2;
+	border: 1px solid #dee2e6;
 	background-color: #fff;
 }
 
@@ -5011,7 +5011,7 @@ table.unstriped tbody {
 
 table.unstriped tbody tr {
 	border-bottom: 0;
-	border-bottom: 1px solid #f2f2f2;
+	border-bottom: 1px solid #dee2e6;
 	background-color: #fff;
 }
 
@@ -5119,9 +5119,8 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 .breadcrumbs li {
 	float: left;
 	font-size: 0.73333rem;
-	color: #000;
+	color: #373a3c;
 	cursor: default;
-	text-transform: uppercase;
 }
 
 .breadcrumbs li:not(:last-child)::after {
@@ -5149,7 +5148,7 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 	position: relative;
 	margin: 0 0 1rem 0;
 	padding: 1rem;
-	border: 1px solid rgba(0, 0, 0, 0.25);
+	border: 1px solid #dee2e6;
 	border-radius: 0;
 	background-color: white;
 	color: #000;
@@ -5217,7 +5216,7 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 	-ms-flex-positive: 1;
 	flex-grow: 1;
 	margin-bottom: 1rem;
-	border: 1px solid #f8f9fa;
+	border: 1px solid #dee2e6;
 	border-radius: 0;
 	background: #fff;
 	-webkit-box-shadow: none;
@@ -5270,7 +5269,7 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 	width: 300px;
 	padding: 1rem;
 	visibility: hidden;
-	border: 1px solid #adb5bd;
+	border: 1px solid #dee2e6;
 	border-radius: 0;
 	background-color: #fff;
 	font-size: 1rem;
@@ -5320,7 +5319,7 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 }
 
 .pagination li {
-	margin-right: 0.06667rem;
+	margin-right: -0.06667rem;
 	border-radius: 0;
 	font-size: 0.93333rem;
 	display: none;
@@ -5340,7 +5339,7 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 .pagination a,
 .pagination button {
 	display: block;
-	padding: 0.2rem 0.66667rem;
+	padding: 0.53333rem 0.8rem;
 	border-radius: 0;
 	color: #000;
 }
@@ -5351,14 +5350,14 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 }
 
 .pagination .current {
-	padding: 0.2rem 0.66667rem;
+	padding: 0.53333rem 0.8rem;
 	background: #2780e3;
 	color: #fff;
 	cursor: default;
 }
 
 .pagination .disabled {
-	padding: 0.2rem 0.66667rem;
+	padding: 0.53333rem 0.8rem;
 	color: #adb5bd;
 	cursor: not-allowed;
 }
@@ -5368,7 +5367,7 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 }
 
 .pagination .ellipsis::after {
-	padding: 0.2rem 0.66667rem;
+	padding: 0.53333rem 0.8rem;
 	content: "\2026";
 	color: #000;
 }
@@ -5513,7 +5512,7 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 
 .accordion {
 	margin-left: 0;
-	background: #fff;
+	background: transparent;
 	list-style-type: none;
 }
 
@@ -5533,15 +5532,15 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 	position: relative;
 	display: block;
 	padding: 1.25rem 1rem;
-	border: 1px solid #f8f9fa;
+	border: 1px solid #dee2e6;
 	border-bottom: 0;
-	font-size: 0.8rem;
+	font-size: 1rem;
 	line-height: 1;
 	color: #2780e3;
 }
 
 :last-child:not(.is-active) > .accordion-title {
-	border-bottom: 1px solid #f8f9fa;
+	border-bottom: 1px solid #dee2e6;
 	border-radius: 0 0 0 0;
 }
 
@@ -5565,14 +5564,14 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 .accordion-content {
 	display: none;
 	padding: 1rem;
-	border: 1px solid #f8f9fa;
+	border: 1px solid #dee2e6;
 	border-bottom: 0;
-	background-color: #fff;
-	color: #000;
+	background-color: transparent;
+	color: inherit;
 }
 
 :last-child > .accordion-content:last-child {
-	border-bottom: 1px solid #f8f9fa;
+	border-bottom: 1px solid #dee2e6;
 }
 
 .media-object {
@@ -5773,8 +5772,8 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 
 .tabs {
 	margin: 0;
-	border: 1px solid #f8f9fa;
-	background: #fff;
+	border: 1px solid #dee2e6;
+	background: transparent;
 	list-style-type: none;
 }
 
@@ -5828,8 +5827,8 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 
 .tabs-title > a {
 	display: block;
-	padding: 1.25rem 1.5rem;
-	font-size: 0.8rem;
+	padding: 1rem 1.25rem;
+	font-size: 1rem;
 	line-height: 1;
 	color: #2780e3;
 }
@@ -5850,16 +5849,16 @@ table.hover:not(.unstriped) tr:nth-of-type(even):hover {
 }
 
 .tabs-content {
-	border: 1px solid #f8f9fa;
+	border: 1px solid #dee2e6;
 	border-top: 0;
-	background: #fff;
+	background: transparent;
 	color: #000;
 	-webkit-transition: all 0.5s ease;
 	transition: all 0.5s ease;
 }
 
 .tabs-content.vertical {
-	border: 1px solid #f8f9fa;
+	border: 1px solid #dee2e6;
 	border-left: 0;
 }
 
@@ -6141,12 +6140,12 @@ a.thumbnail image {
 
 .menu .is-active > a {
 	background: #2780e3;
-	color: #000;
+	color: #fff;
 }
 
 .menu .active > a {
 	background: #2780e3;
-	color: #000;
+	color: #fff;
 }
 
 .menu.align-left {
@@ -6817,7 +6816,7 @@ a.thumbnail image {
 	z-index: 1;
 	display: none;
 	min-width: 200px;
-	border: 1px solid #adb5bd;
+	border: 1px solid #dee2e6;
 	background: #fff;
 }
 
@@ -7422,7 +7421,7 @@ html.is-reveal-open body {
 	backface-visibility: hidden;
 	display: none;
 	padding: 1rem;
-	border: 1px solid #adb5bd;
+	border: 1px solid #dee2e6;
 	border-radius: 0;
 	background-color: #fff;
 	position: relative;
@@ -8330,12 +8329,113 @@ html.is-reveal-open body {
 	color: gray;
 }
 
+.is-invalid-input:focus,
+.is-invalid-input:active {
+	-webkit-box-shadow: 0 0 0 0.2rem rgba(255, 0, 57, 0.25);
+	box-shadow: 0 0 0 0.2rem rgba(255, 0, 57, 0.25);
+}
+
+.is-invalid-input:not(:focus) {
+	background-color: inherit;
+}
+
+.accordion-menu .is-accordion-submenu-parent.is-active > a::after {
+	border-top-color: #fff;
+}
+
 .badge {
 	font-weight: 700;
 }
 
+.breadcrumbs {
+	padding: 0.8rem 1.06667rem;
+	background-color: #f8f9fa;
+}
+
+.breadcrumbs li {
+	font-size: 1rem;
+}
+
+.drilldown .is-drilldown-submenu-parent.is-active > a::after {
+	border-left-color: #fff;
+}
+
 .label {
 	font-weight: 700;
+}
+
+.pagination {
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+}
+
+.pagination li {
+	border: 1px solid #dee2e6;
+}
+
+.pagination li.ellipsis {
+	padding: 0.53333rem 0.8rem;
+}
+
+.pagination li.ellipsis::after {
+	padding-left: 0;
+	padding-right: 0;
+}
+
+.switch .switch-inactive,
+.switch .switch-active {
+	font-size: 75%;
+}
+
+.switch.tiny .switch-paddle {
+	border-radius: 0.625rem;
+}
+
+.switch.small .switch-paddle {
+	border-radius: 0.665rem;
+}
+
+.switch.large .switch-paddle {
+	border-radius: 1rem;
+}
+
+.tabs {
+	border: none;
+	border-bottom: 1px solid #dee2e6;
+}
+
+.tabs li {
+	border: 1px solid transparent;
+	margin-bottom: -1px;
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+}
+
+.tabs li:hover {
+	border: 1px solid #dee2e6;
+}
+
+.tabs li.is-active {
+	border: 1px solid #dee2e6;
+	border-bottom-color: #fff;
+}
+
+.tabs-title > a:focus,
+.tabs-title > a[aria-selected="true"] {
+	background-color: inherit;
+	color: inherit;
+}
+
+.tabs-content {
+	border: none;
+}
+
+.top-bar input,
+.top-bar button {
+	min-height: 100%;
+	margin-right: 0.5rem;
 }
 
 .top-bar .dropdown.menu > li > a {
